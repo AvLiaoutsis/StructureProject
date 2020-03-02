@@ -234,5 +234,18 @@ namespace StructureProject.Controllers
             return View(viewModel);
         }
 
+        public ActionResult Contact(int id)
+        {
+            var person = context.Persons
+                          .SingleOrDefault(s => s.Id == id);
+
+            if (person == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(person);
+        }
+
     }
 }

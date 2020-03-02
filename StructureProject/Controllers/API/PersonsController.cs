@@ -8,6 +8,7 @@ using System.Web.Http;
 using StructureProject.DTO;
 using AutoMapper;
 using System.Net;
+using Microsoft.AspNet.Identity;
 
 namespace StructureProject.Controllers.API
 {
@@ -41,9 +42,17 @@ namespace StructureProject.Controllers.API
         //GET /api/Persons
         public IEnumerable<PersonDTO> GetPersons()
         {
+            var identityId = User.Identity.GetUserId();
+
+
+            //var loggedPerson = context.Persons.Where(s => s.IdentityUserId == identityId)
+            //    .SingleOrDefault();
+
             return context.Persons
+                .Where(s => !(s.IdentityUserId == identityId))
                 .ToList()
                 .Select(Mapper.Map<Person, PersonDTO>);
+                
         }
 
 
