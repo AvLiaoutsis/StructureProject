@@ -1,0 +1,93 @@
+﻿@model IEnumerable<StructureProject.Models.Pet>
+
+
+<h2>My Pets</h2>
+@*@if (!Model.Any())
+    {
+        <p>We don't have any viewers yet.</p>
+    }
+    else
+    {*@
+<p>
+    @Html.ActionLink("Add Pet", "New", "Pet", null, new { @class = "btn btn-primary" })
+</p>
+<table id="pets" class="table table-bordered">
+    <thead>
+    <th>Name</th>
+    <th>Kind</th>
+    <th>Age</th>
+    <th></th>
+
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+@*}*@
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#pets").DataTable({
+                ajax: {
+                    url: "/api/pets/",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (data, type,pet) {
+                            return "<a href='/pet/edit/" + pet.id + "'>" + pet.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "kind"
+                    },
+                    {
+                        data: "age",
+                        render: function (data) {
+                            if (data == 0) {
+                                return "N/A"
+                            } 
+                        }
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn btn-link js-delete' data-pet-id = " + data + ">Delete</button>";
+                        }
+                    }
+                ],
+                'columnDefs': [{
+                    'targets': [3], // column index (start from 0)
+                    'orderable': false, // set orderable false for selected columns
+                }]
+            });
+
+
+            $("#pets").on("click", ".js-delete", function () {
+                let button = $(this);
+
+
+                bootbox.confirm("Delete? Are you SURE? SURE SURE?", function (result) {
+                    console.log(button.attr("data-pet-id"));
+                    if (result) {
+                        $.ajax({
+                            url: "/api/pets/" + button.attr("data-pet-id"),
+                            method: "DELETE",
+                            success: function () {
+                                console.log("YES YES YES");
+                                //button.parents("tr").remove();
+                                table.row(button.parents("tr")).remove().draw();
+                                toastr.success("Deletion success!")
+                            }
+                        })
+                    }
+                });
+            });
+
+
+        });
+    </script>
+}
+
+

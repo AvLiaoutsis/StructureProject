@@ -1,0 +1,54 @@
+﻿@model StructureProject.ViewModels.OwnerWithPetViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+@*<h2>@Model.Owner.Name</h2>
+
+    <ul>
+        <li>Name : @Model.Owner.Name</li>
+        <li>Last Name : @Model.Owner.LastName</li>
+        <li>Birth Date : @Model.Owner.BirthDate</li>
+
+    </ul>*@
+
+
+
+
+@if (!@String.IsNullOrEmpty(Model.Owner.Description))
+{
+    <h3>Bio</h3>
+
+    @Html.TextAreaFor(model => model.Owner.Description, new { disabled = "true", @class = "form-control", @rows = 3, @style = "resize: none;" })
+}
+
+<br />
+<h3>@Model.Owner.Name has @Model.Pets.Count Pets</h3>
+
+<br />
+@if (@Model.Pets.Count > 0)
+{
+    <table id="pets" class="table table-bordered">
+        <thead>
+        <th>Pet Name</th>
+        <th>Pet Kind</th>
+        <th>Pet Age</th>
+        </thead>
+        <tbody>
+            @foreach (var pet in Model.Pets)
+            {
+                <tr>
+                    <td>
+                        @pet.Name
+                    </td>
+                    <td>
+                        @pet.Kind
+                    </td>
+                    <td>
+                        @pet.Age
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,34 @@
+﻿@model StructureProject.ViewModels.PetFormViewModel
+
+<h2>@Model.Title</h2>
+
+@using (Html.BeginForm("Save", "Pet"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "Please fix the following Errors!!")
+    <div class="form-group">
+        @Html.LabelFor(v => v.Pet.Name)
+        @Html.TextBoxFor(v => v.Pet.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(v => v.Pet.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(v => v.Pet.Kind)
+        @Html.TextBoxFor(v => v.Pet.Kind, new { @class = "form-control" })
+        @Html.ValidationMessageFor(v => v.Pet.Kind)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(v => v.Pet.Age)
+        @Html.TextBoxFor(v => v.Pet.Age, new { @class = "form-control" })
+        @Html.ValidationMessageFor(v => v.Pet.Age)
+
+    </div>
+
+    @Html.HiddenFor(v => v.Pet.Id)
+
+    <button type="submit" class="btn btn-secondary">Save</button>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
