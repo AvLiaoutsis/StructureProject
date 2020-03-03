@@ -24,10 +24,15 @@ namespace StructureProject.Controllers
 
             var contact = context.ContactInfos.Where(s => s.Person.IdentityUserId == identityId).SingleOrDefault();
 
-            if (contact == null)
+            //if (contact == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            if (contact is null)
             {
-                return HttpNotFound();
+                contact = new ContactInfo();
             }
+
 
             return View(contact);
         }
