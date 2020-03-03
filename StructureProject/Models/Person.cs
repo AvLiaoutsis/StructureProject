@@ -9,11 +9,16 @@ namespace StructureProject.Models
     public class Person
     {
         public int Id { get; set; }
+
+        [Display(Name = "First Name")]
+
         public string Name { get; set; }
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         public string Email { get; set; }
 
+        [Display(Name = "Birth Date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime?BirthDate { get; set; }
 

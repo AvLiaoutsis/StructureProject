@@ -53,6 +53,7 @@ namespace StructureProject.Models
         }
         public DbSet<Pet> Pets { get; set; }
         public DbSet<Person> Persons { get; set; }
+        public DbSet<ContactInfo> ContactInfos { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

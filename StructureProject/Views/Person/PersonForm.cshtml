@@ -28,7 +28,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.Person.Description)
-        @Html.TextAreaFor(model => model.Person.Description, new { @class = "form-control", @rows = 3 })
+        @Html.TextAreaFor(model => model.Person.Description, new { @class = "form-control", @cols = "100", @rows = "8", @style = "resize: none; max-width:7000px;" })
     </div>
     @Html.HiddenFor(v => v.Person.Id)
 

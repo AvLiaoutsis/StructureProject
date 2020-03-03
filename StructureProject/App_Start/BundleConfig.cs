@@ -27,10 +27,20 @@ namespace StructureProject
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-theme-united.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/toastr.css",
                       "~/Content/site.css"));
+
+
+            bundles.Add(new StyleBundle("~/Content/css4").Include(
+              "~/Content/bootstrap4",
+              "~/Content/datatables/css/datatables.bootstrap.css",
+              "~/Content/toastr.css",
+              "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap4").Include(
+             "~/Scripts/bootstrap.js"));
         }
     }
 }

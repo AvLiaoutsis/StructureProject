@@ -17,6 +17,9 @@ namespace StructureProject.App_Start
 
             CreateMap<Pet, PetDTO>();
             CreateMap<PetDTO, Pet>();
+
+            CreateMap<ContactInfo, ContantInfoDTO>();
+            CreateMap<ContantInfoDTO, ContactInfo>();
         }
     }
 }

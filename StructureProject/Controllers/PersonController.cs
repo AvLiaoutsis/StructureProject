@@ -211,27 +211,59 @@ namespace StructureProject.Controllers
         {
             return View();
         }
+        public ActionResult MyProfile()
+        {
+            var identityId = User.Identity.GetUserId();
+
+
+            var contact = context.ContactInfos.Where(s => s.Person.IdentityUserId == identityId).SingleOrDefault();
+            if (contact is null)
+            {
+                contact = new ContactInfo();
+            }
+
+            var viewmodel = new PersonDetailsViewModel()
+            {
+                Owner = context.Persons.Where(s => s.IdentityUserId == identityId).SingleOrDefault(),
+                Pets = context.Pets.Where(s => s.Owner.IdentityUserId == identityId).ToList(),
+                Contact = contact
+
+            };
+            return View(viewmodel);
+        }
         public ActionResult Details(int id)
         {
-            var person = context.Persons
-                          .SingleOrDefault(s => s.Id == id);
-
             var pets = context.Pets
                         .Where(s => s.Owner.Id == id)
                         .ToList();
+            var owner = context.Persons
+            .Where(s => s.Id == id)
+            .SingleOrDefault();
 
-            var viewModel = new OwnerWithPetViewModel()
+            //var viewModel = new OwnerWithPetViewModel()
+            //{
+            //    Owner = person,
+            //    Pets = pets
+            //};
+            var contact = context.ContactInfos.Where(s => s.Person.Id == id).SingleOrDefault();
+            if(contact is null)
             {
-                Owner = person,
-                Pets = pets
+                contact = new ContactInfo();
+            }
+
+            var viewmodel = new PersonDetailsViewModel()
+            {
+                Owner = owner,
+                Pets = pets,
+                Contact = contact
             };
 
-            if (person == null)
+            if (viewmodel == null)
             {
                 return HttpNotFound();
             }
 
-            return View(viewModel);
+            return View(viewmodel);
         }
 
         public ActionResult Contact(int id)
