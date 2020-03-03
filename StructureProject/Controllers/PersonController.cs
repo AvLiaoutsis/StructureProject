@@ -75,13 +75,14 @@ namespace StructureProject.Controllers
 
             var personInDb = context.Persons.Single(m => m.Id == person.Id);
 
+            personInDb.BirthDate = person.BirthDate;
+            personInDb.Description = person.Description;
+            personInDb.Name = person.Name;
+            personInDb.LastName = person.LastName;
 
 
 
-
-
-            
-             context.SaveChanges();
+            context.SaveChanges();
 
             return RedirectToAction("Index", "Home");
         }
