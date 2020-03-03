@@ -146,7 +146,8 @@ namespace StructureProject.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var viewmodel = new RegisterViewModel();
+            return View(viewmodel);
         }
 
         // GET: /Account/RegisterAdmin
@@ -154,7 +155,8 @@ namespace StructureProject.Controllers
         [AllowAnonymous]
         public ActionResult RegisterAdmin()
         {
-            return View();
+            var viewmodel = new RegisterViewModel();
+            return View(viewmodel);
         }
 
         //
@@ -195,13 +197,21 @@ namespace StructureProject.Controllers
                         BirthDate = user.BirthDate,
                         IdentityUserId = user.Id
                     };
+
+                    var newContact = new ContactInfo() 
+                    {
+                        Person = newPerson
+                    };
                     context.Persons.Add(newPerson);
+                    context.ContactInfos.Add(newContact);
+
                     context.SaveChanges();
                     
                     
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
+                model.Errors = result.Errors.ToList();
             }
 
             // If we got this far, something failed, redisplay form

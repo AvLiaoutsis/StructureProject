@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -95,6 +96,12 @@ namespace StructureProject.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
         public string Role { get; set; }
+        public IEnumerable <string> Errors { get; set; }
+
+        public RegisterViewModel()
+        {
+            Errors = new List<string>();
+        }
     }
 
     public class ResetPasswordViewModel

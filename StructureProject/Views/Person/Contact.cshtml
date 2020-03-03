@@ -1,18 +1,37 @@
-﻿@model StructureProject.Models.Person
+﻿@model StructureProject.Models.ContactInfo
 
 
 
 
-<h2>Contact Details</h2>
-
-<ul>
-    <li>
-        Email : @Model.Email
-    </li>
-    <li>
-        Phone Number :
-    </li>
-    <li>
-        Location :
-    </li>
-</ul>
+@if (!@String.IsNullOrEmpty(Model.City))
+{
+    <h3>Contact Details</h3>
+    <br />
+    <ul>
+        <li>
+            Phone Number : @Model.PhoneNumber
+        </li>
+        <li>
+            Telephone Number : @Model.TelNumber
+        </li>
+        <li>
+            Country : @Model.Country
+        </li>
+        <li>
+            State : @Model.State
+        </li>
+        <li>
+            City : @Model.City
+        </li>
+        <li>
+            Address : @Model.Address
+        </li>
+        <li>
+            Postal Code : @Model.PostalCode
+        </li>
+    </ul>
+}
+else
+{
+    <h3>No Contact Details</h3>
+}

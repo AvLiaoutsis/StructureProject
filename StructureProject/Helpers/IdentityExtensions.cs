@@ -38,6 +38,10 @@ namespace StructureProject.Helpers
 
                 var person = context.Persons.SingleOrDefault(s => s.IdentityUserId == identityId);
 
+                if(person is null)
+                {
+                    return "";
+                }
                 return person.Name;
             }
             else

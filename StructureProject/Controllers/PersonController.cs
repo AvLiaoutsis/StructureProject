@@ -75,12 +75,9 @@ namespace StructureProject.Controllers
 
             var personInDb = context.Persons.Single(m => m.Id == person.Id);
 
-            //TryUpdateModel string [] whitelist
 
-            personInDb.Name = person.Name;
-            personInDb.LastName = person.LastName;
-            personInDb.BirthDate = person.BirthDate;
-            personInDb.Description = person.Description;
+
+
 
 
             
@@ -268,15 +265,15 @@ namespace StructureProject.Controllers
 
         public ActionResult Contact(int id)
         {
-            var person = context.Persons
-                          .SingleOrDefault(s => s.Id == id);
+            var contact = context.ContactInfos.Where(s => s.Person.Id == id).SingleOrDefault();
 
-            if (person == null)
+
+            if (contact == null)
             {
                 return HttpNotFound();
             }
 
-            return View(person);
+            return View(contact);
         }
 
     }

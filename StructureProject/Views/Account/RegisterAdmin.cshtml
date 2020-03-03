@@ -8,6 +8,17 @@
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
+    if (Model.Errors.Any())
+    {
+        foreach (var error in Model.Errors)
+        {
+            <ul style="color:red">
+                <li>
+                    @error
+                </li>
+            </ul>
+        }
+    }
     @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>
     <hr />
@@ -48,7 +59,8 @@
         </div>
     </div>
 
-    @Html.HiddenFor(m => m.Role,new { @Value = "Admin" });
+    @Html.HiddenFor(m => m.Role, new { @Value = "Admin" });
+
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
