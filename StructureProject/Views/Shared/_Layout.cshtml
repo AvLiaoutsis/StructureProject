@@ -36,6 +36,12 @@
                         <li>@Html.ActionLink("Contact", "ContactUs", "Manage")</li>
 
                     }
+                    @if (this.User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("View Mails", "ViewMail", "Admin")</li>
+                        <li>@Html.ActionLink("View Users", "PersonList", "Admin")</li>
+
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

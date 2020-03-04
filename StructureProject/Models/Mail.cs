@@ -19,6 +19,5 @@ namespace StructureProject.Models
         General,
         Suggestions,
         Support
-
     }
 }
