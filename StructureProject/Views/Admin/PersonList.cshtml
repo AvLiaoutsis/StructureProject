@@ -1,0 +1,126 @@
+﻿@model IEnumerable<StructureProject.Models.Person>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Persons</h2>
+@*@if (!Model.Any())
+    {
+        <p>We don't have any viewers yet.</p>
+    }
+    else
+    {*@
+<table id="persons" class="table table-bordered">
+    <thead>
+    <th>User</th>
+    <th></th>
+
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+            {
+        <tr>
+            <td>
+                @user.Name @user.LastName
+            </td>
+            <td>
+                @user.Email
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", "Admin", new { id = user.Id }, null)
+            </td>
+        </tr>
+            }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#persons").dataTable()
+        })
+        </script>
+    @*<script>
+        $(document).ready(function () {
+            var table = $("#persons").DataTable({
+                ajax: {
+                    url: "/api/persons/",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (data, type, person) {
+                            return "<a href='/person/edit/" + person.id + "'>" + person.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "lastName"
+                    },
+                    {
+                        data: "birthDate",
+                        render: function (data) {
+                            var date = new Date(data);
+                            var month = date.getMonth() + 1;
+                            return (month.toString().length > 1 ? month : "0" + month) + "/" + date.getDate() + "/" + date.getFullYear();
+                        }
+                    },
+                    {
+                        data: "pet.name",
+                        render: function (data) {
+                            if (data) {
+                                return data;
+                            }
+                            else {
+                                return "No Pet";
+                            }
+                        }
+                    
+                        
+                    },
+                    {
+                        data: "pet.kind"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn btn-link js-delete' data-person-id = " + data + ">Delete</button>";
+                        }
+                    }
+                ],
+                'columnDefs': [{
+                    'targets': [5], // column index (start from 0)
+                    'orderable': false, // set orderable false for selected columns
+                }]
+            });
+
+
+            $("#persons").on("click", ".js-delete", function () {
+                let button = $(this);
+
+
+                bootbox.confirm("Delete? Are you SURE? SURE SURE?", function (result) {
+                    console.log(button.attr("data-person-id"));
+                    if (result) {
+                        $.ajax({
+                            url: "/api/persons/" + button.attr("data-person-id"),
+                            method: "DELETE",
+                            success: function () {
+                                console.log("YES YES YES");
+                                //button.parents("tr").remove();
+                                table.row(button.parents("tr")).remove().draw();
+                                toastr.success("Deletion success!")
+                            }
+                        })
+                    }
+                });
+            });
+
+
+        });
+    </script>*@
+}
+
+

@@ -13,7 +13,7 @@
     {*@
 <table id="persons" class="table table-bordered">
     <thead>
-    <th>First Name</th>
+    <th>User</th>
     <th></th
 
     </thead>
@@ -51,7 +51,7 @@
                     {
                         data: "name",
                         render: function (data, type, person) {
-                            return "<a href='/person/details/" + person.id + "'>" + person.name + "</a>";
+                            return "<a href='/person/details/" + person.id + "'>" + person.name + " " + person.lastName+ "</a>";
                         }
                     },
                     {

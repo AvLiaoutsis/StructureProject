@@ -185,6 +185,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\API\PersonsController.cs" />
     <Compile Include="Controllers\API\PetsController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
@@ -576,7 +577,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Person\Index.cshtml" />
+    <Content Include="Views\Person\OtherUsers.cshtml" />
     <Content Include="Views\Person\New.cshtml" />
     <Content Include="Views\Pet\AddPet.cshtml" />
     <Content Include="Views\Person\Create.cshtml" />
@@ -590,6 +591,7 @@
     <Content Include="Views\Person\Contact.cshtml" />
     <Content Include="Views\Person\MyProfile.cshtml" />
     <Content Include="Views\Contact\Edit.cshtml" />
+    <Content Include="Views\Admin\PersonList.cshtml" />
     <None Include="Views\Shared\_Layout4.cshtml" />
   </ItemGroup>
   <ItemGroup>

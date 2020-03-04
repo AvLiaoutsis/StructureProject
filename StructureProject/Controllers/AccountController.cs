@@ -180,6 +180,7 @@ namespace StructureProject.Controllers
                         var roleManager = new RoleManager<IdentityRole>(roleStore);
                         await roleManager.CreateAsync(new IdentityRole("Admin"));
                         await UserManager.AddToRoleAsync(user.Id, "Admin");
+
                     }
 
 

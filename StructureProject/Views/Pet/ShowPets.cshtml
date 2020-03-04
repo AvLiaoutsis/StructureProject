@@ -44,10 +44,13 @@
                     },
                     {
                         data: "age",
-                        render: function (data) {
-                            if (data == 0) {
-                                return "N/A"
-                            } 
+                        render: function (data,pet) {
+                            if (pet.age == 0) {
+                                return "N/A";
+                            }
+                            else {
+                                return data;
+                            }
                         }
                     },
                     {

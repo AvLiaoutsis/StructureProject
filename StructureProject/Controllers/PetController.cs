@@ -132,6 +132,7 @@ namespace StructureProject.Controllers
                 {
                     Name = pet.Name,
                     Kind = pet.Kind,
+                    Age =  pet.Age,
                     Owner = PersonToUpdate
                 };
                 context.Pets.Add(newPet);

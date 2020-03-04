@@ -29,6 +29,7 @@ namespace StructureProject.Models
         public DateTime BirthDate { get; set; }
 
 
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -37,8 +38,6 @@ namespace StructureProject.Models
             userIdentity.AddClaim(new Claim("Name", this.Name));
             userIdentity.AddClaim(new Claim("LastName", this.LastName));
             userIdentity.AddClaim(new Claim("BirthDate", this.BirthDate.ToString("MM/dd/yyyy")));
-
-
             return userIdentity;
         }
 

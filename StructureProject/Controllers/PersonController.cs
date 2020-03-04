@@ -5,8 +5,10 @@ using StructureProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 
@@ -23,7 +25,7 @@ namespace StructureProject.Controllers
             context = new ApplicationDbContext();
         }
 
-        public ActionResult Index()
+        public ActionResult OtherUsers()
         {
             return View();
         }
@@ -83,6 +85,7 @@ namespace StructureProject.Controllers
 
 
             context.SaveChanges();
+
 
             return RedirectToAction("Index", "Home");
         }
@@ -212,7 +215,6 @@ namespace StructureProject.Controllers
         public ActionResult MyProfile()
         {
             var identityId = User.Identity.GetUserId();
-
 
             var contact = context.ContactInfos.Where(s => s.Person.IdentityUserId == identityId).SingleOrDefault();
             if (contact is null)
