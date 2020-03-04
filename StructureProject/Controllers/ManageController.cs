@@ -13,11 +13,17 @@ namespace StructureProject.Controllers
     [Authorize]
     public class ManageController : Controller
     {
+        private ApplicationDbContext context = new ApplicationDbContext();
+
+
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public ManageController()
         {
+            context = new ApplicationDbContext();
+
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -50,9 +56,35 @@ namespace StructureProject.Controllers
             }
         }
 
-        //
-        // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        [AllowAnonymous]
+        public ActionResult ContactUs()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Send(Mail mail)
+        {
+            // shit happens
+            if (!ModelState.IsValid)
+            {
+                return HttpNotFound();
+            }
+            var newMail = mail;
+
+            context.Mails.Add(newMail);
+
+            context.SaveChanges();
+
+            return RedirectToAction("Index","Home");
+        }
+
+    
+    //
+    // GET: /Manage/Index
+    public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."

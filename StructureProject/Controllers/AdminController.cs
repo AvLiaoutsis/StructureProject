@@ -53,5 +53,23 @@ namespace StructureProject.Controllers
             context.SaveChanges();
             return RedirectToAction("PersonList");
         }
+
+        public ActionResult DeleteMail(int id)
+        {
+            var mail = context.Mails.Single(s => s.Id == id);
+
+            context.Mails.Remove(mail);
+
+
+            context.SaveChanges();
+            return RedirectToAction("ViewMail");
+        }
+
+        public ActionResult ViewMail()
+        {
+            var mails = context.Mails.ToList();
+
+            return View(mails);
+        }
     }
 }

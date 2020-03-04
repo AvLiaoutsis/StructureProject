@@ -20,6 +20,9 @@ namespace StructureProject.App_Start
 
             CreateMap<ContactInfo, ContantInfoDTO>();
             CreateMap<ContantInfoDTO, ContactInfo>();
+
+            CreateMap<Mail, MailDTO>();
+            CreateMap<MailDTO, Mail>();
         }
     }
 }
