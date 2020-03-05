@@ -19,7 +19,6 @@ namespace StructureProject.Models
         public string Email { get; set; }
 
         [Display(Name = "Birth Date")]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/mm/yyyy}")]
 
         public DateTime BirthDate { get; set; }

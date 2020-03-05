@@ -1,42 +1,69 @@
 ﻿@model StructureProject.ViewModels.PersonFormViewModel
 
+@{
+    ViewBag.Title = "Register";
+}
 
 <h2>Change Profile</h2>
 
-@using (Html.BeginForm("Save", "Person"))
+@using (Html.BeginForm("Save", "Person", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
+
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "Please fix the following Errors!!")
+    <h4>Create a new account.</h4>
+    <hr />
     <div class="form-group">
-        @Html.LabelFor(v => v.Person.Name)
-        @Html.TextBoxFor(v => v.Person.Name, new { @class = "form-control" })
-        @Html.ValidationMessageFor(v => v.Person.Name)
+        @Html.LabelFor(v => v.Person.Name, new { @class = "col-md-2 control-label"})
+                <br />
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(v => v.Person.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(v => v.Person.Name)
+
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(v => v.Person.LastName, new { @class = "col-md-2 control-label" })
+        <br />
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(v => v.Person.LastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(v => v.Person.LastName)
+
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(v => v.Person.BirthDate, new { @class = "col-md-2 control-label" })
+        <br />
+
+        <div class="col-md-10">
+            @*@Html.TextBox("BirthDate", DateTime.Now.Date.ToString("dd/MM/yyyy"), new { @class = "form-control" })*@
+            @Html.TextBoxFor(v => v.Person.BirthDate, new { @class = "form-control" })
+
+            @*@Html.TextBox("BirthDate", Model.Person.BirthDate.Date.ToString("dd/MM/yyyy"), new { @class = "form-control" })*@
+            @Html.ValidationMessageFor(v => v.Person.BirthDate)
+
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Person.Description, new { @class = "col-md-2 control-label"})
+        <br />
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Person.Description, new { @class = "form-control", @cols = "100", @rows = "8", @style = "resize: none; max-width:7000px;" })
+
+
+        </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(v => v.Person.LastName)
-        @Html.TextBoxFor(v => v.Person.LastName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(v => v.Person.LastName)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(v => v.Person.BirthDate)
-
-        @Html.TextBoxFor(v => v.Person.BirthDate, "{0:dd/MM/yyyy}", new { @class = "form-control" })
-        @*@Html.TextBox("BirthDate", Model.Person.BirthDate.ToString("dd/MM/yyyy"), new { @class = "form-control" })*@
-
-        @Html.ValidationMessageFor(v => v.Person.BirthDate)
-
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Person.Description)
-        @Html.TextAreaFor(model => model.Person.Description, new { @class = "form-control", @cols = "100", @rows = "8", @style = "resize: none; max-width:7000px;" })
-    </div>
     @Html.HiddenFor(v => v.Person.Id)
 
-    <button type="submit" class="btn btn-secondary">Save</button>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-secondary">Save</button>
+        </div>
+    </div>
 }
+
 @section Scripts {
     <script>
 
@@ -44,12 +71,19 @@
 
     @Scripts.Render("~/bundles/jqueryval")
     <script>
-            $.validator.addMethod('date', function (value, element) {
-              if (this.optional(element)) {
-                return true;
-              }
-              var valid = true;
-              return valid;
+        $(function () {
+            $('#Person_BirthDate').datetimepicker({
+                format: 'D/M/YYYY'
             });
+        });
+
+
+        $.validator.addMethod('date', function (value, element) {
+            if (this.optional(element)) {
+                return true;
+            }
+            var valid = true;
+            return valid;
+        });
     </script>
 }

@@ -13,6 +13,8 @@ namespace StructureProject
                         "~/Scripts/bootbox.js",
                         "~/Scripts/datatables/jquery.datatables.js",
                        "~/Scripts/datatables/datatables.bootstrap.js",
+                       "~/Scripts/moment.min.js",
+                       "~/Scripts/bootstrap-datetimepicker.min.js",
                        "~/Scripts/toastr.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -30,6 +32,7 @@ namespace StructureProject
                       "~/Content/bootstrap-theme-united.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/toastr.css",
+                      "~/Content/_bootstrap - datetimepicker.less",
                       "~/Content/site.css"));
 
 

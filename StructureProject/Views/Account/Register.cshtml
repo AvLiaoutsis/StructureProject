@@ -90,6 +90,13 @@
 
     @Scripts.Render("~/bundles/jqueryval")
 <script>
+     $(function () {
+                $('#BirthDate').datetimepicker({
+                    format: 'D/M/YYYY'
+                });
+     });
+
+
             $.validator.addMethod('date', function (value, element) {
               if (this.optional(element)) {
                 return true;
