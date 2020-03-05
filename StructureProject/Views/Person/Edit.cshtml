@@ -36,7 +36,9 @@
     <div class="form-group">
         @Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.BirthDate.ToString(), new { htmlAttributes = new { @class = "form-control" } })
+            @*@Html.EditorFor(model => model.BirthDate.ToString(), new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.TextBox("BirthDate",Model.BirthDate, new { @class = "form-control" })
+
             @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -63,4 +65,14 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+          $.validator.addMethod('date', function (value, element) {
+          if (this.optional(element)) {
+            return true;
+          }
+          var valid = true;
+          return valid;
+        });
+        </script>
 }

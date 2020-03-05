@@ -265,6 +265,10 @@
     <Compile Include="Migrations\202003041149556_AddMail.Designer.cs">
       <DependentUpon>202003041149556_AddMail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003051104175_return.cs" />
+    <Compile Include="Migrations\202003051104175_return.Designer.cs">
+      <DependentUpon>202003051104175_return.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ContactInfo.cs" />
@@ -666,6 +670,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003041149556_AddMail.resx">
       <DependentUpon>202003041149556_AddMail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003051104175_return.resx">
+      <DependentUpon>202003051104175_return.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
