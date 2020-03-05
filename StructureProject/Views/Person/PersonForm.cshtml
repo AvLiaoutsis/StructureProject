@@ -14,8 +14,6 @@
     <hr />
     <div class="form-group">
         @Html.LabelFor(v => v.Person.Name, new { @class = "col-md-2 control-label"})
-                <br />
-
         <div class="col-md-10">
             @Html.TextBoxFor(v => v.Person.Name, new { @class = "form-control" })
             @Html.ValidationMessageFor(v => v.Person.Name)
@@ -24,8 +22,6 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(v => v.Person.LastName, new { @class = "col-md-2 control-label" })
-        <br />
-
         <div class="col-md-10">
             @Html.TextBoxFor(v => v.Person.LastName, new { @class = "form-control" })
             @Html.ValidationMessageFor(v => v.Person.LastName)
@@ -34,8 +30,6 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(v => v.Person.BirthDate, new { @class = "col-md-2 control-label" })
-        <br />
-
         <div class="col-md-10">
             @*@Html.TextBox("BirthDate", DateTime.Now.Date.ToString("dd/MM/yyyy"), new { @class = "form-control" })*@
             @Html.TextBoxFor(v => v.Person.BirthDate, new { @class = "form-control" })
@@ -47,7 +41,6 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.Person.Description, new { @class = "col-md-2 control-label"})
-        <br />
         <div class="col-md-10">
             @Html.TextAreaFor(model => model.Person.Description, new { @class = "form-control", @cols = "100", @rows = "8", @style = "resize: none; max-width:7000px;" })
 
@@ -59,7 +52,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-secondary">Save</button>
+            <button type="submit" class="btn btn-default">Save</button>
         </div>
     </div>
 }

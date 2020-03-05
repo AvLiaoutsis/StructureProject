@@ -24,9 +24,7 @@ namespace StructureProject.Models
         public DateTime BirthDate { get; set; }
 
         [Display(Name ="Biography")]
-        public string Description { get; set; }
-
-       
+        public string Description { get; set; }      
 
         public string IdentityUserId { get; set; }
 
