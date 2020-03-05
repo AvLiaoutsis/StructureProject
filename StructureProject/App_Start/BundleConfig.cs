@@ -32,7 +32,7 @@ namespace StructureProject
                       "~/Content/bootstrap-theme-united.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/toastr.css",
-                      "~/Content/_bootstrap - datetimepicker.less",
+                      "~/Content/bootstrap-datetimepicker.css",
                       "~/Content/site.css"));
 
 

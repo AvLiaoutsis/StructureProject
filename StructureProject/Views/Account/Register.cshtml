@@ -51,7 +51,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.BirthDate, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBox("BirthDate", DateTime.Now.Date.ToString("dd/MM/yyyy"), new { @class = "form-control" })
+            @Html.TextBox("BirthDate", "", new { @class = "form-control" })
             @*@Html.TextBoxFor(m => m.BirthDate, "{0:d MMM yyyy}", new { @class = "form-control" })*@
             @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
 
@@ -90,11 +90,25 @@
 
     @Scripts.Render("~/bundles/jqueryval")
 <script>
-     $(function () {
+
+    var a = moment().subtract(18, 'years').format('D/M/YYYY');
+    //alert(a);
+
+    $('#BirthDate').mouseenter(function () {
                 $('#BirthDate').datetimepicker({
-                    format: 'D/M/YYYY'
-                });
+
+                    format: 'D/M/YYYY',
+                    maxDate: a
+                })
      });
+
+     //   $('#BirthDate').focus(function () {
+     //           $('#BirthDate').datetimepicker({
+
+     //               format: 'D/M/YYYY',
+     //               maxDate: a
+     //           })
+     //});
 
 
             $.validator.addMethod('date', function (value, element) {
