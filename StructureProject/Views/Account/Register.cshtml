@@ -6,12 +6,12 @@
 
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @id = "RegisterForm", @class = "form-horizontal", role = "form" }))
 {
 
-    if(Model.Errors.Any())
+    if (Model.Errors.Any())
     {
-        foreach(var error in Model.Errors)
+        foreach (var error in Model.Errors)
         {
             <ul style="color:red" class="alert alert-danger" role="alert">
                 <li>
@@ -25,7 +25,7 @@
     <h4>Create a new account.</h4>
     <hr />
     <div class="form-group">
-        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label"})
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
@@ -74,7 +74,7 @@
         </div>
     </div>
 
-    @Html.HiddenFor(m => m.Role,new { @Value = "User" });
+    @Html.HiddenFor(m => m.Role, new { @Value = "User" });
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
@@ -89,34 +89,34 @@
     </script>
 
     @Scripts.Render("~/bundles/jqueryval")
-<script>
+    <script>
+        var a = moment().subtract(18, 'years').format('D/M/YYYY');
+        //alert(a);
 
-    var a = moment().subtract(18, 'years').format('D/M/YYYY');
-    //alert(a);
+        //$('#BirthDate').mouseenter(function () {
+        //            $('#BirthDate').datetimepicker({
 
-    //$('#BirthDate').mouseenter(function () {
-    //            $('#BirthDate').datetimepicker({
-
-    //                format: 'D/M/YYYY',
-    //                maxDate: a
-    //            })
-    // });
+        //                format: 'D/M/YYYY',
+        //                maxDate: a
+        //            })
+        // });
 
         $('#BirthDate').focus(function () {
-                $('#BirthDate').datetimepicker({
+            $('#BirthDate').datetimepicker({
 
-                    format: 'D/M/YYYY',
-                    maxDate: a
-                })
-     });
+                format: 'D/M/YYYY',
+                maxDate: a
+            })
+        });
 
 
-            $.validator.addMethod('date', function (value, element) {
-              if (this.optional(element)) {
+        $.validator.addMethod('date', function (value, element) {
+            if (this.optional(element)) {
                 return true;
-              }
-              var valid = true;
-              return valid;
-            });
+            }
+            var valid = true;
+            return valid;
+        });
+
     </script>
 }

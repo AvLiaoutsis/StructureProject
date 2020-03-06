@@ -206,9 +206,11 @@ namespace StructureProject.Controllers
                     context.Persons.Add(newPerson);
                     context.ContactInfos.Add(newContact);
 
+
                     context.SaveChanges();
-                    
-                    
+
+                    TempData["message"] = "Added";
+
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
