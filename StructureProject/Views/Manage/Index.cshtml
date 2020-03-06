@@ -23,6 +23,12 @@
             @Html.ActionLink("Change Contact Details ", "Edit", "Contact")
             ]
         </dd>
+        <dt>Hosting:</dt>
+        <dd>
+            [
+            @Html.ActionLink("Change Hosting Info", "Edit", "Host")
+            ]
+        </dd>
         <dt>Password:</dt>
         <dd>
             [
@@ -37,13 +43,13 @@
             ]
         </dd>
         <dt>Contact with PetAir
-        
+
         <dd>
             [
-            @Html.ActionLink("Here","ContactUs")
+            @Html.ActionLink("Here", "ContactUs")
             ]
         </dd>
-        
+
         @*<dt>External Logins:</dt>
         <dd>
             @Model.Logins.Count [

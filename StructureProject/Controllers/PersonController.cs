@@ -246,7 +246,7 @@ namespace StructureProject.Controllers
             //    Pets = pets
             //};
             var contact = context.ContactInfos.Where(s => s.Person.Id == id).SingleOrDefault();
-            if(contact is null)
+            if (contact is null)
             {
                 contact = new ContactInfo();
             }
@@ -277,6 +277,33 @@ namespace StructureProject.Controllers
             }
 
             return View(contact);
+        }
+
+        public ActionResult Search()
+        {
+            var PersonsWithContacts = context.ContactInfos
+                .Include(s => s.Person)
+                .ToList();
+
+            return View(PersonsWithContacts);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Search(string searchstring)
+        {
+            var PersonsWithContactsSameCity = context.ContactInfos
+                 .Include(s => s.Person)
+                 .Where(l => l.City.Contains(searchstring) ||
+                             l.Country.Contains(searchstring) ||
+                             l.Address.Contains(searchstring))
+                 .ToList();
+
+            return View(PersonsWithContactsSameCity);
+
+
+
+
         }
 
     }

@@ -190,6 +190,7 @@
     <Compile Include="Controllers\API\PetsController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HostController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\PetController.cs" />
@@ -269,9 +270,14 @@
     <Compile Include="Migrations\202003051104175_return.Designer.cs">
       <DependentUpon>202003051104175_return.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003060826362_addHostInfo.cs" />
+    <Compile Include="Migrations\202003060826362_addHostInfo.Designer.cs">
+      <DependentUpon>202003060826362_addHostInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ContactInfo.cs" />
+    <Compile Include="Models\HostInfo.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Mail.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -283,6 +289,7 @@
     <Compile Include="ViewModels\PersonDetailsViewModel.cs" />
     <Compile Include="ViewModels\PersonFormViewModel.cs" />
     <Compile Include="ViewModels\PetFormViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-datetimepicker.css" />
@@ -689,6 +696,8 @@
     <Content Include="Views\Manage\ContactUs.cshtml" />
     <Content Include="Views\Admin\ViewMail.cshtml" />
     <Content Include="Views\Person\PersonForm.cshtml" />
+    <Content Include="Views\Person\Search.cshtml" />
+    <Content Include="Views\Host\Edit.cshtml" />
     <None Include="Views\Shared\_Layout4.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -758,6 +767,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003051104175_return.resx">
       <DependentUpon>202003051104175_return.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003060826362_addHostInfo.resx">
+      <DependentUpon>202003060826362_addHostInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

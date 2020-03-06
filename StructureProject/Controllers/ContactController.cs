@@ -18,8 +18,9 @@ namespace StructureProject.Controllers
         }
         public ActionResult Edit()
         {
+            
             var identityId = User.Identity.GetUserId();
-
+           
             //var person = context.Persons.SingleOrDefault(s => s.IdentityUserId == identityId);
 
             var contact = context.ContactInfos.Where(s => s.Person.IdentityUserId == identityId).SingleOrDefault();

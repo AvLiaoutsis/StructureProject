@@ -1,0 +1,65 @@
+﻿@model IEnumerable<StructureProject.Models.ContactInfo>
+<h2>Search</h2>
+@using (Html.BeginForm("Search", "Person", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group"> 
+     <input id="searchstring" name="searchstring" type="text" value="" class="form-control"  placeholder="Search By Location"/>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary">Search</button>
+    </div>
+}
+
+@if (@Model.Any())
+{
+<table id="users" class="table table-bordered">
+    <thead>
+    <th>Country</th>
+    <th>City</th>
+    <th>Address</th>
+    <th>User</th>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model)
+        {
+            <tr>
+                <td>
+                    @if (!String.IsNullOrEmpty(obj.Country))
+                    {
+                        @obj.Country
+                    }
+                    else
+                    {
+                        <text>N/A</text>
+                    }
+                </td>
+                <td>
+                    @if (!String.IsNullOrEmpty(obj.City))
+                    {
+                        @obj.City
+                    }
+                    else
+                    {
+                        <text>N/A</text>
+                    }
+                </td>
+                <td>
+                    @if (!String.IsNullOrEmpty(obj.Address))
+                    {
+                        @obj.Address
+                    }
+                    else
+                    {
+                        <text>N/A</text>
+                    }
+                </td>
+                <td>
+                    @obj.Person.FullName
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}

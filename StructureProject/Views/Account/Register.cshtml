@@ -94,21 +94,21 @@
     var a = moment().subtract(18, 'years').format('D/M/YYYY');
     //alert(a);
 
-    $('#BirthDate').mouseenter(function () {
+    //$('#BirthDate').mouseenter(function () {
+    //            $('#BirthDate').datetimepicker({
+
+    //                format: 'D/M/YYYY',
+    //                maxDate: a
+    //            })
+    // });
+
+        $('#BirthDate').focus(function () {
                 $('#BirthDate').datetimepicker({
 
                     format: 'D/M/YYYY',
                     maxDate: a
                 })
      });
-
-     //   $('#BirthDate').focus(function () {
-     //           $('#BirthDate').datetimepicker({
-
-     //               format: 'D/M/YYYY',
-     //               maxDate: a
-     //           })
-     //});
 
 
             $.validator.addMethod('date', function (value, element) {
