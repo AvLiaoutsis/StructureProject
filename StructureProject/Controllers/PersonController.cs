@@ -217,16 +217,24 @@ namespace StructureProject.Controllers
             var identityId = User.Identity.GetUserId();
 
             var contact = context.ContactInfos.Where(s => s.Person.IdentityUserId == identityId).SingleOrDefault();
+            var hostInfo = context.HostInfos.Where(s => s.Person.IdentityUserId == identityId).SingleOrDefault();
+
             if (contact is null)
             {
                 contact = new ContactInfo();
+            }
+            if (hostInfo is null)
+            {
+                hostInfo = new HostInfo();
             }
 
             var viewmodel = new PersonDetailsViewModel()
             {
                 Owner = context.Persons.Where(s => s.IdentityUserId == identityId).SingleOrDefault(),
                 Pets = context.Pets.Where(s => s.Owner.IdentityUserId == identityId).ToList(),
-                Contact = contact
+                Contact = contact,
+                HostInfo = hostInfo
+
 
             };
             return View(viewmodel);
@@ -246,16 +254,24 @@ namespace StructureProject.Controllers
             //    Pets = pets
             //};
             var contact = context.ContactInfos.Where(s => s.Person.Id == id).SingleOrDefault();
+            var hostInfo = context.HostInfos.Where(s => s.Person.Id == id).SingleOrDefault();
+
             if (contact is null)
             {
                 contact = new ContactInfo();
+            }
+
+            if (hostInfo is null)
+            {
+                hostInfo = new HostInfo();
             }
 
             var viewmodel = new PersonDetailsViewModel()
             {
                 Owner = owner,
                 Pets = pets,
-                Contact = contact
+                Contact = contact,
+                HostInfo = hostInfo
             };
 
             if (viewmodel == null)

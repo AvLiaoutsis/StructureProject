@@ -78,3 +78,20 @@
         </li>
     </ul>
 }
+@if (!(Model.HostInfo.StartDateTime.ToString() == "1/1/0001 00:00:00"))
+{
+    <h3>Dates Available</h3>
+
+    <ul>
+        <li>
+            Start Date: @Model.HostInfo.StartDateTime.ToString("dd/MM/yyyy")
+        </li>
+        <li>
+            End Date: @Model.HostInfo.EndDateTime.ToString("dd/MM/yyyy")
+        </li>
+    </ul>
+}
+else
+{
+    <h3>No Dates Available</h3>
+}

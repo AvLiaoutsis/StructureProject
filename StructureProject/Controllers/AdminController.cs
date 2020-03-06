@@ -44,11 +44,15 @@ namespace StructureProject.Controllers
             var user = context.Users.Single(s => s.Id == person.IdentityUserId);
             var contact = context.ContactInfos.Single(s => s.Person.Id == person.Id);
             var pets = context.Pets.Where(s => s.Owner.Id == person.Id);
+            var hostinfo = context.HostInfos.Single(s => s.Person.Id == person.Id);
+
 
             context.Persons.Remove(person);
             context.Users.Remove(user);
             context.ContactInfos.Remove(contact);
             context.Pets.RemoveRange(pets);
+            context.HostInfos.Remove(hostinfo);
+
 
             context.SaveChanges();
             return RedirectToAction("PersonList");

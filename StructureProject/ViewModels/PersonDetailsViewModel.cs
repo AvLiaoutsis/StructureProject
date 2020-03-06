@@ -11,5 +11,6 @@ namespace StructureProject.ViewModels
         public Person Owner { get; set; }
         public ContactInfo Contact { get; set; }
         public List<Pet> Pets { get; set; }
+        public HostInfo HostInfo { get; set; }
     }
 }

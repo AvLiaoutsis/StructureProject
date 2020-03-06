@@ -17,6 +17,8 @@
     </center>
 }
 
+
+
 <br />
 <h3>You Have @Model.Pets.Count Pets</h3>
 
@@ -74,6 +76,23 @@
             Postal Code : @Model.Contact.PostalCode
         </li>
     </ul>
+}
+@if (!@String.IsNullOrEmpty(Model.HostInfo.StartDateTime.ToString()))
+{
+    <h3>Dates Available</h3>
+
+    <ul>
+        <li>
+            Start Date: @Model.HostInfo.StartDateTime.ToString("dd/MM/yyyy")
+        </li>
+        <li>
+            End Date: @Model.HostInfo.EndDateTime.ToString("dd/MM/yyyy")
+        </li>
+    </ul>
+}
+else
+{
+    <h3>No Dates Available</h3>
 }
 
 
