@@ -209,7 +209,7 @@ namespace StructureProject.Controllers
 
                     context.SaveChanges();
 
-                    TempData["message"] = "Added";
+                    TempData["Registration"] = "Added";
 
                     return RedirectToAction("Index", "Home");
                 }
