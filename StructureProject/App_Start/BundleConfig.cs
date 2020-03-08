@@ -14,7 +14,7 @@ namespace StructureProject
                         "~/Scripts/datatables/jquery.datatables.js",
                        "~/Scripts/datatables/datatables.bootstrap.js",
                        "~/Scripts/moment.min.js",
-                       "~/Scripts/bootstrap-datetimepicker.min.js",
+                       "~/Scripts/bootstrap-datetimepicker.js",
                        "~/Scripts/toastr.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

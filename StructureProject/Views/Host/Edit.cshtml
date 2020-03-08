@@ -65,50 +65,78 @@
 
     <script>
 
-
-        var today = moment();
-        //var firstDate = moment(document.getElementById("StartDateTime"));
-
-
-        $(function () {
-            //$('#StartDateTime').datetimepicker({
-            //    format: 'D/M/YYYY'
-            //});
-            $("#EndDateTime").prop('disabled', true);
-
-            $('#StartDateTime').datetimepicker({
-                    format: 'D/M/YYYY',
-                minDate: today
+                $(function () {
+            $('#StartDateTime,#EndDateTime').datetimepicker({
+                useCurrent: false,
+                minDate: moment(),
+                format: 'D/M/YYYY'
+                
+            });
+            $('#StartDateTime').datetimepicker().on('dp.change', function (e) {
+                var incrementDay = moment(new Date(e.date));
+                incrementDay.add(1, 'days');
+                $('#EndDateTime').data('DateTimePicker').minDate(incrementDay).format('D/M/YYYY');
+                $(this).data("DateTimePicker").hide();
             });
 
+            $('#EndDateTime').datetimepicker().on('dp.change', function (e) {
+                var decrementDay = moment(new Date(e.date));
+                decrementDay.subtract(1, 'days');
+                $('#StartDateTime').data('DateTimePicker').maxDate(decrementDay).format('D/M/YYYY');
+                 $(this).data("DateTimePicker").hide();
+            });
 
-        })
+                });
+
+
+        //var today = moment();
+        ////var firstDate = moment(document.getElementById("StartDateTime"));
+
+
+        //$(function () {
+        //    //$('#StartDateTime').datetimepicker({
+        //    //    format: 'D/M/YYYY'
+        //    //});
+        //    $("#EndDateTime").prop('disabled', true);
+
+        //    $('#StartDateTime').datetimepicker({
+        //            format: 'D/M/YYYY',
+        //        minDate: today
+        //    });
+
+
+        //})
+
+        //$('#StartDateTime').blur(function () {
+        //    $("#EndDateTime").prop('disabled', false);
+        //    alert($('#StartDateTime').val());
+
+
+
+        //    var startDate = moment($('#StartDateTime').val(), "DD/MM/YYYY").toDate();
+        //    var startDateChange = moment(startDate).format('L');
+
+
+        //    if (startDateChange) {
+
+        //        if ($('#EndDateTime').val() < startDateChange) {
+        //            $('#EndDateTime').val(startDateChange);
+
+
+        //        }
+
+        //        $('#EndDateTime').datetimepicker({
+        //            format: 'D/M/YYYY',
+        //                      minDate: startDateChange
+        //        });
+
             
-        $('#StartDateTime').blur(function () {
-            $("#EndDateTime").prop('disabled', false);
-            alert($('#StartDateTime').val());
-
-            var startDate = moment($('#StartDateTime').val(), "DD/MM/YYYY").toDate();
-            var startDateChange = moment(startDate).format('L');
+        //       $('#EndDateTime').data("DateTimePicker").destroy()
 
 
+        //    }
 
-            if (startDateChange) {
-
-                if ($('#EndDateTime').val() < startDateChange) {
-                    $('#EndDateTime').val(startDateChange);
-
-
-                }
-
-                $('#EndDateTime').datetimepicker({
-                    format: 'D/M/YYYY',
-                              minDate: startDateChange
-                                });
-
-            }
-
-        });
+        //});
 
         //$('#StartDateTime').blur(function () {
         //    $("#EndDateTime").prop('disabled', false);
