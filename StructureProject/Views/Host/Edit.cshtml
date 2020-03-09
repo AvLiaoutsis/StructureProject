@@ -65,7 +65,8 @@
 
     <script>
 
-                $(function () {
+        $(function () {
+            $("#EndDateTime").prop('disabled', true);
             $('#StartDateTime,#EndDateTime').datetimepicker({
                 useCurrent: false,
                 minDate: moment(),
@@ -73,6 +74,7 @@
                 
             });
             $('#StartDateTime').datetimepicker().on('dp.change', function (e) {
+               $("#EndDateTime").prop('disabled', false);
                 var incrementDay = moment(new Date(e.date));
                 incrementDay.add(1, 'days');
                 $('#EndDateTime').data('DateTimePicker').minDate(incrementDay).format('D/M/YYYY');

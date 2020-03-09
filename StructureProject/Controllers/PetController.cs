@@ -31,8 +31,11 @@ namespace StructureProject.Controllers
 
         public ViewResult New()
         {
-            var viewmodel = new PetFormViewModel();
-
+            var viewmodel = new PetFormViewModel()
+            {
+                Pet = new Pet()
+            };
+            
             return View("PetForm", viewmodel);
         }
         public ViewResult Details(int id)

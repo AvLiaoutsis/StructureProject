@@ -14,7 +14,7 @@ namespace StructureProject.ViewModels
 
             get
             {
-                return Pet is null ? "New Pet" : "Edit Pet";
+                return Pet.Id == 0 ? "New Pet" : "Edit Pet";
             }
         }
     }

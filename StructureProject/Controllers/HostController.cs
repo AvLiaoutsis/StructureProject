@@ -10,6 +10,7 @@ using System.Data.Entity;
 
 namespace StructureProject.Controllers
 {
+    [Authorize]
     public class HostController : Controller
     {
         private ApplicationDbContext context = new ApplicationDbContext();
