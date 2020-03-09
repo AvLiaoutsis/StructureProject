@@ -55,6 +55,9 @@ namespace StructureProject.Controllers.API
                 
         }
 
+        //GET /api/GetPersonsAndCities
+
+
 
         //DELETE /api/Persons/id
         [HttpDelete]

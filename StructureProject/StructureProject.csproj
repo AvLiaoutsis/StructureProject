@@ -186,6 +186,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\API\ContactsController.cs" />
     <Compile Include="Controllers\API\PersonsController.cs" />
     <Compile Include="Controllers\API\PetsController.cs" />
     <Compile Include="Controllers\ContactController.cs" />

@@ -1,65 +1,148 @@
 ﻿@model IEnumerable<StructureProject.Models.ContactInfo>
-<h2>Search</h2>
-@using (Html.BeginForm("Search", "Person", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
+<br />
 
-    <div class="form-group"> 
-     <input id="searchstring" name="searchstring" type="text" value="" class="form-control"  placeholder="Search By Location"/>
-    </div>
-    <div class="form-group">
-        <button class="btn btn-primary">Search</button>
-    </div>
+    <table id="contacts" class="table table-bordered">
+        <thead>
+        <th>Person</th>
+        <th>Country</th>
+        <th>City</th>
+        <th>Address</th>
+
+
+        <thead/>
+        <tbody>
+            @*@foreach (var viewer in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(viewer.Name, "Edit", "Viewer", new { id = viewer.Id }, null)
+                    </td>
+                    <td>
+                        @viewer.MembershipType.Name
+                    </td>
+                    <td>
+                        @viewer.MembershipType.Discount%
+                    </td>
+                    <td>
+                        <button data-viewer-id="@viewer.Id" class="btn btn-link js-delete">Delete</button>
+                    </td>
+                </tr>
+            }*@
+        </tbody>
+    </table>
+@*}*@
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#contacts").DataTable({
+                ajax: {
+                    url: "/api/contacts/",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "person.name"
+                    },
+                    {
+                        data: "country"
+                    },
+                    {
+                        data: "city"
+                    },
+                    {
+                        data: "address"
+                    }
+                ]
+            });
+
+
+        });
+    </script>
 }
 
-@if (@Model.Any())
-{
-<table id="users" class="table table-bordered">
-    <thead>
-    <th>Country</th>
-    <th>City</th>
-    <th>Address</th>
-    <th>User</th>
-    </thead>
-    <tbody>
-        @foreach (var obj in Model)
-        {
-            <tr>
-                <td>
-                    @if (!String.IsNullOrEmpty(obj.Country))
-                    {
-                        @obj.Country
-                    }
-                    else
-                    {
-                        <text>N/A</text>
-                    }
-                </td>
-                <td>
-                    @if (!String.IsNullOrEmpty(obj.City))
-                    {
-                        @obj.City
-                    }
-                    else
-                    {
-                        <text>N/A</text>
-                    }
-                </td>
-                <td>
-                    @if (!String.IsNullOrEmpty(obj.Address))
-                    {
-                        @obj.Address
-                    }
-                    else
-                    {
-                        <text>N/A</text>
-                    }
-                </td>
-                <td>
-                    @obj.Person.FullName
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<h2>Search</h2>
+    @using (Html.BeginForm("Search", "Person", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+         <input id="searchstring" name="searchstring" type="text" value="" class="form-control"  placeholder="Search By Location"/>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary">Search</button>
+        </div>
+    }
+
+    @if (@Model.Any())
+    {
+    <table id="users" class="table table-bordered">
+        <thead>
+        <th>Country</th>
+        <th>City</th>
+        <th>Address</th>
+        <th>User</th>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td>
+                        @if (!String.IsNullOrEmpty(obj.Country))
+                        {
+                            @obj.Country
+                        }
+                        else
+                        {
+                            <text>N/A</text>
+                        }
+                    </td>
+                    <td>
+                        @if (!String.IsNullOrEmpty(obj.City))
+                        {
+                            @obj.City
+                        }
+                        else
+                        {
+                            <text>N/A</text>
+                        }
+                    </td>
+                    <td>
+                        @if (!String.IsNullOrEmpty(obj.Address))
+                        {
+                            @obj.Address
+                        }
+                        else
+                        {
+                            <text>N/A</text>
+                        }
+                    </td>
+                    <td>
+                        @obj.Person.FullName
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    }*@

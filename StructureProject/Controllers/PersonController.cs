@@ -302,11 +302,12 @@ namespace StructureProject.Controllers
 
         public ActionResult Search()
         {
-            var PersonsWithContacts = context.ContactInfos
-                .Include(s => s.Person)
-                .ToList();
+            //var PersonsWithContacts = context.ContactInfos
+            //    .Include(s => s.Person)
+            //    .ToList();
 
-            return View(PersonsWithContacts);
+            //return View(PersonsWithContacts);
+            return View();
         }
 
         [HttpPost]
