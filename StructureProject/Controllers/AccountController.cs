@@ -150,6 +150,12 @@ namespace StructureProject.Controllers
             return View(viewmodel);
         }
 
+        [AllowAnonymous]
+        public ActionResult RegisterNewView()
+        {
+            var viewmodel = new RegisterViewModel();
+            return View(viewmodel);
+        }
         // GET: /Account/RegisterAdmin
 
         [AllowAnonymous]
@@ -197,14 +203,22 @@ namespace StructureProject.Controllers
                         Email = user.Email,
                         BirthDate = user.BirthDate,
                         IdentityUserId = user.Id
+                        
                     };
 
                     var newContact = new ContactInfo() 
                     {
                         Person = newPerson
                     };
+                    var newHostInfo = new HostInfo()
+                    {
+                        Person = newPerson
+                    };
+
                     context.Persons.Add(newPerson);
                     context.ContactInfos.Add(newContact);
+                    context.HostInfos.Add(newHostInfo);
+
 
 
                     context.SaveChanges();

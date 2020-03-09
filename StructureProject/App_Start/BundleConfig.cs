@@ -15,10 +15,17 @@ namespace StructureProject
                        "~/Scripts/datatables/datatables.bootstrap.js",
                        "~/Scripts/moment.min.js",
                        "~/Scripts/bootstrap-datetimepicker.js",
+                       "~/Scripts/fontawesome/all.min.js",
                        "~/Scripts/toastr.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/registerjs").Include(
+            "~/Scripts/Register/additional-methods.min.js",
+            "~/Scripts/Register/jquery.steps.min.js",
+            "~/Scripts/Register/jquery.validate.min.js",
+            "~/Scripts/Register/register.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
@@ -33,7 +40,8 @@ namespace StructureProject
                       "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/toastr.css",
                       "~/Content/bootstrap-datetimepicker.css",
-                      "~/Content/site.css"));
+                      "~/Content/fontawesome-all.css",
+                      "~/Content/Site.css"));
 
 
             bundles.Add(new StyleBundle("~/Content/css4").Include(
@@ -41,6 +49,10 @@ namespace StructureProject
               "~/Content/datatables/css/datatables.bootstrap.css",
               "~/Content/toastr.css",
               "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/registerCSS").Include(
+                    "~/Content/Register/material-design-iconic-font.min.css",
+                    "~/Content/Register/registerStyle.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap4").Include(
              "~/Scripts/bootstrap.js"));

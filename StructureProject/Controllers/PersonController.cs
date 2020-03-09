@@ -11,6 +11,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
+using StructureProject.Helpers;
 
 namespace StructureProject.Controllers
 {
@@ -67,7 +68,7 @@ namespace StructureProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save(Person person)
+        public ActionResult Save(Person person, HttpPostedFileBase file)
         {
             // shit happens
             if (!ModelState.IsValid)
@@ -75,12 +76,16 @@ namespace StructureProject.Controllers
                 return HttpNotFound();
             }
 
+            var fileName = ExtraMethods.UploadPhoto(file);
+            person.Avatar = fileName;
+
             var personInDb = context.Persons.Single(m => m.Id == person.Id);
 
             personInDb.BirthDate = person.BirthDate;
             personInDb.Description = person.Description;
             personInDb.Name = person.Name;
             personInDb.LastName = person.LastName;
+            personInDb.Avatar = person.Avatar;
 
 
 

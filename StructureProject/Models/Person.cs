@@ -25,7 +25,8 @@ namespace StructureProject.Models
 
         [Display(Name ="Biography")]
         public string Description { get; set; }
-        
+
+        public string Avatar { get; set; }
 
         public string IdentityUserId { get; set; }
 
