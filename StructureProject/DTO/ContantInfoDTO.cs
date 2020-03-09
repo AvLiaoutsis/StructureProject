@@ -8,6 +8,7 @@ namespace StructureProject.DTO
 {
     public class ContantInfoDTO
     {
+        public int Id { get; set; }
         public string PhoneNumber { get; set; }
         public string TelNumber { get; set; }
         public string Address { get; set; }
@@ -15,6 +16,6 @@ namespace StructureProject.DTO
         public string State { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public Person Person { get; set; }
+        public PersonDTO Person { get; set; }
     }
 }
