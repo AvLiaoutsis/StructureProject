@@ -11,6 +11,7 @@ namespace StructureProject.Models
         public string Name { get; set; }
         public string Kind { get; set; }
         public float Age { get; set; }
+        public string Avatar { get; set; }
         public Person Owner { get; set; }
 
     }

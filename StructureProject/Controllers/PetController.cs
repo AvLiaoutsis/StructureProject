@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using StructureProject.Helpers;
 using StructureProject.Models;
 using StructureProject.ViewModels;
 using System;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace StructureProject.Controllers
 {
@@ -32,6 +34,14 @@ namespace StructureProject.Controllers
             var viewmodel = new PetFormViewModel();
 
             return View("PetForm", viewmodel);
+        }
+        public ViewResult Details(int id)
+        {
+            var pet = context.Pets
+                .Include(v=>v.Owner)
+                .SingleOrDefault(v => v.Id == id);
+
+            return View(pet);
         }
         //[Authorize]
         //public ActionResult AddPet()
@@ -105,7 +115,7 @@ namespace StructureProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save(Pet pet)
+        public ActionResult Save(Pet pet,HttpPostedFileBase file)
         {
             //// shit happens
             //if (!ModelState.IsValid)
@@ -128,12 +138,16 @@ namespace StructureProject.Controllers
 
                 var PersonToUpdate = context.Persons.Where(s => s.IdentityUserId == identityId).SingleOrDefault();
 
+                var fileName = ExtraMethods.UploadPhoto(file);
+                pet.Avatar = fileName;
+
                 var newPet = new Pet()
                 {
                     Name = pet.Name,
                     Kind = pet.Kind,
                     Age =  pet.Age,
-                    Owner = PersonToUpdate
+                    Owner = PersonToUpdate,
+                    Avatar = pet.Avatar
                 };
                 context.Pets.Add(newPet);
 
@@ -142,9 +156,13 @@ namespace StructureProject.Controllers
             {
                 var petInDb = context.Pets.Single(m => m.Id == pet.Id);
 
+                var fileName = ExtraMethods.UploadPhoto(file);
+                pet.Avatar = fileName;
+
                 petInDb.Name = pet.Name;
                 petInDb.Kind = pet.Kind;
                 petInDb.Age = pet.Age;
+                petInDb.Avatar = pet.Avatar;
 
             }
             context.SaveChanges();

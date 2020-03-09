@@ -1,0 +1,30 @@
+﻿@model StructureProject.Models.Pet
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<br />
+<h3>Owner:</h3>
+<h4>@Model.Owner.FullName</h4>
+<br />
+<img class="img-circle md-avatar rounded-circle size-4" src="~/Content/Images/UserPhotos/@Model.Avatar" alt="No Profile Photo">
+
+
+<br />
+<h3>Pet Details</h3>
+<br />
+<ul>
+    <li>
+        Name : @Model.Name
+    </li>
+    <li>
+        Kind: @Model.Kind
+    </li>
+    <li>
+        Age : @Model.Age
+    </li>
+</ul>
+
+
+

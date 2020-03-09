@@ -12,6 +12,11 @@
 
     </ul>*@
 
+<br />
+<h3>@Model.Owner.FullName</h3>
+
+<img class="img-circle md-avatar rounded-circle size-4" src="~/Content/Images/UserPhotos/@Model.Owner.Avatar" alt="No Profile Photo">
+
 @if (!@String.IsNullOrEmpty(Model.Owner.Description))
 {
     <h3>Bio</h3>
@@ -20,23 +25,23 @@
 }
 
 <br />
-<h3>@Model.Owner.Name @Model.Owner.LastName  has @Model.Pets.Count Pets</h3>
+<h3>@Model.Owner.Name  has @Model.Pets.Count Pets</h3>
 
 <br />
 @if (@Model.Pets.Count > 0)
 {
     <table id="pets" class="table table-bordered">
         <thead>
-        <th>Pet Name</th>
-        <th>Pet Kind</th>
-        <th>Pet Age</th>
+        <th>Name</th>
+        <th>Kind</th>
+        <th>Age</th>
         </thead>
         <tbody>
             @foreach (var pet in Model.Pets)
             {
                 <tr>
                     <td>
-                        @pet.Name
+                        @Html.ActionLink(pet.Name, "Details", "Pet", new { id = pet.Id }, null)
                     </td>
                     <td>
                         @pet.Kind
