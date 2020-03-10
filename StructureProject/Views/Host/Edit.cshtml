@@ -29,14 +29,14 @@
 
                 @Html.ValidationMessageFor(model => model.StartDateTime, "", new { @class = "text-danger" })
             </div>
-        
-                </div>
-        
+
+        </div>
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.EndDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @if (String.IsNullOrEmpty(Model.EndDateTime.ToString()) || (Model.EndDateTime.ToString() =="1/1/0001 00:00:00"))
+                @if (String.IsNullOrEmpty(Model.EndDateTime.ToString()) || (Model.EndDateTime.ToString() == "1/1/0001 00:00:00"))
                 {
                     @Html.TextBox("EndDateTime", "", new { @class = "form-control" })
 
@@ -66,15 +66,16 @@
     <script>
 
         $(function () {
+            $(':input[type="submit"]').prop('disabled', true);
             $("#EndDateTime").prop('disabled', true);
             $('#StartDateTime,#EndDateTime').datetimepicker({
                 useCurrent: false,
                 minDate: moment(),
                 format: 'D/M/YYYY'
-                
+
             });
             $('#StartDateTime').datetimepicker().on('dp.change', function (e) {
-               $("#EndDateTime").prop('disabled', false);
+                $("#EndDateTime").prop('disabled', false);
                 var incrementDay = moment(new Date(e.date));
                 incrementDay.add(1, 'days');
                 $('#EndDateTime').data('DateTimePicker').minDate(incrementDay).format('D/M/YYYY');
@@ -85,10 +86,12 @@
                 var decrementDay = moment(new Date(e.date));
                 decrementDay.subtract(1, 'days');
                 $('#StartDateTime').data('DateTimePicker').maxDate(decrementDay).format('D/M/YYYY');
-                 $(this).data("DateTimePicker").hide();
+                $(this).data("DateTimePicker").hide();
+                $(':input[type="submit"]').prop('disabled', false);
+
             });
 
-                });
+        });
 
 
         //var today = moment();
@@ -132,7 +135,7 @@
         //                      minDate: startDateChange
         //        });
 
-            
+
         //       $('#EndDateTime').data("DateTimePicker").destroy()
 
 
@@ -157,7 +160,7 @@
         //        else if ($('#EndDateTime').val() == "1/1/0001 00:00:00")
         //        {
         //            $('#EndDateTime').val($('#StartDateTime').val());
-        //        } 
+        //        }
 
         //    }
 

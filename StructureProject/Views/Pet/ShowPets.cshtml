@@ -25,7 +25,20 @@
 @*}*@
 @section scripts
 {
+
     <script>
+
+            $(function () {
+                if ('@TempData["PetAdd"]' == "Added") {
+                    toastr.success('Registration Successful!!');
+                    TempData.Remove("PetAdd");
+                } else if ('@TempData["PetUpdate"]' == "Updated") {
+                    toastr.success('Update Successful!!');
+                    TempData.Remove("PetUpdate");
+
+                }
+            });
+
         $(document).ready(function () {
             var table = $("#pets").DataTable({
                 ajax: {

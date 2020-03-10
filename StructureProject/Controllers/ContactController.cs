@@ -71,6 +71,8 @@ namespace StructureProject.Controllers
 
             }
             context.SaveChanges();
+            TempData["Contact"] = "Added";
+
 
             return RedirectToAction("Index", "Home");
         }

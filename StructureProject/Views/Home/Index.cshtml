@@ -35,6 +35,31 @@
     $(function () {
         if ('@TempData["Registration"]' == "Added") {
             toastr.success('Registration Successful!!');
+            TempData.Remove("Registration");
+        }
+        if ('@TempData["UpdatePerson"]' == "Added") {
+            toastr.success('Update Successful!!')
+            TempData.Remove("UpdatePerson");
+        }
+        if ('@TempData["UpdateHost"]' == "Added") {
+            toastr.success('Update Successful!!')
+            TempData.Remove("UpdateHost");
+        }
+        if ('@TempData["UpdateContact"]' == "Added") {
+            toastr.success('Update Successful!!')
+            TempData.Remove("UpdateContact");
+        }
+         if ('@TempData["Login"]' == "Logged") {
+             toastr.success('Login Successful!!')
+             TempData.Remove("Login");
+        }
+        if ('@TempData["UpdateHost"]' == "Updated") {
+             toastr.success('Update Successful!!');
+             TempData.Remove("UpdateHost");
+        }
+        if ('@TempData["Message"]' == "Send") {
+             toastr.success('Message Sent!!');
+             TempData.Remove("Message");
         }
     });
     </script>

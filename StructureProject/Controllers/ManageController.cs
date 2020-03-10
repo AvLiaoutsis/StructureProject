@@ -77,6 +77,7 @@ namespace StructureProject.Controllers
             context.Mails.Add(newMail);
 
             context.SaveChanges();
+            TempData["Message"] = "Send";
 
             return RedirectToAction("Index","Home");
         }

@@ -153,6 +153,8 @@ namespace StructureProject.Controllers
                     Avatar = pet.Avatar
                 };
                 context.Pets.Add(newPet);
+                TempData["PetAdd"] = "Added";
+
 
             }
             else //Update
@@ -166,6 +168,8 @@ namespace StructureProject.Controllers
                 petInDb.Kind = pet.Kind;
                 petInDb.Age = pet.Age;
                 petInDb.Avatar = pet.Avatar;
+                TempData["PetUpdate"] = "Updated";
+
 
             }
             context.SaveChanges();

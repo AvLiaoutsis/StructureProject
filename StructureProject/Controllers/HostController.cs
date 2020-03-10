@@ -49,7 +49,6 @@ namespace StructureProject.Controllers
 
                 newHosting.Person = personInDb;
 
-
                 context.HostInfos.Add(newHosting);
             }
 
@@ -62,6 +61,7 @@ namespace StructureProject.Controllers
 
             }
             context.SaveChanges();
+            TempData["UpdateHost"] = "Updated";
 
             return RedirectToAction("Index", "Home");
         }

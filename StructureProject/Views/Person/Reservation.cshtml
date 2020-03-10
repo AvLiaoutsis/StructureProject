@@ -1,0 +1,127 @@
+﻿@model StructureProject.ViewModels.ReservationViewModel
+@{
+    ViewBag.Title = "Reservation";
+}
+
+<h2>Reservation</h2>
+@using (Html.BeginForm("Create", "Gig"))
+{
+    @Html.AntiForgeryToken();
+
+<div class="form-horizontal">
+    <div class="form-group">
+
+        @Html.Label("Person")
+        <div class="col-md-10">
+
+            <select class="form-control" id="reservationDropdown" name="reservationDropdown"></select>
+            </div>
+        </div>
+    <div class="form-group" id="second" style="display:none">
+
+        <h3>Dates Available</h3>
+        <div class="col-md-10">
+
+            <ul>
+                <li>
+                    Start Date: <text id="startdate"></text>
+                </li>
+                <li>
+                    End Date : <text id="enddate"></text>
+                </li>
+            </ul>
+        </div>
+
+
+        @Html.Label("Choose Date")
+        <div class="col-md-10">
+            
+            @Html.TextBox("DateTime", "", new { @class = "form-control" })
+        </div>
+
+
+    </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        }
+        @section Scripts
+{
+            <script>
+
+                $(document).ready(function () {
+                    $.ajax({
+                        type: "GET",
+                        url: "/api/contacts",
+                        data: "{}",
+                        success: function (data) {
+                            var s = '<option value = "-1">Please Select a User</option>';
+                            for (var i = 0; i < data.length; i++) {
+                                s += '<option value="' + data[i].person.id + '">' + data[i].person.name + '</option>';
+                            }
+                            $("#reservationDropdown").html(s);
+                        }
+                    });
+
+                    var e = document.getElementById("reservationDropdown");
+
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/api/hosts/" + e,
+                        data: "{}",
+                        success: function (data) {
+
+                            $("#startdate").html(moment(data[0].startDateTime).format('D/M/YYYY'));
+                            $("#enddate").html(moment(data[0].endDateTime).format('D/M/YYYY'));
+
+
+                            $('#DateTime').datetimepicker({
+                                useCurrent: false,
+                                minDate: data[0].startDateTime,
+                                maxDate: data[0].endDateTime,
+                                format: 'D/M/YYYY'
+                            });
+                        }
+                    });
+
+
+                });
+
+
+                document.getElementById('reservationDropdown').addEventListener('change', function () {
+                    var style = this.value != -1 ? 'block' : 'none';
+                    console.log(style)
+                    document.getElementById('second').style.display = style;
+                    var e = document.getElementById("reservationDropdown");
+                    alert(e.options[e.selectedIndex].value);
+
+
+
+
+
+                });
+
+                                                                                                    //https://localhost:44322/api/hosts
+
+
+                                                                                                    //        $('#DateTime').datetimepicker({
+                                                                                                    //        useCurrent: false,
+                                                                                                    //        minDate: moment(),
+                                                                                                    //        maxDate://prepei na parw ta dates apo ton user
+                                                                                                    //        format: 'D/M/YYYY'
+
+                                                                                                    //    });
+
+                                                                                                    //});
+
+            </script>
+            @Scripts.Render("~/bundles/jqueryval")
+        }

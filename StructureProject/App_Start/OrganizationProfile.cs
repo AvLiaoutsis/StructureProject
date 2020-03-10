@@ -23,6 +23,9 @@ namespace StructureProject.App_Start
 
             CreateMap<Mail, MailDTO>();
             CreateMap<MailDTO, Mail>();
+
+            CreateMap<HostInfo, HostInfoDTO>();
+            CreateMap<HostInfoDTO, HostInfo>();
         }
     }
 }
