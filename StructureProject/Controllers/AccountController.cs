@@ -211,14 +211,10 @@ namespace StructureProject.Controllers
                     {
                         Person = newPerson
                     };
-                    var newHostInfo = new HostInfo()
-                    {
-                        Person = newPerson
-                    };
+
 
                     context.Persons.Add(newPerson);
                     context.ContactInfos.Add(newContact);
-                    context.HostInfos.Add(newHostInfo);
 
 
 

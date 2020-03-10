@@ -32,6 +32,17 @@ namespace StructureProject.Controllers.API
                 .Select(Mapper.Map<HostInfo, HostInfoDTO>);
 
         }
+        public IEnumerable<HostInfoDTO> GetHostInfos(int id)
+        {
+            var identityId = User.Identity.GetUserId();
+
+            return context.HostInfos
+                .Include(s => s.Person)
+                .Where(s => !(s.Person.IdentityUserId == identityId) &&(s.Id == id))
+                .ToList()
+                .Select(Mapper.Map<HostInfo, HostInfoDTO>);
+
+        }
 
     }
 }
