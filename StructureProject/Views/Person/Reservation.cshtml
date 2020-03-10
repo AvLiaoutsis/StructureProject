@@ -80,12 +80,12 @@
                 }
             });
 
-            var e = document.getElementById("reservationDropdown");
+            var id = document.getElementById("reservationDropdown");
 
 
             $.ajax({
                 type: "GET",
-                url: "/api/hosts/" + e,
+                url: "/api/hosts/" + id,
                 data: "{}",
                 success: function (data) {
 
