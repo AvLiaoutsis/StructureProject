@@ -25,12 +25,13 @@
         @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
 
-            <p class="form-control" id="startdate"></p>
+            <p class="form-control col-md-2" id="startdate"></p>
         </div>
         @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
 
-            <p class="form-control" id="enddate"></p>
+            <p class="form-control col-md-2" id="enddate"></p>
+
         </div>
 
     </div>
@@ -52,11 +53,11 @@
         @Html.Label("Choose Date", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
 
-            @Html.TextBox("DateTime", "", new { @class = "form-control"  })
+            @Html.TextBox("DateTime", "", new { @class = "form-control col-md-2" })
         </div>
     </div>
 
-    <div class="form-group" id="final" style="display:none">
+    <div class="col-md-offset-2 col-md-10" id="final" style="display:none">
         <input type="submit" value="Save" class="btn btn-default" />
     </div>
 </div>
@@ -107,24 +108,33 @@
 
         document.getElementById('reservationDropdown').addEventListener('change', function () {
             var style = this.value != -1 ? 'block' : 'none';
-            console.log(style)
             document.getElementById('second').style.display = style;
             document.getElementById('third').style.display = style;
-
-            var e = document.getElementById("reservationDropdown");
         });
 
-        $('#DateTime').datetimepicker({
-                        useCurrent: false,
-                        minDate: data[0].startDateTime,
-                        maxDate: data[0].endDateTime,
-                        format: 'D/M/YYYY'
+        //document.getElementById('DateTime').addEventListener('change', function () {
+        //    console.log("hello");
+        //    var style = this.value != -1 ? 'block' : 'none';
+        //    console.log("geia")
+        //    
+        //});
+                $("#DateTime").on("dp.change", function (e) {
+                    document.getElementById('final').style.display = 'block';
+                });
+        //$('#DateTime').blur(function () {
+        //      document.getElementById('final').style.display = 'block';
+        //    });
+        //$('#DateTime').datetimepicker({
+        //                useCurrent: false,
+        //                minDate: data[0].startDateTime,
+        //                maxDate: data[0].endDateTime,
+        //                format: 'D/M/YYYY'
 
 
-        }).on('dp.change', function () {
-             document.getElementById('final').style.display = 'block';
+        //}).on('dp.change', function () {
+        //     document.getElementById('final').style.display = 'block';
 
-            });
+        //    });
         //document.getElementById('DateTime').addEventListener('change', function () {
         //    console.log("mpike");
         //    var style = this.value != -1 ? 'block' : 'none';
