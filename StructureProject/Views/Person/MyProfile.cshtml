@@ -77,7 +77,7 @@
         </li>
     </ul>
 }
-@if (!@String.IsNullOrEmpty(Model.HostInfo.StartDateTime.ToString()))
+@if (!(@String.IsNullOrEmpty(Model.HostInfo.StartDateTime.ToString())) &&(Model.HostInfo.StartDateTime.ToString("dd/MM/yyyy") != "01/01/0001" ))
 {
     <h3>Dates Available</h3>
 
