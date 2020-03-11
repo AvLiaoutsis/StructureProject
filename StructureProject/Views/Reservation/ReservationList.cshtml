@@ -1,0 +1,87 @@
+﻿@model StructureProject.ViewModels.ReservationsShowViewModel
+
+
+<h2>My Pets</h2>
+@*@if (!Model.Any())
+    {
+        <p>We don't have any viewers yet.</p>
+    }
+    else
+    {*@
+<p>
+    @Html.ActionLink("Make A New Reservation", "Make", "Reservation", null, new { @class = "btn btn-primary" })
+</p>
+@if (Model.MyReservations.Any())
+{<h3>List of Reservations made by You</h3>
+
+    <table id="reservationsbyme" class="table table-bordered">
+        <thead>
+        <th>Host Name</th>
+        <th>Date</th>
+
+        </thead>
+        <tbody>
+            @foreach (var reservation in Model.MyReservations)
+            {
+                <tr>
+                    <td>
+                        @reservation.Host.FullName
+                    </td>
+                    <td>
+                        @reservation.Date.ToString("dd/MM/yyyy")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3>No haven't made any reservation</h3>
+}
+
+
+<br />
+<br />
+@if (Model.ReservationsWithHostMe.Any())
+{
+    <h3>List of Reservations made to you</h3>
+    <table id="reservations" class="table table-bordered">
+        <thead>
+        <th>Customer Name</th>
+        <th>Date</th>
+
+        </thead>
+        <tbody>
+            @foreach (var reservation in Model.ReservationsWithHostMe)
+            {
+                <tr>
+                    <td>
+                        @reservation.Customer.FullName
+                    </td>
+                    <td>
+                        @reservation.Date.ToString("dd/MM/yyyy")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3>No one has made a reservation with you</h3>
+}
+
+@*}*@
+@section scripts
+{
+
+    <script>
+        var table = $("#reservationsbyme").DataTable();
+
+        var table = $("#reservations").DataTable();
+
+    </script>
+}
+
+

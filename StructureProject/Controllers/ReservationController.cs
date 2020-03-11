@@ -3,6 +3,7 @@ using StructureProject.Models;
 using StructureProject.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -21,6 +22,38 @@ namespace StructureProject.Controllers
             context = new ApplicationDbContext();
         }
 
+
+        public ActionResult Show()
+        
+       {
+
+            var identityId = User.Identity.GetUserId();
+
+            if (identityId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+           var myReservations = context.Reservations
+                .Include(s=>s.Host)
+                .Include(s=>s.Customer)
+                .Where(s => s.Customer.IdentityUserId == identityId)
+                .ToList();
+
+            var myReservationsWithHostMe = context.Reservations
+            .Include(s => s.Host)
+            .Include(s => s.Customer)
+            .Where(s => s.Host.IdentityUserId == identityId)
+            .ToList();
+
+            var viewModel = new ReservationsShowViewModel
+            {
+                MyReservations = myReservations,
+                ReservationsWithHostMe = myReservationsWithHostMe
+            };
+
+            return View("ReservationList", viewModel);
+        }
         // GET: Reservation
         public ActionResult Make()
         {

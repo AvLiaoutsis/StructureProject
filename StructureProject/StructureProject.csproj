@@ -307,6 +307,7 @@
     <Compile Include="ViewModels\PersonDetailsViewModel.cs" />
     <Compile Include="ViewModels\PersonFormViewModel.cs" />
     <Compile Include="ViewModels\PetFormViewModel.cs" />
+    <Compile Include="ViewModels\ReservationsShowViewModel.cs" />
     <Compile Include="ViewModels\ReservationViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
   </ItemGroup>
@@ -758,6 +759,7 @@
     <Content Include="Views\Account\RegisterNewView.cshtml" />
     <Content Include="Views\Pet\Details.cshtml" />
     <Content Include="Views\Reservation\Make.cshtml" />
+    <Content Include="Views\Reservation\ReservationList.cshtml" />
     <None Include="Views\Shared\_Layout4.cshtml" />
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
