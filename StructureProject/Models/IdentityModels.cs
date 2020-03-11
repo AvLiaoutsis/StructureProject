@@ -55,6 +55,8 @@ namespace StructureProject.Models
         public DbSet<ContactInfo> ContactInfos { get; set; }
         public DbSet<Mail> Mails { get; set; }
         public DbSet<HostInfo> HostInfos { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+
 
         public static ApplicationDbContext Create()
         {

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace StructureProject.ViewModels
 {
-    public class ReservationViewModel
+    public class SearchViewModel
     {
         public int PersonId { get; set; }
         public List<Person> Persons { get; set; }

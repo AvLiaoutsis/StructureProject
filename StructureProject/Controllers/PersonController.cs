@@ -66,41 +66,6 @@ namespace StructureProject.Controllers
             return View("PersonForm", viewModel);
         }
 
-        public ActionResult Reservation()
-        {
-            var identityId = User.Identity.GetUserId();
-
-            var persons = context.Persons.Where(s => s.IdentityUserId != identityId).ToList();
-            var contactinfos = context.ContactInfos.Where(s=>s.Person.IdentityUserId != identityId).ToList();
-            var hostinfos = context.HostInfos.Where(s => s.Person.IdentityUserId != identityId).ToList();
-
-            var viewModel = new ReservationViewModel()
-            {
-                Persons = persons,
-                Contacts = contactinfos,
-                Hostings = hostinfos
-            };
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Reservation(int id)
-        {
-            var identityId = User.Identity.GetUserId();
-
-            var persons = context.Persons.Where(s => s.IdentityUserId != identityId).ToList();
-            var contactinfos = context.ContactInfos.Where(s => s.Person.IdentityUserId != identityId).ToList();
-            var hostinfos = context.HostInfos.Where(s => s.Person.IdentityUserId != identityId).ToList();
-
-            var viewModel = new ReservationViewModel()
-            {
-                Persons = persons,
-                Contacts = contactinfos,
-                Hostings = hostinfos
-            };
-            return View(viewModel);
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
