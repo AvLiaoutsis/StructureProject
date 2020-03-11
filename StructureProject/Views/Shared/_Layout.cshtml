@@ -28,6 +28,7 @@
                     {
 
                         <li>@Html.ActionLink("My Profile", "MyProfile", "Person")</li>
+                        <li>@Html.ActionLink("Make A Reservation", "Make", "Reservation")</li>
 
                         <li>@Html.ActionLink("Show My Pets", "ShowPets", "Pet")</li>
                         <li>@Html.ActionLink("Show Other Users", "OtherUsers", "Person")</li>
@@ -41,12 +42,12 @@
                     }
 
                     @*}
-                    @if (this.User.IsInRole("Admin"))
-                    {
-                        <li>@Html.ActionLink("View Mails", "ViewMail", "Admin")</li>
-                        <li>@Html.ActionLink("View Users", "PersonList", "Admin")</li>
+        @if (this.User.IsInRole("Admin"))
+        {
+            <li>@Html.ActionLink("View Mails", "ViewMail", "Admin")</li>
+            <li>@Html.ActionLink("View Users", "PersonList", "Admin")</li>
 
-                    }*@
+        }*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
