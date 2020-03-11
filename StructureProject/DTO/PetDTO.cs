@@ -12,6 +12,6 @@ namespace StructureProject.DTO
         public string Name { get; set; }
         public string Kind { get; set; }
         public float Age { get; set; }
-        public Person Owner { get; set; }
+        public PersonDTO Owner { get; set; }
     }
 }

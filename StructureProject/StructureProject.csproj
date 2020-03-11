@@ -291,6 +291,10 @@
     <Compile Include="Migrations\202003110820337_AddReservation.Designer.cs">
       <DependentUpon>202003110820337_AddReservation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003111035461_addpetpropertyReservation.cs" />
+    <Compile Include="Migrations\202003111035461_addpetpropertyReservation.Designer.cs">
+      <DependentUpon>202003111035461_addpetpropertyReservation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ContactInfo.cs" />
@@ -856,6 +860,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003110820337_AddReservation.resx">
       <DependentUpon>202003110820337_AddReservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003111035461_addpetpropertyReservation.resx">
+      <DependentUpon>202003111035461_addpetpropertyReservation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

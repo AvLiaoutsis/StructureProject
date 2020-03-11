@@ -8,72 +8,81 @@
 {
     @Html.AntiForgeryToken();
 
-<div class="form-horizontal">
-    <div class="form-group">
+    <div class="form-horizontal">
+        <div class="form-group">
 
-        @Html.Label("Person", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+            @Html.Label("Person", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
 
-            <select class="form-control " id="reservationDropdown" name="reservationDropdown"></select>
-        </div>
-
-    </div>
-
-    <div class="form-group" id="second" style="display: none;">
-        <div class="row">
-            <h2><span class="label label-default col-md-3 col-md-offset-2">Available Dates</span></h2>
-        </div>
-        <br>
-
-        @*@Html.Label("Available dates", htmlAttributes: new { @class = "control-label col-md-2" })
-            <br />*@
-        <div class="row">
-
-            @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-2">
-
-                <p class="form-control col-md-2" id="startdate"></p>
-            </div>
-        </div>
-        <div class="row">
-
-            @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-2">
-
-                <p class="form-control col-md-2" id="enddate"></p>
-
+                <select class="form-control " id="reservationDropdown" name="reservationDropdown"></select>
             </div>
 
         </div>
-    </div>
 
-    @*<label class="control-label col-md-2">Dates Available</label>
-        <h3 class="control-label col-md-2">Dates Available</h3>
-        <p class="form-control"></p>
-        <br />
+        <div class="form-group" id="second" style="display: none;">
+            <div class="row">
+                <h2><span class="label label-default col-md-3 col-md-offset-2">Available Dates</span></h2>
+            </div>
+            <br>
 
-        @Html.Label("Start Date", new { @class = "control-label col-md-2" })
-        <p class="control-label col-md-2">Start Date</p>
-        <p id="startdate" class="form-control"></p>
+            @*@Html.Label("Available dates", htmlAttributes: new { @class = "control-label col-md-2" })
+                <br />*@
+            <div class="row">
 
-        @Html.Label("End Date", new { @class = "control-label col-md-2" })
-        <p class="control-label col-md-2">End Date</p>
-        <p id="enddate" class="form-control"></p>*@
-    <div class="form-group" id="third" style="display:none">
+                @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+
+                    <p class="form-control col-md-2" id="startdate"></p>
+                </div>
+            </div>
+            <div class="row">
+
+                @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+
+                    <p class="form-control col-md-2" id="enddate"></p>
+
+                </div>
+
+            </div>
+        </div>
+
+        @*<label class="control-label col-md-2">Dates Available</label>
+            <h3 class="control-label col-md-2">Dates Available</h3>
+            <p class="form-control"></p>
+            <br />
+
+            @Html.Label("Start Date", new { @class = "control-label col-md-2" })
+            <p class="control-label col-md-2">Start Date</p>
+            <p id="startdate" class="form-control"></p>
+
+            @Html.Label("End Date", new { @class = "control-label col-md-2" })
+            <p class="control-label col-md-2">End Date</p>
+            <p id="enddate" class="form-control"></p>*@
+        <div class="form-group" id="third" style="display:none">
 
 
-        @Html.Label("Choose Date", new { @class = "control-label col-md-2" })
-        <div class="col-md-2">
+            @Html.Label("Choose Date", new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
 
-            @Html.TextBox("Date", "", new { @class = "form-control col-md-2" })
+                @Html.TextBox("Date", "", new { @class = "form-control col-md-2" })
+            </div>
+        </div>
+
+        <div class="form-group" id="forth" style="display:none">
+
+            @Html.Label("Choose Pet", new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+
+                <select class="form-control " id="PetId" name="PetId"></select>
+            </div>
+        </div>
+        @Html.HiddenFor(v => v.HostId)
+
+        <div class="col-md-offset-2 col-md-10" id="final" style="display:none">
+            <input type="submit" value="Save" class="btn btn-default" />
         </div>
     </div>
-    @Html.HiddenFor(v => v.HostId)
-
-    <div class="col-md-offset-2 col-md-10" id="final" style="display:none">
-        <input type="submit" value="Save" class="btn btn-default" />
-    </div>
-</div>
 }
 @section Scripts
 {
@@ -92,7 +101,21 @@
                     $("#reservationDropdown").html(s);
                 }
             });
-            $('#Date').datetimepicker();
+
+           $.ajax({
+                type: "GET",
+                url: "/api/pets",
+                data: "{}",
+                success: function (data) {
+                    var s = '<option value = "-1">Please Select a Pet</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        s += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+                    }
+                    $("#PetId").html(s);
+                }
+            });
+
+           $('#Date').datetimepicker();
 
             document.getElementById('reservationDropdown').addEventListener('change', function () {
                 var style = this.value != -1 ? 'block' : 'none';
@@ -100,7 +123,13 @@
                 document.getElementById('third').style.display = style;
             });
             $("#Date").on("dp.change", function (e) {
-                document.getElementById('final').style.display = 'block';
+                document.getElementById('forth').style.display = 'block';
+
+            });
+
+            document.getElementById('PetId').addEventListener('change', function () {
+                var style = this.value != -1 ? 'block' : 'none';
+                document.getElementById('final').style.display = style;
             });
 
 
@@ -124,6 +153,8 @@
         $('#reservationDropdown').on('change', function () {
             document.getElementById('second').style.display = 'none';
             document.getElementById('third').style.display = 'none';
+            document.getElementById('forth').style.display = 'none';
+
             document.getElementById('final').style.display = 'none';
             $('#Date').data("DateTimePicker").destroy();
 
@@ -180,8 +211,16 @@
                             document.getElementById('third').style.display = style;
                         });
                         $("#Date").on("dp.change", function (e) {
-                            document.getElementById('final').style.display = 'block';
+                            document.getElementById('forth').style.display = 'block';
+
                         });
+
+                        document.getElementById('PetId').addEventListener('change', function () {
+                            var style = this.value != -1 ? 'block' : 'none';
+                            document.getElementById('final').style.display = 'style';
+                        });
+
+
                     }
                 });
 
@@ -193,44 +232,44 @@
 
 
 
-                            //$('#DateTime').blur(function () {
-                            //      document.getElementById('final').style.display = 'block';
-                            //    });
-                            //$('#DateTime').datetimepicker({
-                            //                useCurrent: false,
-                            //                minDate: data[0].startDateTime,
-                            //                maxDate: data[0].endDateTime,
-                            //                format: 'D/M/YYYY'
+                                //$('#DateTime').blur(function () {
+                                //      document.getElementById('final').style.display = 'block';
+                                //    });
+                                //$('#DateTime').datetimepicker({
+                                //                useCurrent: false,
+                                //                minDate: data[0].startDateTime,
+                                //                maxDate: data[0].endDateTime,
+                                //                format: 'D/M/YYYY'
 
 
-                            //}).on('dp.change', function () {
-                            //     document.getElementById('final').style.display = 'block';
+                                //}).on('dp.change', function () {
+                                //     document.getElementById('final').style.display = 'block';
 
-                            //    });
-                            //document.getElementById('DateTime').addEventListener('change', function () {
-                            //    console.log("mpike");
-                            //    var style = this.value != -1 ? 'block' : 'none';
-                            //    document.getElementById('final').style.display = style;
-                            //});
+                                //    });
+                                //document.getElementById('DateTime').addEventListener('change', function () {
+                                //    console.log("mpike");
+                                //    var style = this.value != -1 ? 'block' : 'none';
+                                //    document.getElementById('final').style.display = style;
+                                //});
 
-                            // document.getElementById('#DateTime').addEventListener('change', function () {
-                            //     var style = 'block';
-                            //    document.getElementById('second').style.display = style;
-                            //    var e = document.getElementById("reservationDropdown");
-                            //});
+                                // document.getElementById('#DateTime').addEventListener('change', function () {
+                                //     var style = 'block';
+                                //    document.getElementById('second').style.display = style;
+                                //    var e = document.getElementById("reservationDropdown");
+                                //});
 
-                                                                                                                            //https://localhost:44322/api/hosts
+                                                                                                                                //https://localhost:44322/api/hosts
 
 
-                                                                                                                            //        $('#DateTime').datetimepicker({
-                                                                                                                            //        useCurrent: false,
-                                                                                                                            //        minDate: moment(),
-                                                                                                                            //        maxDate://prepei na parw ta dates apo ton user
-                                                                                                                            //        format: 'D/M/YYYY'
+                                                                                                                                //        $('#DateTime').datetimepicker({
+                                                                                                                                //        useCurrent: false,
+                                                                                                                                //        minDate: moment(),
+                                                                                                                                //        maxDate://prepei na parw ta dates apo ton user
+                                                                                                                                //        format: 'D/M/YYYY'
 
-                                                                                                                            //    });
+                                                                                                                                //    });
 
-                                                                                                                            //});
+                                                                                                                                //});
 
     </script>
     @Scripts.Render("~/bundles/jqueryval")

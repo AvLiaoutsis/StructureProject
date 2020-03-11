@@ -14,26 +14,48 @@
 @if (Model.MyReservations.Any())
 {<h3>List of Reservations made by You</h3>
 
-    <table id="reservationsbyme" class="table table-bordered">
-        <thead>
-        <th>Host Name</th>
-        <th>Date</th>
+ <table id="reservationsbyme" class="table table-bordered">
+     <thead>
+     <th>Host Name</th>
+     <th>Pet Name</th>
+     <th>Pet Kind</th>
+     <th>Date</th>
 
-        </thead>
-        <tbody>
-            @foreach (var reservation in Model.MyReservations)
-            {
-                <tr>
-                    <td>
-                        @reservation.Host.FullName
-                    </td>
-                    <td>
-                        @reservation.Date.ToString("dd/MM/yyyy")
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+     </thead>
+     <tbody>
+         @foreach (var reservation in Model.MyReservations)
+         {
+         <tr>
+             <td>
+                 @reservation.Host.FullName
+             </td>
+             <td>
+                 @if (!String.IsNullOrEmpty(@reservation.Pet.Name))
+                 {
+                     @reservation.Pet.Name
+                 }
+                 else
+                 {
+                      <text>N/A</text>
+                 }
+             </td>
+             <td>
+                 @if (!String.IsNullOrEmpty(@reservation.Pet.Kind))
+                 {
+                     @reservation.Pet.Kind
+                 }
+                 else
+                 {
+                     <text>N/A</text>
+                 }
+             </td>
+             <td>
+                 @reservation.Date.ToString("dd/MM/yyyy")
+             </td>
+         </tr>
+         }
+     </tbody>
+ </table>
 }
 else
 {
@@ -45,10 +67,12 @@ else
 <br />
 @if (Model.ReservationsWithHostMe.Any())
 {
-    <h3>List of Reservations made to you</h3>
+    <h3>List of Reservations made to You</h3>
     <table id="reservations" class="table table-bordered">
         <thead>
         <th>Customer Name</th>
+        <th>Pet Name</th>
+        <th>Pet Kind</th>
         <th>Date</th>
 
         </thead>
@@ -57,7 +81,27 @@ else
             {
                 <tr>
                     <td>
-                        @reservation.Customer.FullName
+                        @reservation.Host.FullName
+                    </td>
+                    <td>
+                        @if (!String.IsNullOrEmpty(@reservation.Pet.Name))
+                        {
+                            @reservation.Pet.Name
+                        }
+                        else
+                        {
+                            <text>N/A</text>
+                        }
+                    </td>
+                    <td>
+                        @if (!String.IsNullOrEmpty(@reservation.Pet.Kind))
+                        {
+                            @reservation.Pet.Kind
+                        }
+                        else
+                        {
+                            <text>N/A</text>
+                        }
                     </td>
                     <td>
                         @reservation.Date.ToString("dd/MM/yyyy")
@@ -69,7 +113,7 @@ else
 }
 else
 {
-    <h3>No one has made a reservation with you</h3>
+    <h3>No one has made a reservation with You</h3>
 }
 
 @*}*@
@@ -78,7 +122,6 @@ else
 
     <script>
         var table = $("#reservationsbyme").DataTable();
-
         var table = $("#reservations").DataTable();
 
     </script>

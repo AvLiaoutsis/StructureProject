@@ -35,21 +35,23 @@ namespace StructureProject.Controllers
             }
 
            var myReservations = context.Reservations
-                .Include(s=>s.Host)
-                .Include(s=>s.Customer)
+                .Include(s=> s.Host)
+                .Include(s=> s.Customer)
+                .Include(s => s.Pet)
                 .Where(s => s.Customer.IdentityUserId == identityId)
                 .ToList();
 
             var myReservationsWithHostMe = context.Reservations
             .Include(s => s.Host)
             .Include(s => s.Customer)
+            .Include(s =>s.Pet)
             .Where(s => s.Host.IdentityUserId == identityId)
             .ToList();
 
             var viewModel = new ReservationsShowViewModel
             {
                 MyReservations = myReservations,
-                ReservationsWithHostMe = myReservationsWithHostMe
+                ReservationsWithHostMe = myReservationsWithHostMe,                
             };
 
             return View("ReservationList", viewModel);
@@ -79,13 +81,14 @@ namespace StructureProject.Controllers
 
             var PersonToUpdate = context.Persons.Where(s => s.IdentityUserId == identityId).SingleOrDefault();
             var hostToUpdate = context.Persons.Where(s => s.Id == viewModel.HostId).SingleOrDefault();
-
+            var PetToUpdate = context.Pets.Where(s => s.Id == viewModel.PetId).SingleOrDefault();
 
             var reservation = new Reservation()
             {
                 Customer = PersonToUpdate,
                 Date = viewModel.Date,
-                Host = hostToUpdate
+                Host = hostToUpdate,
+                Pet = PetToUpdate
             };
             context.Reservations.Add(reservation);
             context.SaveChanges();

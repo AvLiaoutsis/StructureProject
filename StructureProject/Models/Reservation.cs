@@ -10,6 +10,7 @@ namespace StructureProject.Models
         public int Id { get; set; }
         public Person Host { get; set; }
         public Person Customer { get; set; }
+        public Pet Pet { get; set; }
         public DateTime Date { get; set; }
     }
 }
