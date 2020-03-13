@@ -18,7 +18,6 @@ namespace StructureProject.Models
         public string TelNumber { get; set; }
         public string Address { get; set; }
         [Display(Name = "Postal Code")]
-
         public int? PostalCode { get; set; }
         public string State { get; set; }
         public string City { get; set; }

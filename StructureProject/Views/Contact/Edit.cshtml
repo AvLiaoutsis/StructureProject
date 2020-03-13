@@ -36,7 +36,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+            <select id="Country" name="Country" class="form-control"></select>
             @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -83,4 +83,24 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script>
+    $(document).ready(function () {
+        let dropdownNations = $('#Country');
+        dropdownNations.empty();
+
+        const url = 'https://restcountries.eu/rest/v2/all';
+
+        dropdownNations.append('<option selected="true" disabled>Choose Nation</option>');
+        dropdownNations.prop('selectedIndex', 0);
+
+        // Populate DropDown
+        $.getJSON(url, function (data) {
+            $.each(data, function (key, entry) {
+                dropdownNations.append($('<option></option>').attr('value', entry.name).text(entry.name));
+            });
+        });
+
+    });
+</script>
 }
+
