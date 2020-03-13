@@ -91,7 +91,6 @@
         const url = 'https://restcountries.eu/rest/v2/all';
 
         dropdownNations.append('<option selected="true" disabled>Choose Nation</option>');
-        dropdownNations.prop('selectedIndex', 0);
 
         // Populate DropDown
         $.getJSON(url, function (data) {

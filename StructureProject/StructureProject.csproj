@@ -791,7 +791,6 @@
     <Content Include="Views\Pet\ShowPets.cshtml" />
     <Content Include="Views\Pet\PetForm.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Person\Index - Copy.cshtml" />
     <Content Include="Views\Person\Details.cshtml" />
     <Content Include="Views\Person\Contact.cshtml" />
     <Content Include="Views\Person\MyProfile.cshtml" />
@@ -802,12 +801,9 @@
     <Content Include="Views\Person\PersonForm.cshtml" />
     <Content Include="Views\Person\Search.cshtml" />
     <Content Include="Views\Host\Edit.cshtml" />
-    <Content Include="Views\Account\RegisterNewView.cshtml" />
     <Content Include="Views\Pet\Details.cshtml" />
     <Content Include="Views\Reservation\Make.cshtml" />
     <Content Include="Views\Reservation\ReservationList.cshtml" />
-    <Content Include="Views\Shared\LayoutTry.cshtml" />
-    <None Include="Views\Shared\_Layout4.cshtml" />
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
     <Content Include="webfonts\fa-solid-900.svg" />
