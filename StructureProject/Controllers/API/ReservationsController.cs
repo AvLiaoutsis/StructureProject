@@ -33,22 +33,6 @@ namespace StructureProject.Controllers.API
         [HttpPost]
         public IHttpActionResult Reserve(ReservationDTO reservationDTO)
         {
-            var userId = User.Identity.GetUserId();
-
-            ////edge case
-            //var exists = context.Reservations.Any(a => a.AttendeeId == userId && a.GigId == attendanceDTO.GigId);
-
-            //if (exists)
-            //{
-            //    return BadRequest("The attendance already exists");
-            //}
-
-
-            //var attendance = new Attendance
-            //{
-            //    GigId = attendanceDTO.GigId,
-            //    AttendeeId = userId
-            //};
             var existingReservation = context.Reservations.Single(s => s.Id == reservationDTO.Id);
 
             existingReservation.Accept = reservationDTO.Accept;

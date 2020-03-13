@@ -61,10 +61,8 @@
             <p id="enddate" class="form-control"></p>*@
         <div class="form-group" id="third" style="display:none">
 
-
             @Html.Label("Choose Date", new { @class = "control-label col-md-2" })
             <div class="col-md-2">
-
                 @Html.TextBox("Date", "", new { @class = "form-control col-md-2" })
             </div>
         </div>
@@ -80,7 +78,7 @@
         @Html.HiddenFor(v => v.HostId)
 
         <div class="col-md-offset-2 col-md-10" id="final" style="display:none">
-            <input type="submit" value="Save" class="btn btn-default" />
+            <input type="submit" value="Save" class="btn btn-default"  id="submitButton"/>
         </div>
     </div>
 }
@@ -89,6 +87,7 @@
     <script>
 
         $(document).ready(function () {
+
             $.ajax({
                 type: "GET",
                 url: "/api/hosts",
@@ -200,7 +199,6 @@
                     success: function (data) {
 
                         document.getElementById('HostId').value = data[0].person.id;
-                        alert(document.getElementById('HostId').value)
 
                         $("#startdate").html(moment(data[0].startDateTime).format('D/M/YYYY'));
                         $("#enddate").html(moment(data[0].endDateTime).format('D/M/YYYY'));
@@ -278,5 +276,4 @@
                                                                                                                                 //});
 
     </script>
-    @Scripts.Render("~/bundles/jqueryval")
 }
