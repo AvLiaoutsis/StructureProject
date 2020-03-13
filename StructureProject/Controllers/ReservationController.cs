@@ -88,7 +88,8 @@ namespace StructureProject.Controllers
                 Customer = PersonToUpdate,
                 Date = viewModel.Date,
                 Host = hostToUpdate,
-                Pet = PetToUpdate
+                Pet = PetToUpdate,
+                Accept = Acceptance.Waiting
             };
             context.Reservations.Add(reservation);
             context.SaveChanges();

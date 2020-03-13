@@ -190,6 +190,7 @@
     <Compile Include="Controllers\API\HostsController.cs" />
     <Compile Include="Controllers\API\PersonsController.cs" />
     <Compile Include="Controllers\API\PetsController.cs" />
+    <Compile Include="Controllers\API\ReservationsController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HostController.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="DTO\MailDTO.cs" />
     <Compile Include="DTO\PersonDTO.cs" />
     <Compile Include="DTO\PetDTO.cs" />
+    <Compile Include="DTO\ReservationDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -294,6 +296,14 @@
     <Compile Include="Migrations\202003111035461_addpetpropertyReservation.cs" />
     <Compile Include="Migrations\202003111035461_addpetpropertyReservation.Designer.cs">
       <DependentUpon>202003111035461_addpetpropertyReservation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003131034297_AcceptanceInReservation.cs" />
+    <Compile Include="Migrations\202003131034297_AcceptanceInReservation.Designer.cs">
+      <DependentUpon>202003131034297_AcceptanceInReservation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003131037067_AcceptanceInReservation1.cs" />
+    <Compile Include="Migrations\202003131037067_AcceptanceInReservation1.Designer.cs">
+      <DependentUpon>202003131037067_AcceptanceInReservation1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -863,6 +873,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003111035461_addpetpropertyReservation.resx">
       <DependentUpon>202003111035461_addpetpropertyReservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003131034297_AcceptanceInReservation.resx">
+      <DependentUpon>202003131034297_AcceptanceInReservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003131037067_AcceptanceInReservation1.resx">
+      <DependentUpon>202003131037067_AcceptanceInReservation1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

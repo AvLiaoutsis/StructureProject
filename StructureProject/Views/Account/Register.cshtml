@@ -91,7 +91,7 @@
 
     @Scripts.Render("~/bundles/jqueryval")
     <script>
-        var a = moment().subtract(18, 'years').format('D/M/YYYY');
+        var LessThan18 = moment().subtract(18, 'years').format('l');
         //alert(a);
 
         //$('#BirthDate').mouseenter(function () {
@@ -106,7 +106,7 @@
             $('#BirthDate').datetimepicker({
                 useCurrent: false,
                 format: 'D/M/YYYY',
-                maxDate: a
+                maxDate: LessThan18
             })
         });
 

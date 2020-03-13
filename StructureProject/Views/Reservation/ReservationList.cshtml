@@ -1,4 +1,5 @@
 ﻿@model StructureProject.ViewModels.ReservationsShowViewModel
+@using StructureProject.Models;
 
 
 <h2>My Pets</h2>
@@ -20,39 +21,45 @@
      <th>Pet Name</th>
      <th>Pet Kind</th>
      <th>Date</th>
+     <th>Accepted</th>
 
      </thead>
      <tbody>
          @foreach (var reservation in Model.MyReservations)
          {
-         <tr>
-             <td>
-                 @reservation.Host.FullName
-             </td>
-             <td>
-                 @if (!String.IsNullOrEmpty(@reservation.Pet.Name))
-                 {
-                     @reservation.Pet.Name
-                 }
-                 else
-                 {
-                      <text>N/A</text>
-                 }
-             </td>
-             <td>
-                 @if (!String.IsNullOrEmpty(@reservation.Pet.Kind))
-                 {
-                     @reservation.Pet.Kind
-                 }
-                 else
-                 {
-                     <text>N/A</text>
-                 }
-             </td>
-             <td>
-                 @reservation.Date.ToString("dd/MM/yyyy")
-             </td>
-         </tr>
+             <tr>
+                 <td>
+                     @reservation.Host.FullName
+                 </td>
+                 <td>
+                     @if (!String.IsNullOrEmpty(@reservation.Pet.Name))
+                     {
+                         @reservation.Pet.Name
+                     }
+                     else
+                     {
+                         <text>N/A</text>
+                     }
+                 </td>
+                 <td>
+                     @if (!String.IsNullOrEmpty(@reservation.Pet.Kind))
+                     {
+                         @reservation.Pet.Kind
+                     }
+                     else
+                     {
+                         <text>N/A</text>
+                     }
+                 </td>
+                 <td>
+                     @reservation.Date.ToString("dd/MM/yyyy")
+                 </td>
+                 <td>
+                     @Enum.GetName(typeof(Acceptance), reservation.Accept)
+
+
+                 </td>
+             </tr>
          }
      </tbody>
  </table>
@@ -74,6 +81,8 @@ else
         <th>Pet Name</th>
         <th>Pet Kind</th>
         <th>Date</th>
+        <th>Accepted</th>
+
 
         </thead>
         <tbody>
@@ -106,6 +115,18 @@ else
                     <td>
                         @reservation.Date.ToString("dd/MM/yyyy")
                     </td>
+                    <td>
+                        @if (reservation.Accept == 0)
+                        {
+                            <button id="Btn-Accept-@reservation.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-accept">Accept</button>
+                            <button id="Btn-Reject-@reservation.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-reject">Reject</button>
+                        }
+                        else
+                        {
+                            @Enum.GetName(typeof(Acceptance), reservation.Accept)
+
+                        }
+                    </td>
                 </tr>
             }
         </tbody>
@@ -123,6 +144,44 @@ else
     <script>
         var table = $("#reservationsbyme").DataTable();
         var table = $("#reservations").DataTable();
+
+
+        $(document).ready(function () {
+            $(".js-toggle-accept").click(function (e) {
+                var button = $(e.target);
+                $.post("/api/reservations", {Id: button.attr("data-reservation-id"), Accept: "Accepted" })
+                    .done(function () {
+                        button
+                            .removeClass("btn-default")
+                            .addClass("btn-info")
+                            .text("Accepted")
+                            .prop('disabled', true);
+                        document.getElementById("Btn-Reject-"+button.attr("data-reservation-id")).remove();
+                    })
+                    .fail(function () {
+                        alert("Something failed");
+                    });
+            });
+        });
+
+         $(document).ready(function () {
+            $(".js-toggle-reject").click(function (e) {
+                var button = $(e.target);
+                $.post("/api/reservations", {Id: button.attr("data-reservation-id"), Accept: "Declined" })
+                    .done(function () {
+                        button
+                            .removeClass("btn-default")
+                            .addClass("btn-info")
+                            .text("Rejected")
+                            .prop('disabled', true);
+                      document.getElementById("Btn-Accept-"+button.attr("data-reservation-id")).remove();
+
+                    })
+                    .fail(function () {
+                        alert("Something failed");
+                    });
+            });
+        });
 
     </script>
 }

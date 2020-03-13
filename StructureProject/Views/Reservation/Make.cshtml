@@ -111,6 +111,12 @@
                     for (var i = 0; i < data.length; i++) {
                         s += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
                     }
+                    if (data.length == 0) {
+                        s = '<option value = "-1">You dont have Pets</option>';
+                         document.getElementById("PetId").disabled = true;
+
+
+                    }
                     $("#PetId").html(s);
                 }
             });

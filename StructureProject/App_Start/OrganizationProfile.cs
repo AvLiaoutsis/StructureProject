@@ -26,6 +26,9 @@ namespace StructureProject.App_Start
 
             CreateMap<HostInfo, HostInfoDTO>();
             CreateMap<HostInfoDTO, HostInfo>();
+
+            CreateMap<Reservation, ReservationDTO>();
+            CreateMap<ReservationDTO, Reservation>();
         }
     }
 }
