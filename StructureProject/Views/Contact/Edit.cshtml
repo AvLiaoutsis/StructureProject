@@ -32,11 +32,16 @@
             @Html.ValidationMessageFor(model => model.TelNumber, "", new { @class = "text-danger" })
         </div>
     </div>
+    @Html.HiddenFor(m => m.Country)
 
     <div class="form-group">
         @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <select id="Country" name="Country" class="form-control"></select>
+
+            <select id="Country2" name="Country2" class="form-control">
+                <option selected="selected">
+                </option>
+            </select>
             @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -85,12 +90,27 @@
     @Scripts.Render("~/bundles/jqueryval")
 <script>
     $(document).ready(function () {
-        let dropdownNations = $('#Country');
-        dropdownNations.empty();
+        
+        var savedCountry = document.getElementById("Country").value;
+        var elem = document.getElementById('Country');
+        elem.parentNode.removeChild(elem);
+        if (savedCountry != "") {
+            var dropdownNations = $('#Country2');
+            dropdownNations.empty();
+            dropdownNations.append($('<option></option>').attr('value', 1).text(savedCountry));
+        }
+        else {
+             var dropdownNations = $('#Country2');
+             dropdownNations.empty();
+             dropdownNations.append('<option selected="true" disabled>Choose Nation</option>');
+
+        }
+
+
 
         const url = 'https://restcountries.eu/rest/v2/all';
 
-        dropdownNations.append('<option selected="true" disabled>Choose Nation</option>');
+        //dropdownNations.append('<option selected="true" disabled>Choose Nation</option>');
 
         // Populate DropDown
         $.getJSON(url, function (data) {
@@ -98,6 +118,8 @@
                 dropdownNations.append($('<option></option>').attr('value', entry.name).text(entry.name));
             });
         });
+        document.getElementById("Country2").id = "Country";
+        document.getElementById("Country").setAttribute("name","Country");
 
     });
 </script>
