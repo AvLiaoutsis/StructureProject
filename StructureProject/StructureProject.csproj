@@ -305,6 +305,10 @@
     <Compile Include="Migrations\202003131037067_AcceptanceInReservation1.Designer.cs">
       <DependentUpon>202003131037067_AcceptanceInReservation1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003152057030_AddPriceToHost.cs" />
+    <Compile Include="Migrations\202003152057030_AddPriceToHost.Designer.cs">
+      <DependentUpon>202003152057030_AddPriceToHost.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -908,6 +912,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003131037067_AcceptanceInReservation1.resx">
       <DependentUpon>202003131037067_AcceptanceInReservation1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003152057030_AddPriceToHost.resx">
+      <DependentUpon>202003152057030_AddPriceToHost.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

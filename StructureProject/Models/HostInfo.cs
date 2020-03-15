@@ -20,5 +20,7 @@ namespace StructureProject.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/mm/yyyy}")]
 
         public DateTime EndDateTime { get; set; }
+
+        public Double Price { get; set; }
     }
 }

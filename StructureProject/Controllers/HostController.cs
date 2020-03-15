@@ -58,6 +58,7 @@ namespace StructureProject.Controllers
 
                 hostInDb.StartDateTime = info.StartDateTime;
                 hostInDb.EndDateTime = info.EndDateTime;
+                hostInDb.Price = info.Price;
 
             }
             context.SaveChanges();
