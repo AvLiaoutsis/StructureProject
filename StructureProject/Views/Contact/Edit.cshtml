@@ -89,7 +89,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Alert</h4>
+                    <h4 class="modal-title" id="myModalLabel">Contact</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -98,8 +98,8 @@
                     <h3>Are you sure about these changes??</h3>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="Submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <button type="Submit" class="btn btn-primary">Do it!</button>
                 </div>
             </div>
         </div>
@@ -143,7 +143,6 @@
             document.getElementById("Country2").id = "Country";
             document.getElementById("Country").setAttribute("name", "Country");
             if (savedCountry != "") {
-                alert(savedCountry)
                 $("#Country2 option[value='" + savedCountry + "']").remove();
                 $("option[value='"+savedCountry+"']").remove();
                 dropdownNations.append($('<option selected="true"></option>').attr('value', savedCountry).text(savedCountry));

@@ -46,16 +46,50 @@
                         data: "person.name"
                     },
                     {
-                        data: "country"
+                        data: "country",
+                        render: function (data) {
+                            if (data == ""|| data == null) {
+                                return "N/A";
+                            }
+                            else {
+                                return data
+                            }
+                            
+                        }
                     },
                     {
-                        data: "city"
+                        data: "city",
+                        render: function (data) {
+                            if (data == ""|| data == null) {
+                                return "N/A";
+                            }
+                            else {
+                                return data
+                            }
+
+                        }
                     },
                     {
-                        data: "address"
+                        data: "address",
+                        render: function (data) {
+                             if (data == ""|| data == null) {
+                                return "N/A";
+                            }
+                            else {
+                                return data
+                            }
+                        }
                     },
                     {
-                        data: "phoneNumber"
+                        data: "phoneNumber",
+                        render: function (data) {
+                             if (data == "" || data == null) {
+                                return "N/A";
+                            }
+                            else {
+                                return data
+                            }
+                        }
                     }
                 ]
             });

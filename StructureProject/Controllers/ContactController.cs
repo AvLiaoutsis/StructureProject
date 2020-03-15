@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace StructureProject.Controllers
 {
+    [Authorize]
     public class ContactController : Controller
     {
         private ApplicationDbContext context = new ApplicationDbContext();
