@@ -223,7 +223,7 @@
                                 success: function (data) {
 
                                     document.getElementById('HostId').value = data[0].person.id;
-                                    $("#Price").html(data[0].price);
+                                    $("#Price").html(data[0].price + " €");
 
                                     $("#startdate").html(moment(data[0].startDateTime).format('D/M/YYYY'));
                                     $("#enddate").html(moment(data[0].endDateTime).format('D/M/YYYY'));
