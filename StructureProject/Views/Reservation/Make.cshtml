@@ -10,18 +10,20 @@
 
 <div class="form-horizontal">
     <div class="form-group">
-
+        <div class="row">
         @Html.Label("Person", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-2">
 
             <select class="form-control " id="reservationDropdown" name="reservationDropdown"></select>
         </div>
-
+            </div>
     </div>
 
     <div class="form-group" id="second" style="display: none;">
         <div class="row">
-            <h2><span class="label label-default col-md-3 col-md-offset-2">Available Dates</span></h2>
+            <h2>
+                <span class="label label-default col-md-4 col-md-offset-1">Available Dates</span>     
+            </h2>
         </div>
         <br>
 
@@ -59,7 +61,8 @@
         @Html.Label("End Date", new { @class = "control-label col-md-2" })
         <p class="control-label col-md-2">End Date</p>
         <p id="enddate" class="form-control"></p>*@
-    <div class="form-group" id="third" style="display:none">
+<div class="form-group" id="third" style="display:none">
+    <div class="row">
 
         @Html.Label("Choose Date", new { @class = "control-label col-md-2" })
         <div class="col-md-2">
@@ -67,163 +70,83 @@
         </div>
     </div>
 
-    <div class="form-group" id="forth" style="display:none">
-
-        @Html.Label("Choose Pet", new { @class = "control-label col-md-2" })
-        <div class="col-md-2">
-
-            <select class="form-control " id="PetId" name="PetId"></select>
-        </div>
-    </div>
-
-    <div class="form-group" id="fifth" style="display:none">
-
-        @Html.Label("Price", new { @class = "control-label col-md-2" })
-        <div class="col-md-2">
-            <p class="form-control" id="price" name="price"></p>
-        </div>
-    </div>
-
-    @Html.HiddenFor(v => v.HostId)
-
-    <div class="col-md-offset-2 col-md-10" id="final" style="display:none">
-        <input type="submit" value="Save" class="btn btn-default" id="submitButton" />
-    </div>
 </div>
-}
-@section Scripts
+
+    <div class="form-group" id="forth" style="display:none">
+        <div class="row">
+
+            @Html.Label("Choose Pet", new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+
+                <select class="form-control " id="PetId" name="PetId"></select>
+            </div>
+        </div>
+
+    </div>
+
+        <div class="form-group" id="fifth" style="display:none">
+            <div class="row">
+
+                @Html.Label("Cost", new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    <p class="form-control col-md-2" id="Price"></p>
+                </div>
+            </div>
+
+        </div>
+
+            @Html.HiddenFor(v => v.HostId)
+            <div class="row">
+
+                <div class="col-md-offset-2 col-md-10" id="final" style="display:none">
+                    <input type="submit" value="Save" class="btn btn-default" id="submitButton" />
+                </div>
+                </div>
+            </div>
+            }
+            @section Scripts
 {
-    <script>
+                <script>
 
-        $(document).ready(function () {
+                    $(document).ready(function () {
 
-            $.ajax({
-                type: "GET",
-                url: "/api/hosts",
-                data: "{}",
-                success: function (data) {
-                    var s = '<option value = "-1">Please Select a User</option>';
-                    for (var i = 0; i < data.length; i++) {
-                        s += '<option value="' + data[i].id + '">' + data[i].person.name + '</option>';
-                    }
-                    var p = data.price;
-                    alert(data.price)
-                    $("#reservationDropdown").html(s);
-
-                }
-            });
-
-           $.ajax({
-                type: "GET",
-                url: "/api/pets",
-                data: "{}",
-                success: function (data) {
-                    var s = '<option value = "-1">Please Select a Pet</option>';
-                    for (var i = 0; i < data.length; i++) {
-                        s += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
-                    }
-                    if (data.length == 0) {
-                        s = '<option value = "-1">You dont have Pets</option>';
-                         document.getElementById("PetId").disabled = true;
-
-
-                    }
-                    $("#PetId").html(s);
-                }
-            });
-
-           $('#Date').datetimepicker();
-
-            document.getElementById('reservationDropdown').addEventListener('change', function () {
-                var style = this.value != -1 ? 'block' : 'none';
-                document.getElementById('second').style.display = style;
-                document.getElementById('third').style.display = style;
-            });
-            $("#Date").on("dp.change", function (e) {
-                document.getElementById('forth').style.display = 'block';
-
-            });
-
-            document.getElementById('PetId').addEventListener('change', function () {
-                var style = this.value != -1 ? 'block' : 'none';
-                document.getElementById('fifth').style.display = style;
-                document.getElementById('final').style.display = style;
-            });
-
-
-        });
-
-
-
-
-
-
-
-        //document.getElementById('DateTime').addEventListener('change', function () {
-        //    console.log("hello");
-        //    var style = this.value != -1 ? 'block' : 'none';
-        //    console.log("geia")
-        //
-        //});
-
-
-
-        $('#reservationDropdown').on('change', function () {
-            document.getElementById('second').style.display = 'none';
-            document.getElementById('third').style.display = 'none';
-            document.getElementById('forth').style.display = 'none';
-
-            document.getElementById('final').style.display = 'none';
-            $('#Date').data("DateTimePicker").destroy();
-
-
-
-            //alert("perase?")
-            //  $.ajax({
-            //    type: "GET",
-            //    url: "/api/hosts",
-            //    data: "{}",
-            //    success: function (data) {
-            //        var s = '<option value = "-1">Please Select a User</option>';
-            //        for (var i = 0; i < data.length; i++) {
-            //            s += '<option value="' + data[i].Id + '">' + data[i].person.name + '</option>';
-            //        }
-            //        $("#reservationDropdown").html(s);
-
-            //        alert("perase");
-            //    }
-            //});
-
-
-            //prepei na parw to id tou person kai na parw ta id tou hosts gia kathe user
-
-
-
-
-            var id = document.getElementById("reservationDropdown").value;
-
-
-            if (id != -1) {
-
-                $.ajax({
-                    type: "GET",
-                    url: "/api/hosts/" + id,
-                    data: "{}",
-                    success: function (data) {
-
-                        document.getElementById('HostId').value = data[0].person.id;
-
-                        $("#startdate").html(moment(data[0].startDateTime).format('D/M/YYYY'));
-                        $("#enddate").html(moment(data[0].endDateTime).format('D/M/YYYY'));
-
-                        $('#Date').datetimepicker({
-                            useCurrent: false,
-                            minDate: data[0].startDateTime,
-                            maxDate: data[0].endDateTime,
-                            format: 'D/M/YYYY'
+                        $.ajax({
+                            type: "GET",
+                            url: "/api/hosts",
+                            data: "{}",
+                            success: function (data) {
+                                var s = '<option value = "-1">Please Select a User</option>';
+                                for (var i = 0; i < data.length; i++) {
+                                    s += '<option value="' + data[i].id + '">' + data[i].person.name + '</option>';
+                                }
+                                $("#reservationDropdown").html(s);
+                            }
                         });
+
+                        $.ajax({
+                            type: "GET",
+                            url: "/api/pets",
+                            data: "{}",
+                            success: function (data) {
+                                var s = '<option value = "-1">Please Select a Pet</option>';
+                                for (var i = 0; i < data.length; i++) {
+                                    s += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+                                }
+                                if (data.length == 0) {
+                                    s = '<option value = "-1">You dont have Pets</option>';
+                                    document.getElementById("PetId").disabled = true;
+
+
+                                }
+                                $("#PetId").html(s);
+                            }
+                        });
+
+                        $('#Date').datetimepicker();
+
                         document.getElementById('reservationDropdown').addEventListener('change', function () {
                             var style = this.value != -1 ? 'block' : 'none';
+                            //document.getElementById('price')
                             document.getElementById('second').style.display = style;
                             document.getElementById('third').style.display = style;
                         });
@@ -234,59 +157,148 @@
 
                         document.getElementById('PetId').addEventListener('change', function () {
                             var style = this.value != -1 ? 'block' : 'none';
-                            document.getElementById('final').style.display = 'style';
+                            document.getElementById('fifth').style.display = style;
+                            document.getElementById('final').style.display = style;
                         });
 
 
-                    }
-                });
+                    });
 
 
+
+
+
+
+
+                    //document.getElementById('DateTime').addEventListener('change', function () {
+                    //    console.log("hello");
+                    //    var style = this.value != -1 ? 'block' : 'none';
+                    //    console.log("geia")
+                    //
+                    //});
+
+
+
+                    $('#reservationDropdown').on('change', function () {
+                        document.getElementById('second').style.display = 'none';
+                        document.getElementById('third').style.display = 'none';
+                        document.getElementById('forth').style.display = 'none';
+
+                        document.getElementById('final').style.display = 'none';
+                        $('#Date').data("DateTimePicker").destroy();
+
+
+
+                        //alert("perase?")
+                        //  $.ajax({
+                        //    type: "GET",
+                        //    url: "/api/hosts",
+                        //    data: "{}",
+                        //    success: function (data) {
+                        //        var s = '<option value = "-1">Please Select a User</option>';
+                        //        for (var i = 0; i < data.length; i++) {
+                        //            s += '<option value="' + data[i].Id + '">' + data[i].person.name + '</option>';
+                        //        }
+                        //        $("#reservationDropdown").html(s);
+
+                        //        alert("perase");
+                        //    }
+                        //});
+
+
+                        //prepei na parw to id tou person kai na parw ta id tou hosts gia kathe user
+
+
+
+
+                        var id = document.getElementById("reservationDropdown").value;
+
+
+                        if (id != -1) {
+
+                            $.ajax({
+                                type: "GET",
+                                url: "/api/hosts/" + id,
+                                data: "{}",
+                                success: function (data) {
+
+                                    document.getElementById('HostId').value = data[0].person.id;
+                                    $("#Price").html(data[0].price);
+
+                                    $("#startdate").html(moment(data[0].startDateTime).format('D/M/YYYY'));
+                                    $("#enddate").html(moment(data[0].endDateTime).format('D/M/YYYY'));
+
+                                    $('#Date').datetimepicker({
+                                        useCurrent: false,
+                                        minDate: data[0].startDateTime,
+                                        maxDate: data[0].endDateTime,
+                                        format: 'D/M/YYYY'
+                                    });
+                                    document.getElementById('reservationDropdown').addEventListener('change', function () {
+                                        var style = this.value != -1 ? 'block' : 'none';
+                                        document.getElementById('second').style.display = style;
+                                        document.getElementById('third').style.display = style;
+                                    });
+                                    $("#Date").on("dp.change", function (e) {
+                                        document.getElementById('forth').style.display = 'block';
+
+                                    });
+
+                                    document.getElementById('PetId').addEventListener('change', function () {
+                                        var style = this.value != -1 ? 'block' : 'none';
+                                        document.getElementById('final').style.display = 'style';
+                                    });
+
+
+                                }
+                            });
+
+
+                        }
+                    });
+
+
+
+
+
+                                                //$('#DateTime').blur(function () {
+                                                //      document.getElementById('final').style.display = 'block';
+                                                //    });
+                                                //$('#DateTime').datetimepicker({
+                                                //                useCurrent: false,
+                                                //                minDate: data[0].startDateTime,
+                                                //                maxDate: data[0].endDateTime,
+                                                //                format: 'D/M/YYYY'
+
+
+                                                //}).on('dp.change', function () {
+                                                //     document.getElementById('final').style.display = 'block';
+
+                                                //    });
+                                                //document.getElementById('DateTime').addEventListener('change', function () {
+                                                //    console.log("mpike");
+                                                //    var style = this.value != -1 ? 'block' : 'none';
+                                                //    document.getElementById('final').style.display = style;
+                                                //});
+
+                                                // document.getElementById('#DateTime').addEventListener('change', function () {
+                                                //     var style = 'block';
+                                                //    document.getElementById('second').style.display = style;
+                                                //    var e = document.getElementById("reservationDropdown");
+                                                //});
+
+                                                                                                                                                //https://localhost:44322/api/hosts
+
+
+                                                                                                                                                //        $('#DateTime').datetimepicker({
+                                                                                                                                                //        useCurrent: false,
+                                                                                                                                                //        minDate: moment(),
+                                                                                                                                                //        maxDate://prepei na parw ta dates apo ton user
+                                                                                                                                                //        format: 'D/M/YYYY'
+
+                                                                                                                                                //    });
+
+                                                                                                                                                //});
+
+                </script>
             }
-        });
-
-
-
-
-
-                                //$('#DateTime').blur(function () {
-                                //      document.getElementById('final').style.display = 'block';
-                                //    });
-                                //$('#DateTime').datetimepicker({
-                                //                useCurrent: false,
-                                //                minDate: data[0].startDateTime,
-                                //                maxDate: data[0].endDateTime,
-                                //                format: 'D/M/YYYY'
-
-
-                                //}).on('dp.change', function () {
-                                //     document.getElementById('final').style.display = 'block';
-
-                                //    });
-                                //document.getElementById('DateTime').addEventListener('change', function () {
-                                //    console.log("mpike");
-                                //    var style = this.value != -1 ? 'block' : 'none';
-                                //    document.getElementById('final').style.display = style;
-                                //});
-
-                                // document.getElementById('#DateTime').addEventListener('change', function () {
-                                //     var style = 'block';
-                                //    document.getElementById('second').style.display = style;
-                                //    var e = document.getElementById("reservationDropdown");
-                                //});
-
-                                                                                                                                //https://localhost:44322/api/hosts
-
-
-                                                                                                                                //        $('#DateTime').datetimepicker({
-                                                                                                                                //        useCurrent: false,
-                                                                                                                                //        minDate: moment(),
-                                                                                                                                //        maxDate://prepei na parw ta dates apo ton user
-                                                                                                                                //        format: 'D/M/YYYY'
-
-                                                                                                                                //    });
-
-                                                                                                                                //});
-
-    </script>
-}

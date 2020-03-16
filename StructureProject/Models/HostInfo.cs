@@ -21,6 +21,6 @@ namespace StructureProject.Models
 
         public DateTime EndDateTime { get; set; }
 
-        public Double Price { get; set; }
+        public Decimal Price { get; set; }
     }
 }

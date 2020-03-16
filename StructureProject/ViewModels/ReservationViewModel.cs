@@ -11,5 +11,6 @@ namespace StructureProject.ViewModels
         public int HostId { get; set; }
         public DateTime Date { get; set; }
         public int PetId { get; set; }
+        public Decimal Price { get; set; }
     }
 }
