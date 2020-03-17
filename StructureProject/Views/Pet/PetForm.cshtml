@@ -12,50 +12,51 @@
             <label for="imageUpload"></label>
         </div>
         <div class="avatar-preview">
-            <div id="imagePreview" style="background-image: url('/Content/Images/UserPhotos/@Model.Pet.Avatar');">
+            <div id="imagePreview" style="background-image: url('/Content/Images/UserPhotos/@Model.Avatar');">
             </div>
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(v => v.Pet.Name)
-        @Html.TextBoxFor(v => v.Pet.Name, new { @class = "form-control" })
-        @Html.ValidationMessageFor(v => v.Pet.Name)
+        @Html.LabelFor(v => v.Name)
+        @Html.TextBoxFor(v => v.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(v => v.Name)
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(v => v.KindId)
+            @Html.DropDownListFor(v => v.KindId, new SelectList(Model.Kinds, "Id", "Name"), "--Select--",new { @class = "form-control" })
+            @Html.ValidationMessageFor(v => v.KindId)
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(v => v.Pet.Kind)
-        @Html.TextBoxFor(v => v.Pet.Kind, new { @class = "form-control" })
-        @Html.ValidationMessageFor(v => v.Pet.Kind)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(v => v.Pet.Age)
-        @Html.TextBoxFor(v => v.Pet.Age, new { @class = "form-control" })
-        @Html.ValidationMessageFor(v => v.Pet.Age)
+        @Html.LabelFor(v => v.Age)
+        @Html.TextBoxFor(v => v.Age, new { @class = "form-control" })
+        @Html.ValidationMessageFor(v => v.Age)
 
     </div>
 
-    @Html.HiddenFor(v => v.Pet.Id)
+    @Html.HiddenFor(v => v.Id)
 
     <button type="submit" class="btn btn-secondary">Save</button>
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script>
-            function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
-            $('#imagePreview').hide();
-            $('#imagePreview').fadeIn(650);
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                    $('#imagePreview').hide();
+                    $('#imagePreview').fadeIn(650);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
         }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-$("#imageUpload").change(function() {
-    readURL(this);
-});
+        $("#imageUpload").change(function () {
+            readURL(this);
+        });
     </script>
 }

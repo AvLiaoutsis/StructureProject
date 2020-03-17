@@ -10,7 +10,8 @@ namespace StructureProject.DTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Kind { get; set; }
+        public byte KindId { get; set; }
+        public KindDTO Kind { get; set; }
         public float Age { get; set; }
         public PersonDTO Owner { get; set; }
     }

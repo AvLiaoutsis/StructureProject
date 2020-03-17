@@ -38,6 +38,7 @@ namespace StructureProject.Controllers
                 .Include(s=> s.Host)
                 .Include(s=> s.Customer)
                 .Include(s => s.Pet)
+                .Include(s=>s.Pet.Kind)
                 .Where(s => s.Customer.IdentityUserId == identityId)
                 .ToList();
 
@@ -45,6 +46,8 @@ namespace StructureProject.Controllers
             .Include(s => s.Host)
             .Include(s => s.Customer)
             .Include(s =>s.Pet)
+                            .Include(s => s.Pet.Kind)
+
             .Where(s => s.Host.IdentityUserId == identityId)
             .ToList();
 
@@ -96,7 +99,7 @@ namespace StructureProject.Controllers
 
             TempData["Reservation"] = "Made";
 
-            return RedirectToAction("Index", "Home");        
+            return RedirectToAction("Show");        
         }
     }
 }

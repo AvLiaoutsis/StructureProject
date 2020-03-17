@@ -28,6 +28,7 @@ namespace StructureProject.Controllers.API
 
             return context.Pets
                 .Where(s=>s.Owner.IdentityUserId == identityId)
+                .Include(s=>s.Kind)
                 .ToList()
                 .Select(Mapper.Map<Pet, PetDTO>);
         }

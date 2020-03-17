@@ -42,9 +42,9 @@
                      }
                  </td>
                  <td>
-                     @if (!String.IsNullOrEmpty(@reservation.Pet.Kind))
+                     @if (!String.IsNullOrEmpty(@reservation.Pet.Kind.Name))
                      {
-                         @reservation.Pet.Kind
+                         @reservation.Pet.Kind.Name
                      }
                      else
                      {
@@ -103,9 +103,9 @@ else
                         }
                     </td>
                     <td>
-                        @if (!String.IsNullOrEmpty(@reservation.Pet.Kind))
+                        @if (!String.IsNullOrEmpty(@reservation.Pet.Kind.Name))
                         {
-                            @reservation.Pet.Kind
+                            @reservation.Pet.Kind.Name
                         }
                         else
                         {

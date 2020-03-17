@@ -7,28 +7,19 @@ using System.Web;
 
 namespace StructureProject.ViewModels
 {
-    public class PetFormViewModel
+    public class PetCreateViewModel
     {
-        public int Id { get; set; }
-
+        [Required]
         public string Name { get; set; }
+
+        [Required]
+        public float Age { get; set; }
 
         [Required]
         [Display(Name="Kind")]
         public byte KindId { get; set; }
-        public Kind Kind { get; set; }
-
-        public float Age { get; set; }
-        public string Avatar { get; set; }
         public IEnumerable<Kind> Kinds { get; set; }
 
-        public string Title
-        {
 
-            get
-            {
-                return Id == 0 ? "New Pet" : "Edit Pet";
-            }
-        }
     }
 }

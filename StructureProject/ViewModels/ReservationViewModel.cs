@@ -12,5 +12,6 @@ namespace StructureProject.ViewModels
         public DateTime Date { get; set; }
         public int PetId { get; set; }
         public Decimal Price { get; set; }
+        public Kind Kind { get; set; }
     }
 }

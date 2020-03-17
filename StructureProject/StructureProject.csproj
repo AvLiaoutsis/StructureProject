@@ -200,6 +200,7 @@
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="DTO\ContantInfoDTO.cs" />
     <Compile Include="DTO\HostInfoDTO.cs" />
+    <Compile Include="DTO\KindDTO.cs" />
     <Compile Include="DTO\MailDTO.cs" />
     <Compile Include="DTO\PersonDTO.cs" />
     <Compile Include="DTO\PetDTO.cs" />
@@ -313,12 +314,25 @@
     <Compile Include="Migrations\202003160747431_changeDoubleToDecimal.Designer.cs">
       <DependentUpon>202003160747431_changeDoubleToDecimal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003170851555_AddKindToPetModel.cs" />
+    <Compile Include="Migrations\202003170851555_AddKindToPetModel.Designer.cs">
+      <DependentUpon>202003170851555_AddKindToPetModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003170852278_PopulateKinds.cs" />
+    <Compile Include="Migrations\202003170852278_PopulateKinds.Designer.cs">
+      <DependentUpon>202003170852278_PopulateKinds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003170915483_changeKindAndPet.cs" />
+    <Compile Include="Migrations\202003170915483_changeKindAndPet.Designer.cs">
+      <DependentUpon>202003170915483_changeKindAndPet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ContactInfo.cs" />
     <Compile Include="Models\HostInfo.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Kind.cs" />
     <Compile Include="Models\Mail.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Pet.cs" />
@@ -329,6 +343,7 @@
     <Compile Include="ViewModels\OwnerWithPetViewModel.cs" />
     <Compile Include="ViewModels\PersonDetailsViewModel.cs" />
     <Compile Include="ViewModels\PersonFormViewModel.cs" />
+    <Compile Include="ViewModels\PetCreateViewModel.cs" />
     <Compile Include="ViewModels\PetFormViewModel.cs" />
     <Compile Include="ViewModels\ReservationsShowViewModel.cs" />
     <Compile Include="ViewModels\ReservationViewModel.cs" />
@@ -922,6 +937,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003160747431_changeDoubleToDecimal.resx">
       <DependentUpon>202003160747431_changeDoubleToDecimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003170851555_AddKindToPetModel.resx">
+      <DependentUpon>202003170851555_AddKindToPetModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003170852278_PopulateKinds.resx">
+      <DependentUpon>202003170852278_PopulateKinds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003170915483_changeKindAndPet.resx">
+      <DependentUpon>202003170915483_changeKindAndPet.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

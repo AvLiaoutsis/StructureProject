@@ -29,6 +29,9 @@ namespace StructureProject.App_Start
 
             CreateMap<Reservation, ReservationDTO>();
             CreateMap<ReservationDTO, Reservation>();
+
+            CreateMap<Kind, KindDTO>();
+            CreateMap<KindDTO, Kind>();
         }
     }
 }

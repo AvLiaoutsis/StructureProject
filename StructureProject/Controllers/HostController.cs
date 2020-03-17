@@ -38,7 +38,7 @@ namespace StructureProject.Controllers
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(HostInfo info)
-        {
+            {
             if (info.Id == 0)
             {
                 var identityId = User.Identity.GetUserId();

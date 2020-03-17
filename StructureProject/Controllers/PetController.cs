@@ -31,17 +31,19 @@ namespace StructureProject.Controllers
 
         public ViewResult New()
         {
-            var viewmodel = new PetFormViewModel()
+            var viewModel = new PetFormViewModel()
             {
-                Pet = new Pet()
+                Kinds = context.Kinds.ToList()
+                
             };
-            
-            return View("PetForm", viewmodel);
+
+            return View("PetForm", viewModel);
         }
         public ViewResult Details(int id)
         {
             var pet = context.Pets
                 .Include(v=>v.Owner)
+                .Include(v=>v.Kind)
                 .SingleOrDefault(v => v.Id == id);
 
             return View(pet);
@@ -108,8 +110,14 @@ namespace StructureProject.Controllers
             }
 
             var viewModel = new PetFormViewModel()
-            {
-                Pet = pet
+            { 
+                Kinds = context.Kinds.ToList(),
+                Id = pet.Id,
+                Avatar = pet.Avatar,
+                Age = pet.Age,
+                KindId = pet.KindId,
+                Name = pet.Name
+
             };
 
 
@@ -118,7 +126,7 @@ namespace StructureProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save(Pet pet,HttpPostedFileBase file)
+        public ActionResult Save(PetFormViewModel viewModel,HttpPostedFileBase file)
         {
             //// shit happens
             //if (!ModelState.IsValid)
@@ -131,7 +139,7 @@ namespace StructureProject.Controllers
             //    return View("PetForm", viewModel);
             //}
             //Add
-            if (pet.Id == 0)
+            if (viewModel.Id == 0)
             {
                 var identityId = User.Identity.GetUserId();
                 if (identityId == null)
@@ -142,15 +150,15 @@ namespace StructureProject.Controllers
                 var PersonToUpdate = context.Persons.Where(s => s.IdentityUserId == identityId).SingleOrDefault();
 
                 var fileName = ExtraMethods.UploadPhoto(file);
-                pet.Avatar = fileName;
-
+                viewModel.Avatar = fileName;
                 var newPet = new Pet()
                 {
-                    Name = pet.Name,
-                    Kind = pet.Kind,
-                    Age =  pet.Age,
+                    Name = viewModel.Name,
+                    KindId = viewModel.KindId,
+                    Kind = context.Kinds.Single(s=>s.Id == viewModel.KindId),
+                    Age = viewModel.Age,
                     Owner = PersonToUpdate,
-                    Avatar = pet.Avatar
+                    Avatar = viewModel.Avatar
                 };
                 context.Pets.Add(newPet);
                 TempData["PetAdd"] = "Added";
@@ -159,15 +167,16 @@ namespace StructureProject.Controllers
             }
             else //Update
             {
-                var petInDb = context.Pets.Single(m => m.Id == pet.Id);
+                var petInDb = context.Pets.Single(m => m.Id == viewModel.Id);
 
                 var fileName = ExtraMethods.UploadPhoto(file);
-                pet.Avatar = fileName;
+                viewModel.Avatar = fileName;
 
-                petInDb.Name = pet.Name;
-                petInDb.Kind = pet.Kind;
-                petInDb.Age = pet.Age;
-                petInDb.Avatar = pet.Avatar;
+                petInDb.Name = viewModel.Name;
+                petInDb.KindId = viewModel.KindId;
+                petInDb.Kind = context.Kinds.Single(s => s.Id == viewModel.KindId);
+                petInDb.Age = viewModel.Age;
+                petInDb.Avatar = viewModel.Avatar;
                 TempData["PetUpdate"] = "Updated";
 
 

@@ -238,7 +238,9 @@ namespace StructureProject.Controllers
             var viewmodel = new PersonDetailsViewModel()
             {
                 Owner = context.Persons.Where(s => s.IdentityUserId == identityId).SingleOrDefault(),
-                Pets = context.Pets.Where(s => s.Owner.IdentityUserId == identityId).ToList(),
+                Pets = context.Pets
+                .Include(s=>s.Kind)
+                .Where(s => s.Owner.IdentityUserId == identityId).ToList(),
                 Contact = contact,
                 HostInfo = hostInfo
 
@@ -249,6 +251,7 @@ namespace StructureProject.Controllers
         public ActionResult Details(int id)
         {
             var pets = context.Pets
+                        .Include(s=>s.Kind)
                         .Where(s => s.Owner.Id == id)
                         .ToList();
             var owner = context.Persons

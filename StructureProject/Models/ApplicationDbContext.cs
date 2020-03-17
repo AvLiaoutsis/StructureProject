@@ -20,6 +20,8 @@ namespace StructureProject.Models
         public DbSet<Mail> Mails { get; set; }
         public DbSet<HostInfo> HostInfos { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Kind> Kinds { get; set; }
+
 
 
         public static ApplicationDbContext Create()
