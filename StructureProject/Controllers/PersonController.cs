@@ -25,7 +25,62 @@ namespace StructureProject.Controllers
         {
             context = new ApplicationDbContext();
         }
+        public ActionResult SubmitPrice()
+        {
+            var userIdentity = User.Identity.GetUserId();
+            var personId = context.Persons
+                .Where(p => p.IdentityUserId == userIdentity).Single().Id;
 
+            var kindprices = context.PriceKinds
+                .Include(k=>k.Kind)
+                .Where(p => p.PersonId == personId).ToList();
+
+            var viewModel = new PriceKindViewModel()
+            {
+                PersonId = personId,
+                KindPriceSet = kindprices
+            };
+
+            return View("PriceForm", viewModel);
+        }
+        //public ActionResult SubmitPrice()
+        //{
+        //    var viewModel = new PriceFormViewModel()
+        //    {
+        //        //Kinds = context.Kinds.ToList(),
+        //    };
+
+        //    return View("PriceForm", viewModel);
+        //}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult SubmitPrice(PriceFormViewModel viewModel)
+        //{
+        //    // shit happens
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    var userId = User.Identity.GetUserId();
+
+             
+            
+        //    //var newprice = new PriceKind()
+        //    //{
+        //    //    KindId = viewModel.KindId,
+        //    //    Kind = context.Kinds.SingleOrDefault(s => s.Id == viewModel.KindId),
+        //    //    PersonId = context.Persons.Single(s => s.IdentityUserId == userId).Id,
+        //    //    Person = context.Persons.SingleOrDefault(s => s.Id == viewModel.PersonId),
+        //    //    Price = viewModel.Price
+        //    //};
+
+        //    //context.PriceKinds.Add(newprice);
+        //    //Trying add prices based pet kind
+        //    //I added one price
+
+        //    return RedirectToAction("Index", "Home");
+        //}
         public ActionResult OtherUsers()
         {
             return View();

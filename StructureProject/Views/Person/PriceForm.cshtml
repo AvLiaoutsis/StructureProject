@@ -1,0 +1,140 @@
+﻿@model StructureProject.ViewModels.PriceKindViewModel
+<h2>Prices Per Kind</h2>
+
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="row">
+                @Html.Label("Kind", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+
+                    <select class="form-control " id="kindDropdown" name="kindDropdown"></select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <input type="button" value="Add To List" class="btn btn-default" id="AddToListButton" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <table id="kindAndPriceTable" class="table">
+                    <thead>
+                    <th>Kind</th>
+                    <th>Price</th>
+                    <th>Save</th>
+                    </thead>
+                    <tbody>
+                        @foreach (var kindprice in Model.KindPriceSet)
+                        {
+                            <tr>
+                                <td id=" @kindprice.KindId" >
+                                    @kindprice.Kind.Name
+                                </td>
+                                <td id="price-@kindprice.KindId">
+                                    @Html.TextBox("price",kindprice.Price, new { htmlAttributes = new { @class = "form-control" ,@id="price-@kindprice.KindId"} })
+                                </td>
+                                <td>
+                                    <button class='btn btn-link js-save' data-kind-id="@kindprice.KindId">Save</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @*<div class="form-group">
+            <div class="row">
+
+            </div>
+        </div>*@
+
+    </div>
+
+@section Scripts
+{
+    <script>
+
+        $(document).ready(function () {
+            //All ids of kind that user has
+            var allids = []
+            $('#kindAndPriceTable').find('tr').find('td:first-child').each(function () {
+                allids.push($(this).attr('id'))
+            })
+            for (var i = 0; i < allids.length; i++) {
+                console.log(allids[i]);
+            }
+
+
+            $.ajax({
+                type: "GET",
+                url: "/api/kinds",
+                data: "{}",
+                success: function (data) {
+                    var s = '<option value = "-1">Please Select a Kind</option>';
+                    for (var i = 0; i < data.length; i++) {
+
+                        if (!(allids.includes(data[i].id.toString()))) {
+
+                        s += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+
+                        }
+                    }
+                    $("#kindDropdown").html(s);
+                }
+            })
+        });
+
+
+        $("#AddToListButton").click(function () {
+            var e = document.getElementById("kindDropdown");
+            var selectedKind = e.options[e.selectedIndex].value;
+
+            $.ajax({
+                type: "GET",
+                url: "/api/kinds/" + selectedKind,
+                data: "{}",
+                success: function (data) {
+                    $('#kindAndPriceTable').append('<tr><td id=' + data[0].id + '>' + data[0].name +
+
+                        ' </td><td>' + '  <input type= number id=price-' + data[0].id + '  name="price" class = "form-control "></input> '
+
+                        + '</td>' +
+                        '<td>'
+                        + "<button class = 'btn btn-link js-save' data-kind-id = " + data[0].id + ">Save</button>" +
+
+                        '</td></tr>');
+                    $("#kindDropdown option:selected").remove();
+                }
+            })
+        });
+
+        $("#kindAndPriceTable").on("click", ".js-save", function () {
+            let button = $(this);
+            var idKind = button.attr("data-kind-id");
+            var price = document.getElementById("price-" + idKind).value;
+            alert(idKind);
+            alert(price);
+
+
+            $.post("/api/priceKinds", { KindId: idKind, Price : price })
+                .done(function () {
+                    button
+                        .removeClass("btn-link")
+                        .addClass("btn-info")
+                        .text("Saved")
+                        .prop('disabled', true);
+                })
+            
+
+
+
+        });
+
+
+
+
+    </script>
+    }
+

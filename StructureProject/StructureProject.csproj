@@ -188,6 +188,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\API\ContactsController.cs" />
     <Compile Include="Controllers\API\HostsController.cs" />
+    <Compile Include="Controllers\API\KindsController.cs" />
     <Compile Include="Controllers\API\PersonsController.cs" />
     <Compile Include="Controllers\API\PetsController.cs" />
     <Compile Include="Controllers\API\ReservationsController.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\PetController.cs" />
+    <Compile Include="Controllers\API\PriceKindsController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="DTO\ContantInfoDTO.cs" />
     <Compile Include="DTO\HostInfoDTO.cs" />
@@ -204,6 +206,7 @@
     <Compile Include="DTO\MailDTO.cs" />
     <Compile Include="DTO\PersonDTO.cs" />
     <Compile Include="DTO\PetDTO.cs" />
+    <Compile Include="DTO\PriceKindDTO.cs" />
     <Compile Include="DTO\ReservationDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -326,6 +329,10 @@
     <Compile Include="Migrations\202003170915483_changeKindAndPet.Designer.cs">
       <DependentUpon>202003170915483_changeKindAndPet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003171114306_AddPriceKind.cs" />
+    <Compile Include="Migrations\202003171114306_AddPriceKind.Designer.cs">
+      <DependentUpon>202003171114306_AddPriceKind.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -337,6 +344,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Pet.cs" />
     <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\PriceKind.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -345,6 +353,8 @@
     <Compile Include="ViewModels\PersonFormViewModel.cs" />
     <Compile Include="ViewModels\PetCreateViewModel.cs" />
     <Compile Include="ViewModels\PetFormViewModel.cs" />
+    <Compile Include="ViewModels\PriceFormViewModel.cs" />
+    <Compile Include="ViewModels\PriceKindViewModel.cs" />
     <Compile Include="ViewModels\ReservationsShowViewModel.cs" />
     <Compile Include="ViewModels\ReservationViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
@@ -842,6 +852,7 @@
     <Content Include="webfonts\fa-brands-400.woff" />
     <Content Include="webfonts\fa-brands-400.ttf" />
     <Content Include="webfonts\fa-brands-400.eot" />
+    <Content Include="Views\Person\PriceForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -946,6 +957,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003170915483_changeKindAndPet.resx">
       <DependentUpon>202003170915483_changeKindAndPet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003171114306_AddPriceKind.resx">
+      <DependentUpon>202003171114306_AddPriceKind.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

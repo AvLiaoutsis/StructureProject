@@ -32,6 +32,9 @@ namespace StructureProject.App_Start
 
             CreateMap<Kind, KindDTO>();
             CreateMap<KindDTO, Kind>();
+
+            CreateMap<PriceKind, PriceKindDTO>();
+            CreateMap<PriceKindDTO, PriceKind>();
         }
     }
 }

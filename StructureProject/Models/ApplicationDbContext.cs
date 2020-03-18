@@ -21,6 +21,7 @@ namespace StructureProject.Models
         public DbSet<HostInfo> HostInfos { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Kind> Kinds { get; set; }
+        public DbSet<PriceKind> PriceKinds { get; set; }
 
 
 
