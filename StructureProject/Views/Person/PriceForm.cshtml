@@ -32,8 +32,8 @@
                                 <td id=" @kindprice.KindId" >
                                     @kindprice.Kind.Name
                                 </td>
-                                <td id="price-@kindprice.KindId">
-                                    @Html.TextBox("price",kindprice.Price, new { htmlAttributes = new { @class = "form-control" ,@id="price-@kindprice.KindId"} })
+                                <td >
+                                    @Html.TextBox("price",kindprice.Price, new { @class = "form-control" ,@id="price-"+@kindprice.KindId} )
                                 </td>
                                 <td>
                                     <button class='btn btn-link js-save' data-kind-id="@kindprice.KindId">Save</button>
@@ -98,7 +98,7 @@
                 success: function (data) {
                     $('#kindAndPriceTable').append('<tr><td id=' + data[0].id + '>' + data[0].name +
 
-                        ' </td><td>' + '  <input type= number id=price-' + data[0].id + '  name="price" class = "form-control "></input> '
+                        ' </td><td>' + '  <input type= text id=price-' + data[0].id + '  name="price" class = "form-control "></input> '
 
                         + '</td>' +
                         '<td>'
@@ -114,11 +114,13 @@
             let button = $(this);
             var idKind = button.attr("data-kind-id");
             var price = document.getElementById("price-" + idKind).value;
+            var newprice = parseFloat(price, 10).toFixed(2);
+            
             alert(idKind);
             alert(price);
 
 
-            $.post("/api/priceKinds", { KindId: idKind, Price : price })
+            $.post("/api/priceKinds", { KindId: idKind, Price : newprice })
                 .done(function () {
                     button
                         .removeClass("btn-link")
