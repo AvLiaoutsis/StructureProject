@@ -1,56 +1,60 @@
 ﻿@model StructureProject.ViewModels.PriceKindViewModel
 <h2>Prices Per Kind</h2>
 
-    @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        <div class="form-group">
-            <div class="row">
-                @Html.Label("Kind", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
+@Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <div class="form-group">
+        <div class="row">
+            @Html.Label("Kind", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
 
-                    <select class="form-control " id="kindDropdown" name="kindDropdown"></select>
-                </div>
+                <select class="form-control " id="kindDropdown" name="kindDropdown"></select>
             </div>
         </div>
-        <div class="form-group">
-            <div class="row">
-                <input type="button" value="Add To List" class="btn btn-default" id="AddToListButton" />
-            </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <input type="button" value="Add To List" class="btn btn-default" id="AddToListButton" />
         </div>
-        <div class="form-group">
-            <div class="row">
-                <table id="kindAndPriceTable" class="table">
-                    <thead>
-                    <th>Kind</th>
-                    <th>Price</th>
-                    <th>Save</th>
-                    </thead>
-                    <tbody>
-                        @foreach (var kindprice in Model.KindPriceSet)
-                        {
-                            <tr>
-                                <td id=" @kindprice.KindId" >
-                                    @kindprice.Kind.Name
-                                </td>
-                                <td >
-                                    @Html.TextBox("price",kindprice.Price, new { @class = "form-control" ,@id="price-"+@kindprice.KindId} )
-                                </td>
-                                <td>
-                                    <button class='btn btn-link js-save' data-kind-id="@kindprice.KindId">Save</button>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <table id="kindAndPriceTable" class="table">
+                <thead>
+                <th>Kind</th>
+                <th>Price</th>
+                <th>Save</th>
+                <th>Delete</th>
+                </thead>
+                <tbody>
+                    @foreach (var kindprice in Model.KindPriceSet)
+                    {
+                        <tr>
+                            <td id=" @kindprice.KindId">
+                                @kindprice.Kind.Name
+                            </td>
+                            <td>
+                                @Html.TextBox("price", kindprice.Price, new { @class = "form-control", @id = "price-" + @kindprice.KindId })
+                            </td>
+                            <td>
+                                <button class='btn btn-link js-save' data-kind-id="@kindprice.KindId">Save</button>
+                            </td>
+                            <td>
+                                <button class='btn btn-link js-delete' data-kind-delete-id="@kindprice.KindId">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
-        @*<div class="form-group">
+    </div>
+    @*<div class="form-group">
             <div class="row">
 
             </div>
         </div>*@
 
-    </div>
+</div>
 
 @section Scripts
 {
@@ -77,7 +81,7 @@
 
                         if (!(allids.includes(data[i].id.toString()))) {
 
-                        s += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+                            s += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
 
                         }
                     }
@@ -115,12 +119,12 @@
             var idKind = button.attr("data-kind-id");
             var price = document.getElementById("price-" + idKind).value;
             var newprice = parseFloat(price, 10).toFixed(2);
-            
+
             alert(idKind);
             alert(price);
 
 
-            $.post("/api/priceKinds", { KindId: idKind, Price : newprice })
+            $.post("/api/priceKinds", { KindId: idKind, Price: newprice })
                 .done(function () {
                     button
                         .removeClass("btn-link")
@@ -128,15 +132,57 @@
                         .text("Saved")
                         .prop('disabled', true);
                 })
-            
-
-
-
         });
 
+
+        
+            $(".js-delete").click(function (e) {
+                var link = $(e.target);
+                var id = link.attr("data-kind-delete-id");
+                bootbox.dialog({
+                    title: 'Confirm Cancelation',
+                    message: '<p>Are you sure to Cancel this KindPrice?</p>',
+                    size: 'large',
+                    onEscape: true,
+                    backdrop: true,
+                    buttons: {
+                        no: {
+                            label: 'No',
+                            className: 'btn-default',
+                            callback: function () {
+                                bootbox.hideAll();
+                            }
+                        },
+                        yes: {
+                            label: 'Yes',
+                            className: 'btn-danger',
+                            callback: function () {
+                                $.ajax({
+                                    url: "/api/pricekinds",
+                                    data: { KindId: id},
+                                    method: "DELETE"
+
+                                })
+                                    .done(function () {
+                                        link.parent("li").fadeOut(function () {
+                                            $(this).remove();
+                                        });
+
+                                    })
+                                    .fail(function () {
+                                        alert("Bad very bad!")
+
+                                    })
+
+                            }
+                        }
+                    }
+                })
+            });
+        
 
 
 
     </script>
-    }
+}
 

@@ -40,6 +40,20 @@ namespace StructureProject.Controllers.API
                 .Select(Mapper.Map<PriceKind, PriceKindDTO>);
 
         }
+        [HttpDelete]
+        public IHttpActionResult Delete(PriceKindDTO priceKindDTO)
+        {
+            var userId = User.Identity.GetUserId();
+            var currentPersonId = context.Persons.Where(p => p.IdentityUserId == userId).SingleOrDefault().Id;
+
+            var currentPriceKind = context.PriceKinds.Single(p => p.KindId == priceKindDTO.KindId && p.PersonId == currentPersonId);
+
+            context.PriceKinds.Remove(currentPriceKind);
+            context.SaveChanges();
+
+            return Ok();
+
+        }
         [HttpPost]
         public IHttpActionResult AddPrices(PriceKindDTO priceKindDTO)
         {
