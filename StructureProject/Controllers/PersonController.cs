@@ -280,6 +280,10 @@ namespace StructureProject.Controllers
 
             var contact = context.ContactInfos.Where(s => s.Person.IdentityUserId == identityId).SingleOrDefault();
             var hostInfo = context.HostInfos.Where(s => s.Person.IdentityUserId == identityId).SingleOrDefault();
+            var pricesKinds = context.PriceKinds
+                .Include(k=>k.Kind)
+                .Include(k=>k.Person)
+                .Where(s => s.Person.IdentityUserId == identityId).ToList();
 
             if (contact is null)
             {
@@ -297,7 +301,8 @@ namespace StructureProject.Controllers
                 .Include(s=>s.Kind)
                 .Where(s => s.Owner.IdentityUserId == identityId).ToList(),
                 Contact = contact,
-                HostInfo = hostInfo
+                HostInfo = hostInfo,
+                Prices = pricesKinds
 
 
             };
@@ -312,6 +317,11 @@ namespace StructureProject.Controllers
             var owner = context.Persons
             .Where(s => s.Id == id)
             .SingleOrDefault();
+
+            var pricesKinds = context.PriceKinds
+            .Include(k => k.Kind)
+            .Include(k => k.Person)
+            .Where(s => s.Person.Id == id).ToList();
 
             //var viewModel = new OwnerWithPetViewModel()
             //{
@@ -336,7 +346,8 @@ namespace StructureProject.Controllers
                 Owner = owner,
                 Pets = pets,
                 Contact = contact,
-                HostInfo = hostInfo
+                HostInfo = hostInfo,
+                Prices = pricesKinds
             };
 
             if (viewmodel == null)

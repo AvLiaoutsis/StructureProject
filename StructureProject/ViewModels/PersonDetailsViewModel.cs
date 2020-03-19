@@ -12,5 +12,6 @@ namespace StructureProject.ViewModels
         public ContactInfo Contact { get; set; }
         public List<Pet> Pets { get; set; }
         public HostInfo HostInfo { get; set; }
+        public IEnumerable<PriceKind> Prices {get;set;}
     }
 }

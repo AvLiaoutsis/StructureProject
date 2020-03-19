@@ -94,12 +94,26 @@
         <li>
             End Date: @Model.HostInfo.EndDateTime.ToString("dd/MM/yyyy")
         </li>
-        <li>
-            Price: @Model.HostInfo.Price €
-        </li>
+
     </ul>
 }
 else
 {
     <h3>No Dates Available</h3>
+}
+@if (Model.Prices.Any())
+{
+    <h3>Prices</h3>
+
+    <ul>
+        @foreach (var kindprice in Model.Prices)
+        {
+            <li>@kindprice.Kind.Name : @kindprice.Price</li>
+        }
+    </ul>
+
+}
+else
+{
+    <h3>This Person has no Price Info</h3>
 }
