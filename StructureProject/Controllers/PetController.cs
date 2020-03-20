@@ -142,25 +142,17 @@ namespace StructureProject.Controllers
             if (viewModel.Id == 0)
             {
                 var identityId = User.Identity.GetUserId();
+
                 if (identityId == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
                 var PersonToUpdate = context.Persons.Where(s => s.IdentityUserId == identityId).SingleOrDefault();
+                var kindToUpdate = context.Kinds.Single(s => s.Id == viewModel.KindId);
 
-                var fileName = ExtraMethods.UploadPhoto(file);
-                viewModel.Avatar = fileName;
-                var newPet = new Pet()
-                {
-                    Name = viewModel.Name,
-                    KindId = viewModel.KindId,
-                    Kind = context.Kinds.Single(s=>s.Id == viewModel.KindId),
-                    Age = viewModel.Age,
-                    Owner = PersonToUpdate,
-                    Avatar = viewModel.Avatar
-                };
-                context.Pets.Add(newPet);
+                context.Pets.Add(new Pet(viewModel.Name, viewModel.KindId, kindToUpdate, viewModel.Age, ExtraMethods.UploadPhoto(file), PersonToUpdate));
+                
                 TempData["PetAdd"] = "Added";
 
 
@@ -168,17 +160,12 @@ namespace StructureProject.Controllers
             else //Update
             {
                 var petInDb = context.Pets.Single(m => m.Id == viewModel.Id);
+                var kindInDb = context.Kinds.Single(s => s.Id == viewModel.KindId);
 
-                var fileName = ExtraMethods.UploadPhoto(file);
-                viewModel.Avatar = fileName;
 
-                petInDb.Name = viewModel.Name;
-                petInDb.KindId = viewModel.KindId;
-                petInDb.Kind = context.Kinds.Single(s => s.Id == viewModel.KindId);
-                petInDb.Age = viewModel.Age;
-                petInDb.Avatar = viewModel.Avatar;
+                petInDb.Modify(viewModel.Name, viewModel.KindId,kindInDb,viewModel.Age, ExtraMethods.UploadPhoto(file));
+
                 TempData["PetUpdate"] = "Updated";
-
 
             }
             context.SaveChanges();

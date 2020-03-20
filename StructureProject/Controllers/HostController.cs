@@ -32,10 +32,11 @@ namespace StructureProject.Controllers
             {
                 hosting = new HostInfo();
             }
+
             return View(hosting);
         }
 
-        [HttpPost, ActionName("Edit")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(HostInfo info)
             {
@@ -45,20 +46,16 @@ namespace StructureProject.Controllers
 
                 var personInDb = context.Persons.Single(m => m.IdentityUserId == identityId);
 
-                var newHosting = info;
+                info.Modify(personInDb);
 
-                newHosting.Person = personInDb;
-
-                context.HostInfos.Add(newHosting);
+                context.HostInfos.Add(info);
             }
 
             else //Update
             {
                 var hostInDb = context.HostInfos.Single(m => m.Id == info.Id);
 
-                hostInDb.StartDateTime = info.StartDateTime;
-                hostInDb.EndDateTime = info.EndDateTime;
-                hostInDb.Price = info.Price;
+                hostInDb.Modify(info.StartDateTime, info.EndDateTime);
 
             }
             context.SaveChanges();

@@ -9,15 +9,38 @@ namespace StructureProject.Models
     public class Pet
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
         [Required]
-        public byte KindId { get; set; }
-        public Kind Kind { get; set; }
+        public byte KindId { get;private set; }
+        public Kind Kind { get; private set; }
 
-        public float Age { get; set; }
-        public string Avatar { get; set; }
-        public Person Owner { get; set; }
+        public float Age { get; private set; }
+        public string Avatar { get; private set; }
+        public Person Owner { get; private set; }
+
+        protected Pet()
+        {
+
+        }
+
+        public Pet(string name, byte kindId, Kind kind, float age, string avatar, Person owner)
+        {
+            Name = name;
+            KindId = kindId;
+            Kind = kind;
+            Age = age;
+            Avatar = avatar;
+            Owner = owner;
+        }
+        public void Modify(string name, byte kindId, Kind kind, float age, string avatar)
+        {
+            Name = name;
+            KindId = kindId;
+            Kind = kind;
+            Age = age;
+            Avatar = avatar;
+        } 
 
     }
 }
