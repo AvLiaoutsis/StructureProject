@@ -333,6 +333,10 @@
     <Compile Include="Migrations\202003171114306_AddPriceKind.Designer.cs">
       <DependentUpon>202003171114306_AddPriceKind.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003200829097_RemovePriceFromHosting.cs" />
+    <Compile Include="Migrations\202003200829097_RemovePriceFromHosting.Designer.cs">
+      <DependentUpon>202003200829097_RemovePriceFromHosting.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -960,6 +964,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003171114306_AddPriceKind.resx">
       <DependentUpon>202003171114306_AddPriceKind.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003200829097_RemovePriceFromHosting.resx">
+      <DependentUpon>202003200829097_RemovePriceFromHosting.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

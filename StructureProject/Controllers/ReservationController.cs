@@ -24,8 +24,7 @@ namespace StructureProject.Controllers
 
 
         public ActionResult Show()
-        
-       {
+        {
 
             var identityId = User.Identity.GetUserId();
 
@@ -43,27 +42,18 @@ namespace StructureProject.Controllers
                 .ToList();
 
             var myReservationsWithHostMe = context.Reservations
-            .Include(s => s.Host)
-            .Include(s => s.Customer)
-            .Include(s =>s.Pet)
-                            .Include(s => s.Pet.Kind)
+                .Include(s => s.Host)
+                .Include(s => s.Customer)
+                .Include(s =>s.Pet)
+                .Include(s => s.Pet.Kind)
+                .Where(s => s.Host.IdentityUserId == identityId)
+                .ToList();
 
-            .Where(s => s.Host.IdentityUserId == identityId)
-            .ToList();
-
-            var viewModel = new ReservationsShowViewModel
-            {
-                MyReservations = myReservations,
-                ReservationsWithHostMe = myReservationsWithHostMe,                
-            };
-
-            return View("ReservationList", viewModel);
+            return View("ReservationList", new ReservationsShowViewModel(myReservations,myReservationsWithHostMe));
         }
-        // GET: Reservation
         public ActionResult Make()
         {
-            var viewModel = new ReservationViewModel();
-            return View(viewModel);
+            return View(new ReservationViewModel());
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -86,15 +76,8 @@ namespace StructureProject.Controllers
             var hostToUpdate = context.Persons.Where(s => s.Id == viewModel.HostId).SingleOrDefault();
             var PetToUpdate = context.Pets.Where(s => s.Id == viewModel.PetId).SingleOrDefault();
 
-            var reservation = new Reservation()
-            {
-                Customer = PersonToUpdate,
-                Date = viewModel.Date,
-                Host = hostToUpdate,
-                Pet = PetToUpdate,
-                Accept = Acceptance.Waiting
-            };
-            context.Reservations.Add(reservation);
+
+            context.Reservations.Add(new Reservation(hostToUpdate, PersonToUpdate, PetToUpdate, viewModel.Date, Acceptance.Waiting));
             context.SaveChanges();
 
             TempData["Reservation"] = "Made";

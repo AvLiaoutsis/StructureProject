@@ -9,6 +9,12 @@ namespace StructureProject.ViewModels
 {
     public class PriceKindViewModel
     {
+        public PriceKindViewModel(int personid,List<PriceKind> kindPriceSet)
+        {
+            KindPriceSet = kindPriceSet;
+            PersonId = personid;
+        }
+
         public int Id { get; set; }
         public int PersonId { get; set; }
         public Person Person { get; set; }

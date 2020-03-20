@@ -9,6 +9,8 @@ namespace StructureProject.ViewModels
 {
     public class PetFormViewModel
     {
+
+
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -29,6 +31,22 @@ namespace StructureProject.ViewModels
             {
                 return Id == 0 ? "New Pet" : "Edit Pet";
             }
+        }
+
+
+
+        public PetFormViewModel(int id, string name, byte kindId,float age, string avatar, IEnumerable<Kind> kinds)
+        {
+            Id = id;
+            Name = name;
+            KindId = kindId;
+            Age = age;
+            Avatar = avatar;
+            Kinds = kinds;
+        }
+        public PetFormViewModel(IEnumerable<Kind> kinds)
+        {
+            Kinds = kinds;
         }
     }
 }

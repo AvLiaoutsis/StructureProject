@@ -14,24 +14,24 @@ namespace StructureProject.Models
         [Display(Name = "Start Date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/mm/yyyy}")]
 
-        public DateTime StartDateTime { get;private set; }
+        public DateTime StartDateTime { get; set; }//Δεν μπορώ να το κάνω private γιατί αλλάζει τιμή μέσα στην φόρμα
 
         [Display(Name = "End Date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/mm/yyyy}")]
 
-        public DateTime EndDateTime { get;private set; }
+        public DateTime EndDateTime { get; set; }//Δεν μπορώ να το κάνω private γιατί αλλάζει τιμή μέσα στην φόρμα
         public HostInfo()
         {
 
         }
 
 
-        public HostInfo(Person person, DateTime startDateTime, DateTime endDateTime)
-        {
-            Person = person;
-            StartDateTime = startDateTime;
-            EndDateTime = endDateTime;
-        }
+        //public HostInfo(Person person, DateTime startDateTime, DateTime endDateTime)
+        //{
+        //    Person = person;
+        //    StartDateTime = startDateTime;
+        //    EndDateTime = endDateTime;
+        //}
 
         public void Modify(DateTime startDateTime, DateTime endDateTime)
         {

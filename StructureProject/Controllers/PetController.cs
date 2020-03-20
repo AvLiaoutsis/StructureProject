@@ -31,13 +31,7 @@ namespace StructureProject.Controllers
 
         public ViewResult New()
         {
-            var viewModel = new PetFormViewModel()
-            {
-                Kinds = context.Kinds.ToList()
-                
-            };
-
-            return View("PetForm", viewModel);
+            return View("PetForm", new PetFormViewModel(context.Kinds.ToList()));
         }
         public ViewResult Details(int id)
         {
@@ -109,19 +103,7 @@ namespace StructureProject.Controllers
                 return HttpNotFound();
             }
 
-            var viewModel = new PetFormViewModel()
-            { 
-                Kinds = context.Kinds.ToList(),
-                Id = pet.Id,
-                Avatar = pet.Avatar,
-                Age = pet.Age,
-                KindId = pet.KindId,
-                Name = pet.Name
-
-            };
-
-
-            return View("PetForm", viewModel);
+            return View("PetForm", new PetFormViewModel(pet.Id, pet.Name, pet.KindId, pet.Age, pet.Avatar, context.Kinds.ToList()));
         }
 
         [HttpPost]
@@ -163,7 +145,13 @@ namespace StructureProject.Controllers
                 var kindInDb = context.Kinds.Single(s => s.Id == viewModel.KindId);
 
 
-                petInDb.Modify(viewModel.Name, viewModel.KindId,kindInDb,viewModel.Age, ExtraMethods.UploadPhoto(file));
+                petInDb.Modify(viewModel.Name, viewModel.KindId,kindInDb,viewModel.Age);
+
+                if (!(file is null))
+                {
+                    petInDb.Modify(ExtraMethods.UploadPhoto(file));
+                }
+
 
                 TempData["PetUpdate"] = "Updated";
 

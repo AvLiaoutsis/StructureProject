@@ -35,7 +35,7 @@ namespace StructureProject.Controllers.API
         {
             var existingReservation = context.Reservations.Single(s => s.Id == reservationDTO.Id);
 
-            existingReservation.Accept = reservationDTO.Accept;
+            existingReservation.Modify(reservationDTO.Accept);
 
             context.SaveChanges();
 

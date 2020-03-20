@@ -9,6 +9,7 @@ namespace StructureProject.Models
 {
     public class ContactInfo
     {
+      
         public int Id { get; set; }
         [Display(Name = "Phone Number")]
 
@@ -23,5 +24,20 @@ namespace StructureProject.Models
         public string City { get; set; }
         public string Country { get; set; }
         public Person Person { get; set; }
+
+        public void Modify(string phoneNumber, string telNumber, string address, int? postalCode, string state, string city, string country)
+        {
+            PhoneNumber = phoneNumber;
+            TelNumber = telNumber;
+            Address = address;
+            PostalCode = postalCode;
+            State = state;
+            City = city;
+            Country = country;
+        }
+        public void Modify(Person person)
+        {
+            Person = person;
+        }
     }
 }

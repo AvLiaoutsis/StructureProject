@@ -19,7 +19,6 @@ namespace StructureProject.Controllers
     public class PersonController : Controller
     {
         private ApplicationDbContext context = new ApplicationDbContext();
-        // GET: Person
 
         public PersonController()
         {
@@ -28,6 +27,7 @@ namespace StructureProject.Controllers
         public ActionResult SubmitPrice()
         {
             var userIdentity = User.Identity.GetUserId();
+
             var personId = context.Persons
                 .Where(p => p.IdentityUserId == userIdentity).Single().Id;
 
@@ -35,13 +35,7 @@ namespace StructureProject.Controllers
                 .Include(k=>k.Kind)
                 .Where(p => p.PersonId == personId).ToList();
 
-            var viewModel = new PriceKindViewModel()
-            {
-                PersonId = personId,
-                KindPriceSet = kindprices
-            };
-
-            return View("PriceForm", viewModel);
+            return View("PriceForm", new PriceKindViewModel(personId, kindprices));
         }
         //public ActionResult SubmitPrice()
         //{
@@ -113,12 +107,7 @@ namespace StructureProject.Controllers
                 return HttpNotFound();
             }
 
-            var viewModel = new PersonFormViewModel()
-            {
-                Person = person
-            };
-
-            return View("PersonForm", viewModel);
+            return View("PersonForm", person);
         }
 
 
@@ -132,18 +121,14 @@ namespace StructureProject.Controllers
                 return HttpNotFound();
             }
 
-            var fileName = ExtraMethods.UploadPhoto(file);
-            person.Avatar = fileName;
-
             var personInDb = context.Persons.Single(m => m.Id == person.Id);
 
-            personInDb.BirthDate = person.BirthDate;
-            personInDb.Description = person.Description;
-            personInDb.Name = person.Name;
-            personInDb.LastName = person.LastName;
-            personInDb.Avatar = person.Avatar;
+            personInDb.Modify(person.Name, person.LastName, person.BirthDate, person.Description);
 
-
+            if(!(file is null)) 
+            {
+                personInDb.Modify(ExtraMethods.UploadPhoto(file));
+            }
 
             context.SaveChanges();
             TempData["UpdatePerson"] = "Added";
@@ -284,6 +269,10 @@ namespace StructureProject.Controllers
                 .Include(k=>k.Kind)
                 .Include(k=>k.Person)
                 .Where(s => s.Person.IdentityUserId == identityId).ToList();
+            var pets = context.Pets
+                .Include(s => s.Kind)
+                .Where(s => s.Owner.IdentityUserId == identityId).ToList();
+            var person = context.Persons.Where(s => s.IdentityUserId == identityId).SingleOrDefault();
 
             if (contact is null)
             {
@@ -294,19 +283,7 @@ namespace StructureProject.Controllers
                 hostInfo = new HostInfo();
             }
 
-            var viewmodel = new PersonDetailsViewModel()
-            {
-                Owner = context.Persons.Where(s => s.IdentityUserId == identityId).SingleOrDefault(),
-                Pets = context.Pets
-                .Include(s=>s.Kind)
-                .Where(s => s.Owner.IdentityUserId == identityId).ToList(),
-                Contact = contact,
-                HostInfo = hostInfo,
-                Prices = pricesKinds
-
-
-            };
-            return View(viewmodel);
+            return View(new PersonDetailsViewModel(person, contact, pets, hostInfo, pricesKinds));
         }
         public ActionResult Details(int id)
         {
@@ -341,21 +318,7 @@ namespace StructureProject.Controllers
                 hostInfo = new HostInfo();
             }
 
-            var viewmodel = new PersonDetailsViewModel()
-            {
-                Owner = owner,
-                Pets = pets,
-                Contact = contact,
-                HostInfo = hostInfo,
-                Prices = pricesKinds
-            };
-
-            if (viewmodel == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(viewmodel);
+            return View(new PersonDetailsViewModel(owner, contact, pets, hostInfo, pricesKinds));
         }
 
         public ActionResult Contact(int id)
@@ -393,10 +356,6 @@ namespace StructureProject.Controllers
                  .ToList();
 
             return View(PersonsWithContactsSameCity);
-
-
-
-
         }
 
     }

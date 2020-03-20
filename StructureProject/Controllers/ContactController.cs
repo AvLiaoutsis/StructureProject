@@ -48,27 +48,18 @@ namespace StructureProject.Controllers
             {
                 var identityId = User.Identity.GetUserId();
 
-                var personInDb = context.Persons.Single(m => m.IdentityUserId == identityId);
+                var person = context.Persons.Single(m => m.IdentityUserId == identityId);
 
-                var newContact = info;
+                info.Modify(person);
 
-                newContact.Person = personInDb;
-                
-
-                context.ContactInfos.Add(newContact);
+                context.ContactInfos.Add(info);
             }
 
             else //Update
             {
                 var contactInDb = context.ContactInfos.Single(m => m.Id == info.Id);
 
-                contactInDb.Address = info.Address;
-                contactInDb.City = info.City;
-                contactInDb.Country = info.Country;
-                contactInDb.State = info.State;
-                contactInDb.PhoneNumber = info.PhoneNumber;
-                contactInDb.PostalCode = info.PostalCode;
-                contactInDb.TelNumber = info.TelNumber;
+                contactInDb.Modify(info.PhoneNumber, info.TelNumber, info.Address, info.PostalCode, info.State, info.City, info.Country);
 
             }
             context.SaveChanges();

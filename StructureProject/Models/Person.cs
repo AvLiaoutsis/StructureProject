@@ -8,6 +8,8 @@ namespace StructureProject.Models
 {
     public class Person
     {
+
+
         public int Id { get; set; }
 
         [Display(Name = "First Name")]
@@ -36,6 +38,17 @@ namespace StructureProject.Models
             {
                 return LastName + " " + Name;
             }
+        }
+        public void Modify(string name, string lastName, DateTime birthdate, string description)
+        {
+            Name = name;
+            LastName = lastName;
+            BirthDate = birthdate;
+            Description = description;
+        }
+        public void Modify(string avatar)
+        {
+            Avatar = avatar;
         }
 
 

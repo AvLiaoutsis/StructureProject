@@ -33,14 +33,16 @@ namespace StructureProject.Models
             Avatar = avatar;
             Owner = owner;
         }
-        public void Modify(string name, byte kindId, Kind kind, float age, string avatar)
+        public void Modify(string name, byte kindId, Kind kind, float age)
         {
             Name = name;
             KindId = kindId;
             Kind = kind;
             Age = age;
-            Avatar = avatar;
         } 
-
+        public void Modify(string avatar)
+        {
+            Avatar = avatar;
+        }
     }
 }
