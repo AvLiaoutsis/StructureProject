@@ -30,6 +30,10 @@ namespace StructureProject.Models
             Date = date;
             Accept = status;
         }
+        public Reservation()
+        {
+
+        }
         public void Modify(Acceptance status)
         {
             Accept = status;

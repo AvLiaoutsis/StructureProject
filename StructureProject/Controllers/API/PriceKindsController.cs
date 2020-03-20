@@ -40,6 +40,15 @@ namespace StructureProject.Controllers.API
                 .Select(Mapper.Map<PriceKind, PriceKindDTO>);
 
         }
+        public IEnumerable<PriceKindDTO> GetPriceKinds(int personid,byte kindid)
+        {
+
+            return context.PriceKinds
+                .Where(p => p.KindId == kindid && p.PersonId == personid)
+                .ToList()
+                .Select(Mapper.Map<PriceKind, PriceKindDTO>);
+
+        }
         [HttpDelete]
         public IHttpActionResult Delete(PriceKindDTO priceKindDTO)
         {
