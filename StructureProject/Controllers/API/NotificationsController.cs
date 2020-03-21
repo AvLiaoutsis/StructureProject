@@ -27,8 +27,9 @@ namespace StructureProject.Controllers.API
 
             var notifications = context.UserNotifications
                .Where(un => un.User.IdentityUserId == userId && !un.IsRead)
-               .Include(s=>s.Notification.Reservation.Host)
-               .Include(s=>s.Notification.Reservation.Pet)
+               .Include(s=>s.Host)
+               .Include(s=>s.Pet)
+               .Include(n=>n.Notification)
                .ToList();
             //πρέπει να βάλω στο usernotification ενα host και ενα Pet
 

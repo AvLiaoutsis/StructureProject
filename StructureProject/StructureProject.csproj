@@ -343,6 +343,10 @@
     <Compile Include="Migrations\202003211115470_notifications-models.Designer.cs">
       <DependentUpon>202003211115470_notifications-models.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003211834494_PetAndHostNotification.cs" />
+    <Compile Include="Migrations\202003211834494_PetAndHostNotification.Designer.cs">
+      <DependentUpon>202003211834494_PetAndHostNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -984,6 +988,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003211115470_notifications-models.resx">
       <DependentUpon>202003211115470_notifications-models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003211834494_PetAndHostNotification.resx">
+      <DependentUpon>202003211834494_PetAndHostNotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

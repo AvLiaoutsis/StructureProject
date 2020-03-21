@@ -18,6 +18,9 @@ namespace StructureProject.Models
         public int NotificationId { get; set; }
 
         public Person User { get; set; }
+        public Person Host { get; set; }
+        public Pet Pet { get; set; }
+
         public Notification Notification { get; set; }
         public bool IsRead { get; set; }
 
@@ -26,7 +29,7 @@ namespace StructureProject.Models
 
         }
 
-        public UserNotification(Person user,Notification notification)
+        public UserNotification(Person user,Notification notification,Pet pet,Person host)
         {
             if( user == null)
             {
@@ -38,8 +41,19 @@ namespace StructureProject.Models
                 throw new ArgumentException("notification");
             }
 
+            if (pet == null)
+            {
+                throw new ArgumentException("pet");
+            }
+
+            if (host == null)
+            {
+                throw new ArgumentException("host");
+            }
             User = user;
             Notification = notification;
+            Pet = pet;
+            Host = host;
         }
     }
 }

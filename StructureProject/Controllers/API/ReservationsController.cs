@@ -33,15 +33,19 @@ namespace StructureProject.Controllers.API
         [HttpPost]
         public IHttpActionResult Reserve(ReservationDTO reservationDTO)
         {
-            var existingReservation = context.Reservations.Single(s => s.Id == reservationDTO.Id);
+            var identityId = User.Identity.GetUserId();
 
-            var personwhomadereservation = context.Persons.Single(p=>p.Id == reservationDTO.CustomerId);
+            var existingReservation = context.Reservations.Single(s => s.Id == reservationDTO.Id);
+            var personwhomadereservation = context.Persons.Single(p=>p.IdentityUserId == identityId);
+
+            var existingHost = context.Persons.Single(s => s.Id == reservationDTO.HostId);
+            var existingPet = context.Pets.Single(s => s.Id == reservationDTO.PetId);
 
             existingReservation.Modify(reservationDTO.Accept);
 
             var newNotification = existingReservation.GetNotification();
 
-            context.UserNotifications.Add(new UserNotification(personwhomadereservation, newNotification));
+            context.UserNotifications.Add(new UserNotification(personwhomadereservation, newNotification, existingPet, existingHost));
 
             context.SaveChanges();
 

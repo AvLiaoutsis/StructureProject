@@ -44,6 +44,10 @@ namespace StructureProject.ViewModels
             Avatar = avatar;
             Kinds = kinds;
         }
+        public PetFormViewModel()
+        {
+
+        }
         public PetFormViewModel(IEnumerable<Kind> kinds)
         {
             Kinds = kinds;

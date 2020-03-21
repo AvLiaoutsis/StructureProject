@@ -118,8 +118,8 @@ else
                     <td>
                         @if (reservation.Accept == 0)
                         {
-                            <button id="Btn-Accept-@reservation.Id" data-customer-id="@reservation.Customer.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-accept">Accept</button>
-                            <button id="Btn-Reject-@reservation.Id" data-customer-id="@reservation.Customer.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-reject">Reject</button>
+                            <button id="Btn-Accept-@reservation.Id" data-host-id="@reservation.Host.Id"  data-pet-id="@reservation.Pet.Id" data-customer-id="@reservation.Customer.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-accept">Accept</button>
+                            <button id="Btn-Reject-@reservation.Id" data-host-id="@reservation.Host.Id"  data-pet-id="@reservation.Pet.Id"  data-customer-id="@reservation.Customer.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-reject">Reject</button>
                         }
                         else
                         {
@@ -148,7 +148,7 @@ else
         $(document).ready(function () {
             $(".js-toggle-accept").click(function (e) {
                 var button = $(e.target);
-                $.post("/api/reservations", {Id: button.attr("data-reservation-id"), Accept: "Accepted",CustomerId : button.attr("data-customer-id")})
+                $.post("/api/reservations", { Id: button.attr("data-reservation-id"), Accept: "Accepted", HostId: button.attr("data-host-id"), PetId: button.attr("data-pet-id") })
                     .done(function () {
                         button
                             .removeClass("btn-default")
@@ -166,7 +166,7 @@ else
          $(document).ready(function () {
             $(".js-toggle-reject").click(function (e) {
                 var button = $(e.target);
-                $.post("/api/reservations", {Id: button.attr("data-reservation-id"), Accept: "Declined",CustomerId : button.attr("data-customer-id")})
+                $.post("/api/reservations", { Id: button.attr("data-reservation-id"), Accept: "Accepted", HostId: button.attr("data-host-id"), PetId: button.attr("data-pet-id") })
                     .done(function () {
                         button
                             .removeClass("btn-default")

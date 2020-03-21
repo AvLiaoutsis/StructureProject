@@ -72,8 +72,8 @@
     if (notification.notification.type == 2 ) { %>
 
     <li>
-        Your reservation with your pet <%= notification.notification.pet.name %>  with date <%= notification.notification.dateTime %> has been approved by
-        <%= notification.notification.host.name %>
+        Your reservation with your pet <%= notification.pet.name %>  with date <%= notification.notification.dateTime %> has been approved by
+        <%= notification.host.name %>
     </li>
     @*<li><%= notification.gig.artist.name %> has canceled the gig at <%= notification.gig.venue %></li>*@
     <% }
