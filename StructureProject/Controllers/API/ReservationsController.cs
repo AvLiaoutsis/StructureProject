@@ -35,7 +35,13 @@ namespace StructureProject.Controllers.API
         {
             var existingReservation = context.Reservations.Single(s => s.Id == reservationDTO.Id);
 
+            var personwhomadereservation = context.Persons.Single(p=>p.Id == reservationDTO.CustomerId);
+
             existingReservation.Modify(reservationDTO.Accept);
+
+            var newNotification = existingReservation.GetNotification();
+
+            context.UserNotifications.Add(new UserNotification(personwhomadereservation, newNotification));
 
             context.SaveChanges();
 

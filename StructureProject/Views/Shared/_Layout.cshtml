@@ -65,5 +65,43 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+<script type="text/x-handlebars-template" id="notifications-template">
+<%
+    _.each(notifications, function (notification) {
+    %>
+    <li>kati</li> 
+    <%
+    })
+    %>
+</script>
+    <script>
+        $(document).ready(function () {
+            $.get("/api/notifications", function (notifications) {
+
+                if (notifications.length === 0) {
+                    return;
+                }
+
+                    $(".js-notifications-count")
+                        .text(notifications.length)
+                        .removeClass("hide")
+                        .addClass("animated bounceInDown");
+
+                    $(".notifications").popover({
+                        html: true,
+                        title: "Notifications",
+                        content: function () {
+                            var compiled = _.template($("#notifications-template").html());
+                            var html = compiled({ notifications: notifications })
+
+                            return html;
+                        },
+                        placement: "bottom"
+                    })
+                
+
+            });
+        });
+    </script>
 </body>
 </html>

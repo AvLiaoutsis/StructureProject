@@ -118,8 +118,8 @@ else
                     <td>
                         @if (reservation.Accept == 0)
                         {
-                            <button id="Btn-Accept-@reservation.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-accept">Accept</button>
-                            <button id="Btn-Reject-@reservation.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-reject">Reject</button>
+                            <button id="Btn-Accept-@reservation.Id" data-customer-id="@reservation.Customer.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-accept">Accept</button>
+                            <button id="Btn-Reject-@reservation.Id" data-customer-id="@reservation.Customer.Id"  data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-reject">Reject</button>
                         }
                         else
                         {
@@ -127,6 +127,7 @@ else
 
                         }
                     </td>
+
                 </tr>
             }
         </tbody>
@@ -144,12 +145,12 @@ else
     <script>
         var table = $("#reservationsbyme").DataTable();
         var table = $("#reservations").DataTable();
-
+        //Should get id from customer with ajax
 
         $(document).ready(function () {
             $(".js-toggle-accept").click(function (e) {
                 var button = $(e.target);
-                $.post("/api/reservations", {Id: button.attr("data-reservation-id"), Accept: "Accepted" })
+                $.post("/api/reservations", {Id: button.attr("data-reservation-id"), Accept: "Accepted",CustomerId : button.attr("data-customer-id")})
                     .done(function () {
                         button
                             .removeClass("btn-default")

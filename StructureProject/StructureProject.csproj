@@ -189,6 +189,7 @@
     <Compile Include="Controllers\API\ContactsController.cs" />
     <Compile Include="Controllers\API\HostsController.cs" />
     <Compile Include="Controllers\API\KindsController.cs" />
+    <Compile Include="Controllers\API\NotificationsController.cs" />
     <Compile Include="Controllers\API\PersonsController.cs" />
     <Compile Include="Controllers\API\PetsController.cs" />
     <Compile Include="Controllers\API\ReservationsController.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="DTO\HostInfoDTO.cs" />
     <Compile Include="DTO\KindDTO.cs" />
     <Compile Include="DTO\MailDTO.cs" />
+    <Compile Include="DTO\NotificationDTO.cs" />
     <Compile Include="DTO\PersonDTO.cs" />
     <Compile Include="DTO\PetDTO.cs" />
     <Compile Include="DTO\PriceKindDTO.cs" />
@@ -337,6 +339,10 @@
     <Compile Include="Migrations\202003200829097_RemovePriceFromHosting.Designer.cs">
       <DependentUpon>202003200829097_RemovePriceFromHosting.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003211115470_notifications-models.cs" />
+    <Compile Include="Migrations\202003211115470_notifications-models.Designer.cs">
+      <DependentUpon>202003211115470_notifications-models.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -346,10 +352,13 @@
     <Compile Include="Models\Kind.cs" />
     <Compile Include="Models\Mail.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\NotificationType.cs" />
     <Compile Include="Models\Pet.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\PriceKind.cs" />
     <Compile Include="Models\Reservation.cs" />
+    <Compile Include="Models\UserNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\OwnerWithPetViewModel.cs" />
@@ -364,6 +373,8 @@
     <Compile Include="ViewModels\SearchViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\animate.min.css" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-theme-united.css" />
@@ -787,6 +798,8 @@
     <Content Include="Scripts\Register\register.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\underscore.js" />
+    <Content Include="Scripts\underscore.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -857,6 +870,7 @@
     <Content Include="webfonts\fa-brands-400.ttf" />
     <Content Include="webfonts\fa-brands-400.eot" />
     <Content Include="Views\Person\PriceForm.cshtml" />
+    <Content Include="Scripts\underscore.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -967,6 +981,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003200829097_RemovePriceFromHosting.resx">
       <DependentUpon>202003200829097_RemovePriceFromHosting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003211115470_notifications-models.resx">
+      <DependentUpon>202003211115470_notifications-models.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

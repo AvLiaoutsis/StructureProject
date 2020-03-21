@@ -16,7 +16,8 @@ namespace StructureProject
                        "~/Scripts/moment.min.js",
                        "~/Scripts/bootstrap-datetimepicker.js",
                        "~/Scripts/fontawesome/all.min.js",
-                       "~/Scripts/toastr.js"));
+                       "~/Scripts/toastr.js",
+                       "~/Scripts/underscore.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -41,6 +42,7 @@ namespace StructureProject
                       "~/Content/toastr.css",
                       "~/Content/bootstrap-datetimepicker.css",
                       "~/Content/fontawesome-all.css",
+                      "~/Content/animate.css",
                       "~/Content/Site.css"));
 
 

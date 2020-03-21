@@ -17,7 +17,7 @@ namespace StructureProject.Models
 
         public int Id { get; set; }
         public Person Host { get;private set; }
-        public Person Customer { get;private set; }
+        public Person Customer { get; set; }
         public Pet Pet { get; private set; }
         public DateTime Date { get; private set; }
         public Acceptance Accept { get; private set; }
@@ -37,6 +37,33 @@ namespace StructureProject.Models
         public void Modify(Acceptance status)
         {
             Accept = status;
+           
+            if(status == Acceptance.Accepted)
+            {
+                var notification = Notification.ReservartionApproved(this);  
+
+            }
+            else if(status == Acceptance.Declined)
+            {
+                var notification = Notification.ReservartionCancelled(this);
+
+            }
+        }
+        public Notification GetNotification()
+        {
+            Notification notification;
+            if (Accept == Acceptance.Accepted)
+            {
+                 notification = Notification.ReservartionApproved(this);
+
+            }
+            else 
+            {
+                 notification = Notification.ReservartionCancelled(this);
+
+            }
+            return notification;
+
         }
     }
 }

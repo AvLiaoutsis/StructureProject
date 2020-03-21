@@ -10,6 +10,8 @@ namespace StructureProject.DTO
     {
         public int Id { get; set; }
         public PersonDTO Host { get; set; }
+        public int CustomerId { get; set; }
+
         public PersonDTO Customer { get; set; }
         public PetDTO Pet { get; set; }
         public DateTime Date { get; set; }
