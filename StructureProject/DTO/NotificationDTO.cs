@@ -10,7 +10,6 @@ namespace StructureProject.DTO
     {
         public DateTime DateTime { get; set; }
         public NotificationType Type { get; set; }
-        public string PetName { get; set; }
         public Reservation Reservation { get; set; }
     }
 }
