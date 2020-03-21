@@ -66,11 +66,17 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 <script type="text/x-handlebars-template" id="notifications-template">
-<%
-    _.each(notifications, function (notification) {
-    %>
-    <li>kati</li> 
     <%
+    _.each(notifications, function (notification) {
+
+    if (notification.notification.type == 2 ) { %>
+
+    <li>
+        Your reservation with your pet <%= notification.notification.pet.name %>  with date <%= notification.notification.dateTime %> has been approved by
+        <%= notification.notification.host.name %>
+    </li>
+    @*<li><%= notification.gig.artist.name %> has canceled the gig at <%= notification.gig.venue %></li>*@
+    <% }
     })
     %>
 </script>

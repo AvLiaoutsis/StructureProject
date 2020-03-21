@@ -119,15 +119,13 @@ else
                         @if (reservation.Accept == 0)
                         {
                             <button id="Btn-Accept-@reservation.Id" data-customer-id="@reservation.Customer.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-accept">Accept</button>
-                            <button id="Btn-Reject-@reservation.Id" data-customer-id="@reservation.Customer.Id"  data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-reject">Reject</button>
+                            <button id="Btn-Reject-@reservation.Id" data-customer-id="@reservation.Customer.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-reject">Reject</button>
                         }
                         else
                         {
                             @Enum.GetName(typeof(Acceptance), reservation.Accept)
-
                         }
                     </td>
-
                 </tr>
             }
         </tbody>
@@ -168,7 +166,7 @@ else
          $(document).ready(function () {
             $(".js-toggle-reject").click(function (e) {
                 var button = $(e.target);
-                $.post("/api/reservations", {Id: button.attr("data-reservation-id"), Accept: "Declined" })
+                $.post("/api/reservations", {Id: button.attr("data-reservation-id"), Accept: "Declined",CustomerId : button.attr("data-customer-id")})
                     .done(function () {
                         button
                             .removeClass("btn-default")
