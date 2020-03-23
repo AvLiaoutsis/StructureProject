@@ -88,8 +88,8 @@
             <div class="row">
 
                 @Html.Label("Cost", new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
-                    <p class="form-control col-md-2" id="price"></p>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control col-md-2", @readonly = "readonly" })
                 </div>
             </div>
 
@@ -107,7 +107,7 @@
 @section Scripts
 {
     <script>
-    var personid;
+        var personid;
 
         $(document).ready(function () {
 
@@ -118,7 +118,7 @@
                 success: function (data) {
                     var s = '<option value = "-1">Please Select a User</option>';
                     for (var i = 0; i < data.length; i++) {
-                        s += '<option data-person-id='+data[i].person.id +' value="' + data[i].id + '">' + data[i].person.name + '</option>';
+                        s += '<option data-person-id=' + data[i].person.id + ' value="' + data[i].id + '">' + data[i].person.name + '</option>';
                     }
                     $("#reservationDropdown").html(s);
                 }
@@ -173,8 +173,15 @@
                     type: "GET",
                     url: "/api/pricekinds?kindId=" + petkindid + "&personId=" + personid,
                     success: function (data) {
-                        alert(data[0].price)
-                        $("#price").html(data[0].price +" €");
+                        if (data.price == 0 || data.price == null) {
+
+                            $("#Price").html("N/A Price. Please Contact With Me");
+
+                        }
+                        else {
+                            $("#Price").html(data[0].price + " €");
+
+                        }
                     }
                 });
             });
@@ -201,6 +208,7 @@
             document.getElementById('second').style.display = 'none';
             document.getElementById('third').style.display = 'none';
             document.getElementById('forth').style.display = 'none';
+            document.getElementById('fifth').style.display = 'none';
 
             document.getElementById('final').style.display = 'none';
             $('#Date').data("DateTimePicker").destroy();
@@ -264,7 +272,28 @@
 
                         document.getElementById('PetId').addEventListener('change', function () {
                             var style = this.value != -1 ? 'block' : 'none';
-                            document.getElementById('final').style.display = 'style';
+                            document.getElementById('fifth').style.display = style;
+                            document.getElementById('final').style.display = style;
+                            var pet = document.getElementById("PetId");
+                            var petkindid = pet.options[pet.selectedIndex].getAttribute("data-kind");
+                            alert("petkindid " + petkindid)
+
+                            $.ajax({
+                                type: "GET",
+                                url: "/api/pricekinds?kindId=" + petkindid + "&personId=" + personid,
+                                success: function (data) {
+
+                                    if (!data.price) {
+
+                                        $("#Price").attr("value", "N/A Price. Please Contact With Me");
+
+                                    }
+                                    else {
+                                        $("#Price").attr("value", data[0].price);
+
+                                    }
+                                }
+                            });
                         });
 
 
@@ -279,44 +308,44 @@
 
 
 
-                                                    //$('#DateTime').blur(function () {
-                                                    //      document.getElementById('final').style.display = 'block';
-                                                    //    });
-                                                    //$('#DateTime').datetimepicker({
-                                                    //                useCurrent: false,
-                                                    //                minDate: data[0].startDateTime,
-                                                    //                maxDate: data[0].endDateTime,
-                                                    //                format: 'D/M/YYYY'
+                                                        //$('#DateTime').blur(function () {
+                                                        //      document.getElementById('final').style.display = 'block';
+                                                        //    });
+                                                        //$('#DateTime').datetimepicker({
+                                                        //                useCurrent: false,
+                                                        //                minDate: data[0].startDateTime,
+                                                        //                maxDate: data[0].endDateTime,
+                                                        //                format: 'D/M/YYYY'
 
 
-                                                    //}).on('dp.change', function () {
-                                                    //     document.getElementById('final').style.display = 'block';
+                                                        //}).on('dp.change', function () {
+                                                        //     document.getElementById('final').style.display = 'block';
 
-                                                    //    });
-                                                    //document.getElementById('DateTime').addEventListener('change', function () {
-                                                    //    console.log("mpike");
-                                                    //    var style = this.value != -1 ? 'block' : 'none';
-                                                    //    document.getElementById('final').style.display = style;
-                                                    //});
+                                                        //    });
+                                                        //document.getElementById('DateTime').addEventListener('change', function () {
+                                                        //    console.log("mpike");
+                                                        //    var style = this.value != -1 ? 'block' : 'none';
+                                                        //    document.getElementById('final').style.display = style;
+                                                        //});
 
-                                                    // document.getElementById('#DateTime').addEventListener('change', function () {
-                                                    //     var style = 'block';
-                                                    //    document.getElementById('second').style.display = style;
-                                                    //    var e = document.getElementById("reservationDropdown");
-                                                    //});
+                                                        // document.getElementById('#DateTime').addEventListener('change', function () {
+                                                        //     var style = 'block';
+                                                        //    document.getElementById('second').style.display = style;
+                                                        //    var e = document.getElementById("reservationDropdown");
+                                                        //});
 
-                                                                                                                                                    //https://localhost:44322/api/hosts
+                                                                                                                                                        //https://localhost:44322/api/hosts
 
 
-                                                                                                                                                    //        $('#DateTime').datetimepicker({
-                                                                                                                                                    //        useCurrent: false,
-                                                                                                                                                    //        minDate: moment(),
-                                                                                                                                                    //        maxDate://prepei na parw ta dates apo ton user
-                                                                                                                                                    //        format: 'D/M/YYYY'
+                                                                                                                                                        //        $('#DateTime').datetimepicker({
+                                                                                                                                                        //        useCurrent: false,
+                                                                                                                                                        //        minDate: moment(),
+                                                                                                                                                        //        maxDate://prepei na parw ta dates apo ton user
+                                                                                                                                                        //        format: 'D/M/YYYY'
 
-                                                                                                                                                    //    });
+                                                                                                                                                        //    });
 
-                                                                                                                                                    //});
+                                                                                                                                                        //});
 
     </script>
 }

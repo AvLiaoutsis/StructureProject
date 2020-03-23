@@ -33,7 +33,6 @@
                         <li>@Html.ActionLink("Show My Pets", "ShowPets", "Pet")</li>
                         <li>@Html.ActionLink("Show Other Users", "OtherUsers", "Person")</li>
                         <li>@Html.ActionLink("Search By Location", "Search", "Person")</li>
-                        <li>@Html.ActionLink("Submt Prices","SubmitPrice","Person")</li>
 
                     }
                     else
@@ -72,11 +71,23 @@
     if (notification.notification.type == 2 ) { %>
 
     <li>
-        Your reservation with your pet <%= notification.pet.name %>  with date <%= notification.notification.dateTime %> has been approved by
+        Your reservation with your pet <%= notification.pet.name %>  in <%= moment(notification.notification.dateTime).format('D/M/YYYY')  %> has been approved by
         <%= notification.host.name %>
     </li>
     @*<li><%= notification.gig.artist.name %> has canceled the gig at <%= notification.gig.venue %></li>*@
-    <% }
+    <%
+
+    }
+    else{
+    %>
+
+    <li>
+        Your reservation with your pet <%= notification.pet.name %>  in <%= moment(notification.notification.dateTime).format('D/M/YYYY')  %> has been rejected by
+        <%= notification.host.name %>
+    </li>
+    <%
+    }
+
     })
     %>
 </script>

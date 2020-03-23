@@ -19,15 +19,17 @@ namespace StructureProject.Models
         public Person Host { get;private set; }
         public Person Customer { get; set; }
         public Pet Pet { get; private set; }
+        public Decimal Price { get; set; }
         public DateTime Date { get; private set; }
         public Acceptance Accept { get; private set; }
-
-        public Reservation(Person host, Person customer, Pet pet, DateTime date, Acceptance status)
+    
+        public Reservation(Person host, Person customer, Pet pet, DateTime date,decimal price, Acceptance status)
         {
             Host = host;
             Customer = customer;
             Pet = pet;
             Date = date;
+            Price = price;
             Accept = status;
         }
         public Reservation()

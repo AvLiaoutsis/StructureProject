@@ -59,12 +59,6 @@ namespace StructureProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Make(ReservationViewModel viewModel)
         {
-
-            if (!ModelState.IsValid)
-            {
-                return HttpNotFound();
-            }
-
             var identityId = User.Identity.GetUserId();
 
             if (identityId == null)
@@ -77,7 +71,7 @@ namespace StructureProject.Controllers
             var PetToUpdate = context.Pets.Where(s => s.Id == viewModel.PetId).SingleOrDefault();
 
 
-            context.Reservations.Add(new Reservation(hostToUpdate, PersonToUpdate, PetToUpdate, viewModel.Date, Acceptance.Waiting));
+            context.Reservations.Add(new Reservation(hostToUpdate, PersonToUpdate, PetToUpdate, viewModel.Date,viewModel.Price, Acceptance.Waiting));
             context.SaveChanges();
 
             TempData["Reservation"] = "Made";

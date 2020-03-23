@@ -347,6 +347,10 @@
     <Compile Include="Migrations\202003211834494_PetAndHostNotification.Designer.cs">
       <DependentUpon>202003211834494_PetAndHostNotification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003231004131_addpricetoreservation.cs" />
+    <Compile Include="Migrations\202003231004131_addpricetoreservation.Designer.cs">
+      <DependentUpon>202003231004131_addpricetoreservation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -991,6 +995,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003211834494_PetAndHostNotification.resx">
       <DependentUpon>202003211834494_PetAndHostNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003231004131_addpricetoreservation.resx">
+      <DependentUpon>202003231004131_addpricetoreservation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

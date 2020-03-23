@@ -33,10 +33,9 @@ namespace StructureProject.Controllers.API
         [HttpPost]
         public IHttpActionResult Reserve(ReservationDTO reservationDTO)
         {
-            var identityId = User.Identity.GetUserId();
 
             var existingReservation = context.Reservations.Single(s => s.Id == reservationDTO.Id);
-            var personwhomadereservation = context.Persons.Single(p=>p.IdentityUserId == identityId);
+            var personwhomadereservation = context.Persons.Single(p=>p.Id == reservationDTO.CustomerId);
 
             var existingHost = context.Persons.Single(s => s.Id == reservationDTO.HostId);
             var existingPet = context.Pets.Single(s => s.Id == reservationDTO.PetId);

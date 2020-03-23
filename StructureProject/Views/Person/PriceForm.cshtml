@@ -29,8 +29,8 @@
                 <tbody>
                     @foreach (var kindprice in Model.KindPriceSet)
                     {
-                        <tr>
-                            <td id=" @kindprice.KindId">
+                        <tr id="tr-@kindprice.KindId" >
+                            <td id="@kindprice.KindId">
                                 @kindprice.Kind.Name
                             </td>
                             <td>
@@ -120,10 +120,6 @@
             var price = document.getElementById("price-" + idKind).value;
             var newprice = parseFloat(price, 10).toFixed(2);
 
-            alert(idKind);
-            alert(price);
-
-
             $.post("/api/priceKinds", { KindId: idKind, Price: newprice })
                 .done(function () {
                     button
@@ -164,7 +160,7 @@
 
                                 })
                                     .done(function () {
-                                        link.parent("li").fadeOut(function () {
+                                        $("#tr-"+id).fadeOut(function () {
                                             $(this).remove();
                                         });
 

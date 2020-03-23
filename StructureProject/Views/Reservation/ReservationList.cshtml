@@ -20,6 +20,8 @@
      <th>Host Name</th>
      <th>Pet Name</th>
      <th>Pet Kind</th>
+     <th>Price</th>
+
      <th>Date</th>
      <th>Accepted</th>
 
@@ -52,6 +54,18 @@
                      }
                  </td>
                  <td>
+                     @if (@reservation.Price == 0)
+                     {
+                         <text>N/A</text>
+
+                     }
+                     else
+                     {
+                         @reservation.Price
+
+                     }
+                 </td>
+                 <td>
                      @reservation.Date.ToString("dd/MM/yyyy")
                  </td>
                  <td>
@@ -80,6 +94,7 @@ else
         <th>Customer Name</th>
         <th>Pet Name</th>
         <th>Pet Kind</th>
+        <th>Price</th>
         <th>Date</th>
         <th>Accepted</th>
 
@@ -88,45 +103,57 @@ else
         <tbody>
             @foreach (var reservation in Model.ReservationsWithHostMe)
             {
-                <tr>
-                    <td>
-                        @reservation.Host.FullName
-                    </td>
-                    <td>
-                        @if (!String.IsNullOrEmpty(@reservation.Pet.Name))
-                        {
-                            @reservation.Pet.Name
-                        }
-                        else
-                        {
-                            <text>N/A</text>
-                        }
-                    </td>
-                    <td>
-                        @if (!String.IsNullOrEmpty(@reservation.Pet.Kind.Name))
-                        {
-                            @reservation.Pet.Kind.Name
-                        }
-                        else
-                        {
-                            <text>N/A</text>
-                        }
-                    </td>
-                    <td>
-                        @reservation.Date.ToString("dd/MM/yyyy")
-                    </td>
-                    <td>
-                        @if (reservation.Accept == 0)
-                        {
-                            <button id="Btn-Accept-@reservation.Id" data-host-id="@reservation.Host.Id"  data-pet-id="@reservation.Pet.Id" data-customer-id="@reservation.Customer.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-accept">Accept</button>
-                            <button id="Btn-Reject-@reservation.Id" data-host-id="@reservation.Host.Id"  data-pet-id="@reservation.Pet.Id"  data-customer-id="@reservation.Customer.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-reject">Reject</button>
-                        }
-                        else
-                        {
-                            @Enum.GetName(typeof(Acceptance), reservation.Accept)
-                        }
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @reservation.Customer.FullName
+                </td>
+                <td>
+                    @if (!String.IsNullOrEmpty(@reservation.Pet.Name))
+                    {
+                        @reservation.Pet.Name
+                    }
+                    else
+                    {
+                        <text>N/A</text>
+                    }
+                </td>
+                <td>
+                    @if (!String.IsNullOrEmpty(@reservation.Pet.Kind.Name))
+                    {
+                        @reservation.Pet.Kind.Name
+                    }
+                    else
+                    {
+                        <text>N/A</text>
+                    }
+                </td>
+                <td>
+                    @if (@reservation.Price == 0)
+                    {
+                        <text>N/A</text>
+
+                    }
+                    else
+                    {
+                        @reservation.Price
+
+                    }
+                </td>
+                <td>
+                    @reservation.Date.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @if (reservation.Accept == 0)
+                    {
+                        <button id="Btn-Accept-@reservation.Id" data-host-id="@reservation.Host.Id" data-pet-id="@reservation.Pet.Id" data-customer-id="@reservation.Customer.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-accept">Accept</button>
+                        <button id="Btn-Reject-@reservation.Id" data-host-id="@reservation.Host.Id" data-pet-id="@reservation.Pet.Id" data-customer-id="@reservation.Customer.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-reject">Reject</button>
+                    }
+                    else
+                    {
+                        @Enum.GetName(typeof(Acceptance), reservation.Accept)
+                    }
+                </td>
+            </tr>
             }
         </tbody>
     </table>
@@ -148,7 +175,7 @@ else
         $(document).ready(function () {
             $(".js-toggle-accept").click(function (e) {
                 var button = $(e.target);
-                $.post("/api/reservations", { Id: button.attr("data-reservation-id"), Accept: "Accepted", HostId: button.attr("data-host-id"), PetId: button.attr("data-pet-id") })
+                $.post("/api/reservations", {CustomerId:button.attr("data-customer-id"), Id: button.attr("data-reservation-id"), Accept: "Accepted", HostId: button.attr("data-host-id"), PetId: button.attr("data-pet-id") })
                     .done(function () {
                         button
                             .removeClass("btn-default")
@@ -166,7 +193,7 @@ else
          $(document).ready(function () {
             $(".js-toggle-reject").click(function (e) {
                 var button = $(e.target);
-                $.post("/api/reservations", { Id: button.attr("data-reservation-id"), Accept: "Accepted", HostId: button.attr("data-host-id"), PetId: button.attr("data-pet-id") })
+                $.post("/api/reservations", {CustomerId:button.attr("data-customer-id"), Id: button.attr("data-reservation-id"), Accept: "Declined", HostId: button.attr("data-host-id"), PetId: button.attr("data-pet-id") })
                     .done(function () {
                         button
                             .removeClass("btn-default")
