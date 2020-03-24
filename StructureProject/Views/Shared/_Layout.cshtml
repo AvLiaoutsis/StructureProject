@@ -42,12 +42,12 @@
                     }
 
                     @*}
-        @if (this.User.IsInRole("Admin"))
-        {
-            <li>@Html.ActionLink("View Mails", "ViewMail", "Admin")</li>
-            <li>@Html.ActionLink("View Users", "PersonList", "Admin")</li>
+                        @if (this.User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("View Mails", "ViewMail", "Admin")</li>
+                            <li>@Html.ActionLink("View Users", "PersonList", "Admin")</li>
 
-        }*@
+                        }*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -64,33 +64,35 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-<script type="text/x-handlebars-template" id="notifications-template">
-    <%
-    _.each(notifications, function (notification) {
+    <script type="text/x-handlebars-template" id="notifications-template">
+        <ul class="notifications">
+            <%
+            _.each(notifications, function (notification) {
 
-    if (notification.notification.type == 2 ) { %>
+            if (notification.notification.type == 2 ) { %>
 
-    <li>
-        Your reservation with your pet <%= notification.pet.name %>  in <%= moment(notification.notification.dateTime).format('D/M/YYYY')  %> has been approved by
-        <%= notification.host.name %>
-    </li>
-    @*<li><%= notification.gig.artist.name %> has canceled the gig at <%= notification.gig.venue %></li>*@
-    <%
+            <li>
+                Your reservation with your pet <%= notification.pet.name %>  in <%= moment(notification.notification.dateTime).format('D/M/YYYY')  %> has been approved by
+                <%= notification.host.name %>
+            </li>
+            @*<li><%= notification.gig.artist.name %> has canceled the gig at <%= notification.gig.venue %></li>*@
+            <%
 
-    }
-    else{
-    %>
+            }
+            else{
+            %>
 
-    <li>
-        Your reservation with your pet <%= notification.pet.name %>  in <%= moment(notification.notification.dateTime).format('D/M/YYYY')  %> has been rejected by
-        <%= notification.host.name %>
-    </li>
-    <%
-    }
+            <li>
+                Your reservation with your pet <%= notification.pet.name %>  in <%= moment(notification.notification.dateTime).format('D/M/YYYY')  %> has been rejected by
+                <%= notification.host.name %>
+            </li>
+            <%
+            }
 
-    })
-    %>
-</script>
+            })
+            %>
+        </ul>
+    </script>
     <script>
         $(document).ready(function () {
             $.get("/api/notifications", function (notifications) {
@@ -99,24 +101,33 @@
                     return;
                 }
 
-                    $(".js-notifications-count")
-                        .text(notifications.length)
-                        .removeClass("hide")
-                        .addClass("animated bounceInDown");
+                $(".js-notifications-count")
+                    .text(notifications.length)
+                    .removeClass("hide")
+                    .addClass("animated bounceInDown");
 
-                    $(".notifications").popover({
-                        html: true,
-                        title: "Notifications",
-                        content: function () {
-                            var compiled = _.template($("#notifications-template").html());
-                            var html = compiled({ notifications: notifications })
+                $(".notifications").popover({
+                    html: true,
+                    title: "Notifications",
+                    content: function () {
+                        var compiled = _.template($("#notifications-template").html());
+                        var html = compiled({ notifications: notifications })
 
-                            return html;
-                        },
-                        placement: "bottom"
-                    })
-                
-
+                        return html;
+                    },
+                    placement: "bottom",
+                    template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+                }).on("shown.bs.popover", function () {
+                    $.post("/api/notifications")
+                        .done(function () {
+                            $(".js-notifications-count")
+                                .text("")
+                                .addClass("hide");
+                        })
+                        .fail(function () {
+                            console.log("Bad things happen");
+                        });
+                });
             });
         });
     </script>

@@ -20,6 +20,20 @@ namespace StructureProject.Controllers.API
             context = new ApplicationDbContext();
         }
 
+        [HttpPost]
+        public IHttpActionResult MarkAsRead()
+        {
+            var userId = User.Identity.GetUserId();
+            var notifications = context.UserNotifications
+                .Where(un => un.User.IdentityUserId == userId && !un.IsRead)
+                .ToList();
+
+            notifications.ForEach(n => n.Read());
+
+            context.SaveChanges();
+
+            return Ok();
+        }
         public IEnumerable<UserNotification> GetNotifications()
         {
             var userId = User.Identity.GetUserId();
@@ -31,7 +45,6 @@ namespace StructureProject.Controllers.API
                .Include(s=>s.Pet)
                .Include(n=>n.Notification)
                .ToList();
-            //πρέπει να βάλω στο usernotification ενα host και ενα Pet
 
             return notifications;
         }

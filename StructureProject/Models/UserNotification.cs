@@ -55,5 +55,10 @@ namespace StructureProject.Models
             Pet = pet;
             Host = host;
         }
+
+        public void Read()
+        {
+            IsRead = true;
+        }
     }
 }
