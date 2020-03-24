@@ -12,45 +12,55 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.StartDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @if (String.IsNullOrEmpty(Model.StartDateTime.ToString()))
-                {
-                    @Html.TextBox("StartDateTime", "", new { @class = "form-control" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.StartDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="input-group col-md-3">
+            @if (String.IsNullOrEmpty(Model.StartDateTime.ToString()))
+            {
 
+                @Html.TextBox("StartDateTime", "", new { @class = "form-control" })
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </span>
+            }
+            else
+            {
+                @Html.TextBoxFor(m => m.StartDateTime, new { @class = "form-control" })
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </span>
 
-                }
-                else
-                {
-                    @Html.TextBoxFor(m => m.StartDateTime, new { @class = "form-control" })
-
-                }
-
-                @Html.ValidationMessageFor(model => model.StartDateTime, "", new { @class = "text-danger" })
-            </div>
+            }
 
         </div>
+        @Html.ValidationMessageFor(model => model.StartDateTime, "", new { @class = "text-danger" })
+
+    </div>
 
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.EndDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @if (String.IsNullOrEmpty(Model.EndDateTime.ToString()) || (Model.EndDateTime.ToString() == "1/1/0001 00:00:00"))
-                {
-                    @Html.TextBox("EndDateTime", "", new { @class = "form-control" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.EndDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="input-group col-md-3">
+            @if (String.IsNullOrEmpty(Model.EndDateTime.ToString()) || (Model.EndDateTime.ToString() == "1/1/0001 00:00:00"))
+            {
+                @Html.TextBox("EndDateTime", "", new { @class = "form-control" })
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </span>
 
+            }
+            else
+            {
+                @Html.TextBoxFor(m => m.EndDateTime, new { @class = "form-control" })
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </span>
+            }
 
-                }
-                else
-                {
-                    @Html.TextBoxFor(m => m.EndDateTime, new { @class = "form-control" })
-
-                }
-
-                @Html.ValidationMessageFor(model => model.EndDateTime, "", new { @class = "text-danger" })
-            </div>
         </div>
+        @Html.ValidationMessageFor(model => model.EndDateTime, "", new { @class = "text-danger" })
+
+    </div>
 
 
             <div class="form-group">

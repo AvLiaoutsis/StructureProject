@@ -31,33 +31,41 @@
         </div>
     </div>*@
 
-    <div class="form-group">
-        @Html.LabelFor(v => v.Name, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(v => v.Name, new { @class = "form-control" })
-            @Html.ValidationMessageFor(v => v.Name)
+<div class="form-group">
+    @Html.LabelFor(v => v.Name, new { @class = "col-md-2 control-label" })
+    <div class="input-group col-md-3">
 
-        </div>
+        @Html.TextBoxFor(v => v.Name, new { @class = "form-control" })
+        <span class="input-group-addon">
+            <i class="fas fa-font"></i>
+        </span>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(v => v.LastName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(v => v.LastName, new { @class = "form-control" })
-            @Html.ValidationMessageFor(v => v.LastName)
+      @Html.ValidationMessageFor(v => v.Name)
+</div>
+<div class="form-group">
+    @Html.LabelFor(v => v.LastName, new { @class = "col-md-2 control-label" })
+    <div class="input-group col-md-3">
 
-        </div>
+        @Html.TextBoxFor(v => v.LastName, new { @class = "form-control" })
+        <span class="input-group-addon">
+            <i class="fas fa-bold"></i>
+        </span>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(v => v.BirthDate, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @*@Html.TextBox("BirthDate", DateTime.Now.Date.ToString("dd/MM/yyyy"), new { @class = "form-control" })*@
-            @Html.TextBoxFor(v => v.BirthDate, new { @class = "form-control" })
+        @Html.ValidationMessageFor(v => v.LastName)
 
-            @*@Html.TextBox("BirthDate", Model.Person.BirthDate.Date.ToString("dd/MM/yyyy"), new { @class = "form-control" })*@
-            @Html.ValidationMessageFor(v => v.BirthDate)
+</div>
+<div class="form-group">
+    @Html.LabelFor(v => v.BirthDate, new { @class = "col-md-2 control-label" })
+    <div class="input-group col-md-3">
 
-        </div>
+        @Html.TextBoxFor(v => v.BirthDate, new { @class = "form-control" })
+        <span class="input-group-addon">
+            <i class="fas fa-birthday-cake"></i>
+        </span>
     </div>
+       @Html.ValidationMessageFor(v => v.BirthDate)
+
+</div>
     <div class="form-group">
         @Html.LabelFor(model => model.Description, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">

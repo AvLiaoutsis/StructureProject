@@ -844,7 +844,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Person\OtherUsers.cshtml" />
     <Content Include="Views\Person\New.cshtml" />
-    <Content Include="Views\Pet\AddPet.cshtml" />
     <Content Include="Views\Person\Create.cshtml" />
     <Content Include="Views\Pet\ShowPets.cshtml" />
     <Content Include="Views\Pet\PetForm.cshtml" />
