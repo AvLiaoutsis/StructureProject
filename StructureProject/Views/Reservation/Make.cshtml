@@ -12,9 +12,14 @@
         <div class="form-group">
             <div class="row">
                 @Html.Label("Person", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
+
+                <div class="input-group col-md-3">
 
                     <select class="form-control " id="reservationDropdown" name="reservationDropdown"></select>
+                    <span class="input-group-addon">
+                        <i class="fas fa-user"></i>
+                    </span>
+
                 </div>
             </div>
         </div>
@@ -29,25 +34,31 @@
 
             @*@Html.Label("Available dates", htmlAttributes: new { @class = "control-label col-md-2" })
                 <br />*@
-            <div class="row">
+        <div class="row">
+            @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="input-group col-md-3" >
 
-                @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
-
-                    <p class="form-control col-md-2" id="startdate"></p>
-                </div>
-            </div>
-            <div class="row">
-
-                @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
-
-                    <p class="form-control col-md-2" id="enddate"></p>
-
-                </div>
+                <input type="text" class="form-control" id="startdate" readonly="readonly"/>
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </span>
 
             </div>
         </div>
+            <br />
+            <div class="row">
+
+                @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="input-group col-md-3">
+
+                    <input type="text" class="form-control" id="enddate" readonly="readonly" />
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </span>
+
+                </div>
+            </div>
+         </div>
 
         @*<label class="control-label col-md-2">Dates Available</label>
             <h3 class="control-label col-md-2">Dates Available</h3>
@@ -65,8 +76,13 @@
             <div class="row">
 
                 @Html.Label("Choose Date", new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
+                <div class="input-group col-md-3">
+
                     @Html.TextBox("Date", "", new { @class = "form-control col-md-2" })
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </span>
+
                 </div>
             </div>
 
@@ -76,9 +92,13 @@
             <div class="row">
 
                 @Html.Label("Choose Pet", new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
+                <div class="input-group col-md-3">
 
                     <select class="form-control " id="PetId" name="PetId"></select>
+                    <span class="input-group-addon">
+                        <i class="fas fa-kiwi-bird"></i>
+                    </span>
+
                 </div>
             </div>
 
@@ -88,8 +108,13 @@
             <div class="row">
 
                 @Html.Label("Cost", new { @class = "control-label col-md-2" })
-                <div class="col-md-3">
+                <div class="input-group col-md-3">
+
                     @Html.TextBoxFor(m => m.Price, new { @class = "form-control col-md-2", @readonly = "readonly" })
+                    <span class="input-group-addon">
+                        <i class="fas fa-euro-sign" ></i>
+                    </span>
+
                 </div>
             </div>
 
@@ -98,7 +123,7 @@
         @Html.HiddenFor(v => v.HostId)
         <div class="row">
 
-            <div class="col-md-offset-2 col-md-10" id="final" style="display:none">
+            <div class="col-md-offset-3 col-md-10" id="final" style="display:none">
                 <input type="submit" value="Save" class="btn btn-default" id="submitButton" />
             </div>
         </div>
@@ -251,8 +276,8 @@
                         document.getElementById('HostId').value = data[0].person.id;
                         $("#Price").html(data[0].price + " €");
 
-                        $("#startdate").html(moment(data[0].startDateTime).format('D/M/YYYY'));
-                        $("#enddate").html(moment(data[0].endDateTime).format('D/M/YYYY'));
+                        $("#startdate").val(moment(data[0].startDateTime).format('D/M/YYYY'));
+                        $("#enddate").val(moment(data[0].endDateTime).format('D/M/YYYY'));
 
                         $('#Date').datetimepicker({
                             useCurrent: false,
