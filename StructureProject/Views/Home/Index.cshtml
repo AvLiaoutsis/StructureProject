@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@Styles.Render("~/Content/Custom/IndexCSS")
 
 <div class="jumbotron jumboindex">
     <h1>PetAir</h1>
@@ -8,24 +9,10 @@
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
-    <style>
-        body {
-            background-image: url("/Content/Images/Images/group-of-dogs-at-dog-park.jpg");
-        }
 
-        .hrindex {
-            margin-top: 222px;
-        }
-        .jumboindex {
-            background-color: #fff7fb;
-            margin-top: 50px;
-            width: 75%;
-            margin-left: 149px;
-        }
-    </style>
-    @section Scripts {
+@section Scripts {
 
-        <script>
+    <script>
     $(function () {
         if ('@TempData["Registration"]' == "Added") {
             toastr.success('Registration Successful!!');
@@ -61,5 +48,5 @@
         }
 
     });
-        </script>
-    }
+    </script>
+}

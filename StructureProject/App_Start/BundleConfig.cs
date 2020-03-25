@@ -52,6 +52,10 @@ namespace StructureProject
               "~/Content/toastr.css",
               "~/Content/site.css"));
 
+
+            bundles.Add(new StyleBundle("~/Content/Custom/IndexCSS").Include(
+              "~/Content/Custom/indexCSS.css"));
+
             bundles.Add(new StyleBundle("~/Content/registerCSS").Include(
                     "~/Content/Register/material-design-iconic-font.min.css",
                     "~/Content/Register/registerStyle.css"));
