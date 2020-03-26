@@ -3,12 +3,27 @@
 }
 @Styles.Render("~/Content/Custom/IndexCSS")
 
-<div class="jumbotron jumboindex">
-    <h1>PetAir</h1>
-    <p class="lead">Petair is an online pet hosting service for our friends.</p>
-    <p>@Html.ActionLink("Join Us ", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink",@class = "btn btn-primary btn-lg" })
-    
-</div>
+@if (Request.IsAuthenticated)
+{
+    <div class="jumbotron jumboindex">
+        <h1>PetAir</h1>
+        <p class="lead">Now, you are logged in, you can add pets, make a new reservation,host a pet.</p>
+
+        @*<p> @Html.ActionLink("Make one", "Make", "Reservation", null, new { @class = "btn btn-primary btn-lg" })</p>*@
+
+    </div>
+
+}
+else
+{
+    <div class="jumbotron jumboindex">
+        <h1>PetAir</h1>
+        <p class="lead">Petair is an online pet hosting service for our friends.</p>
+        <p>@Html.ActionLink("Join Us ", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-primary btn-lg" })
+
+    </div>
+}
+
 
 
 @section Scripts {
