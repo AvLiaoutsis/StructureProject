@@ -24,7 +24,7 @@ namespace StructureProject.Models
         public DbSet<PriceKind> PriceKinds { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<UserNotification> UserNotifications { get; set; }
-
+        public DbSet<HostNotification> HostNotifications { get; set; }
 
 
 

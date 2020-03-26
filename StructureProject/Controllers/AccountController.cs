@@ -86,7 +86,6 @@ namespace StructureProject.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    TempData["Login"] = "Logged";
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

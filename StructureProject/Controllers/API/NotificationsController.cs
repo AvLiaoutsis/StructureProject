@@ -38,7 +38,6 @@ namespace StructureProject.Controllers.API
         {
             var userId = User.Identity.GetUserId();
 
-
             var notifications = context.UserNotifications
                .Where(un => un.User.IdentityUserId == userId && !un.IsRead)
                .Include(s=>s.Host)

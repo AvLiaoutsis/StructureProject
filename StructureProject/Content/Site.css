@@ -46,11 +46,11 @@ textarea {
     height: 50px;
 }
 .img-circle {
-    border-radius: 50%;
+    border-radius: 26%;
 }
 .md-avatar.size-4 {
-    width: 110px;
-    height: 110px;
+    width: 226px;
+    height: 193px;
 }
 
 .avatar-upload {

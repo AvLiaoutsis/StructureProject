@@ -187,6 +187,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\API\ContactsController.cs" />
+    <Compile Include="Controllers\API\HostNotificationsController.cs" />
     <Compile Include="Controllers\API\HostsController.cs" />
     <Compile Include="Controllers\API\KindsController.cs" />
     <Compile Include="Controllers\API\NotificationsController.cs" />
@@ -351,11 +352,20 @@
     <Compile Include="Migrations\202003231004131_addpricetoreservation.Designer.cs">
       <DependentUpon>202003231004131_addpricetoreservation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003260902312_addHostNotification.cs" />
+    <Compile Include="Migrations\202003260902312_addHostNotification.Designer.cs">
+      <DependentUpon>202003260902312_addHostNotification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003260914017_changeHostNotification.cs" />
+    <Compile Include="Migrations\202003260914017_changeHostNotification.Designer.cs">
+      <DependentUpon>202003260914017_changeHostNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ContactInfo.cs" />
     <Compile Include="Models\HostInfo.cs" />
+    <Compile Include="Models\HostNotification.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kind.cs" />
     <Compile Include="Models\Mail.cs" />
@@ -998,6 +1008,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003231004131_addpricetoreservation.resx">
       <DependentUpon>202003231004131_addpricetoreservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003260902312_addHostNotification.resx">
+      <DependentUpon>202003260902312_addHostNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003260914017_changeHostNotification.resx">
+      <DependentUpon>202003260914017_changeHostNotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

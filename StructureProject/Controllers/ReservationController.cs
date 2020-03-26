@@ -66,12 +66,16 @@ namespace StructureProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var PersonToUpdate = context.Persons.Where(s => s.IdentityUserId == identityId).SingleOrDefault();
-            var hostToUpdate = context.Persons.Where(s => s.Id == viewModel.HostId).SingleOrDefault();
-            var PetToUpdate = context.Pets.Where(s => s.Id == viewModel.PetId).SingleOrDefault();
+            var user = context.Persons.Where(s => s.IdentityUserId == identityId).SingleOrDefault();
+            var host = context.Persons.Where(s => s.Id == viewModel.HostId).SingleOrDefault();
+            var pet = context.Pets.Where(s => s.Id == viewModel.PetId).SingleOrDefault();
+            var newReservation = new Reservation(host, user, pet, viewModel.Date, viewModel.Price, Acceptance.Waiting);
 
+            var newNotification = newReservation.GetNotification();
 
-            context.Reservations.Add(new Reservation(hostToUpdate, PersonToUpdate, PetToUpdate, viewModel.Date,viewModel.Price, Acceptance.Waiting));
+            context.HostNotifications.Add(new HostNotification(user, newNotification, pet, host));
+            context.Reservations.Add(newReservation);
+
             context.SaveChanges();
 
             TempData["Reservation"] = "Made";

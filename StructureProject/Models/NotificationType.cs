@@ -7,6 +7,7 @@ namespace StructureProject.Models
 {
     public enum NotificationType
     {
+        ReservationWaiting = 0,
         ReservationCanceled = 1,
         ReservationApproved = 2
     }

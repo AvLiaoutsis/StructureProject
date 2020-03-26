@@ -59,10 +59,14 @@ namespace StructureProject.Models
                  notification = Notification.ReservartionApproved(this);
 
             }
-            else 
+            else if(Accept == Acceptance.Declined)
             {
                  notification = Notification.ReservartionCancelled(this);
 
+            }
+            else
+            {
+                notification = Notification.ReservationWaiting(this);
             }
             return notification;
 

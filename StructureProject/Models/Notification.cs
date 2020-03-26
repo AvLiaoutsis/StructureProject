@@ -40,6 +40,10 @@ namespace StructureProject.Models
         {
             return new Notification(NotificationType.ReservationCanceled, reservation);
         }
+        public static Notification ReservationWaiting(Reservation reservation)
+        {
+            return new Notification(NotificationType.ReservationWaiting, reservation);
+        }
 
     }
 }
