@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
+using StructureProject.DTO;
 using StructureProject.Models;
 using System;
 using System.Collections.Generic;
@@ -33,7 +35,7 @@ namespace StructureProject.Controllers.API
             return Ok();
         }
 
-        public IEnumerable<HostNotification> GetNotifications()
+        public IEnumerable<UserNotificationDTO> GetNotifications()
         {
             var userId = User.Identity.GetUserId();
 
@@ -42,7 +44,8 @@ namespace StructureProject.Controllers.API
                .Include(s => s.User)
                .Include(s => s.Pet)
                .Include(n => n.Notification)
-               .ToList();
+               .ToList()
+               .Select(Mapper.Map<HostNotification, UserNotificationDTO>);
 
             return hostnotifications;
         }

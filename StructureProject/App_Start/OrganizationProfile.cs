@@ -38,6 +38,9 @@ namespace StructureProject.App_Start
 
             CreateMap<UserNotification, UserNotificationDTO>();
             CreateMap<UserNotificationDTO, UserNotification>();
+
+            CreateMap<HostNotification, UserNotificationDTO>();
+
         }
     }
 }
