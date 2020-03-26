@@ -211,6 +211,7 @@
     <Compile Include="DTO\PetDTO.cs" />
     <Compile Include="DTO\PriceKindDTO.cs" />
     <Compile Include="DTO\ReservationDTO.cs" />
+    <Compile Include="DTO\UserNotificationDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -854,7 +855,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Person\OtherUsers.cshtml" />
-    <Content Include="Views\Person\New.cshtml" />
     <Content Include="Views\Person\Create.cshtml" />
     <Content Include="Views\Pet\ShowPets.cshtml" />
     <Content Include="Views\Pet\PetForm.cshtml" />

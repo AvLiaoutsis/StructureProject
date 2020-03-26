@@ -35,6 +35,9 @@ namespace StructureProject.App_Start
 
             CreateMap<PriceKind, PriceKindDTO>();
             CreateMap<PriceKindDTO, PriceKind>();
+
+            CreateMap<UserNotification, UserNotificationDTO>();
+            CreateMap<UserNotificationDTO, UserNotification>();
         }
     }
 }

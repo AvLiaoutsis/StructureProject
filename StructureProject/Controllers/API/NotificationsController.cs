@@ -34,7 +34,7 @@ namespace StructureProject.Controllers.API
 
             return Ok();
         }
-        public IEnumerable<UserNotification> GetNotifications()
+        public IEnumerable<UserNotificationDTO> GetNotifications()
         {
             var userId = User.Identity.GetUserId();
 
@@ -43,7 +43,9 @@ namespace StructureProject.Controllers.API
                .Include(s=>s.Host)
                .Include(s=>s.Pet)
                .Include(n=>n.Notification)
-               .ToList();
+               .ToList()
+               .Select(Mapper.Map<UserNotification, UserNotificationDTO>);
+
 
             return notifications;
         }
