@@ -126,7 +126,10 @@ textarea {
 
 .popover-notifications ul.notifications {
     list-style: none;
-    padding-left: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
     .popover-notifications ul.notifications > li {
