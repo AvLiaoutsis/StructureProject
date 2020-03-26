@@ -55,7 +55,7 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr class="hrindex"/>
+        <hr class="hrindex" />
         <footer>
             <p>&copy; @DateTime.Now.Year - PetAir</p>
         </footer>
@@ -93,6 +93,21 @@
             %>
         </ul>
     </script>
+    <script type="text/x-handlebars-template" id="host-notifications-template">
+        <ul class="host-notifications">
+            <%
+            _.each(hostnotifications, function (hostnotification) {
+            %>
+            <li>
+                A new Reservation has made been from <%= hostnotification.user.name %> at  <%= moment(hostnotification.notification.dateTime).format('D/M/YYYY')%>
+
+            </li>
+            <%
+            })
+            %>
+        </ul>
+    </script>
+
     <script>
         $(document).ready(function () {
             $.get("/api/notifications", function (notifications) {
@@ -129,6 +144,41 @@
                         });
                 });
             });
+            $.get("/api/hostnotifications", function (hostnotifications) {
+
+                if (hostnotifications.length === 0) {
+                    return;
+                }
+
+                $(".js-host-notifications-count")
+                    .text(hostnotifications.length)
+                    .removeClass("hide")
+                    .addClass("animated bounceInDown");
+
+                $(".host-notifications").popover({
+                    html: true,
+                    title: "Notifications",
+                    content: function () {
+                        var compiled = _.template($("#host-notifications-template").html());
+                        var html = compiled({ hostnotifications: hostnotifications })
+
+                        return html;
+                    },
+                    placement: "bottom",
+                    template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+                }).on("shown.bs.popover", function () {
+                    $.post("/api/hostnotifications")
+                        .done(function () {
+                            $(".js-notifications-count")
+                                .text("")
+                                .addClass("hide");
+                        })
+                        .fail(function () {
+                            console.log("Bad things happen");
+                        });
+                });
+            });
+
         });
     </script>
 </body>

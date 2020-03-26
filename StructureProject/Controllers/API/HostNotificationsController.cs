@@ -18,6 +18,20 @@ namespace StructureProject.Controllers.API
         {
             context = new ApplicationDbContext();
         }
+        [HttpPost]
+        public IHttpActionResult MarkAsRead()
+        {
+            var userId = User.Identity.GetUserId();
+            var notifications = context.HostNotifications 
+                .Where(un => un.Host.IdentityUserId == userId && !un.IsRead)
+                .ToList();
+
+            notifications.ForEach(n => n.Read());
+
+            context.SaveChanges();
+
+            return Ok();
+        }
 
         public IEnumerable<HostNotification> GetNotifications()
         {

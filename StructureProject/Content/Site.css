@@ -28,6 +28,17 @@
         background: #e95420;
     }
 
+.navbar-inverse .host-notifications {
+    position: relative;
+}
+
+    .navbar-inverse .host-notifications .badge {
+        position: absolute;
+        top: 8px;
+        right: -1px;
+        background: #e95420;
+    }
+
 .navbar-brand {
     font-weight: 700;
 }
@@ -141,6 +152,26 @@ textarea {
             border-bottom: none;
         }
 
+.popover-notifications .popover-content {
+    padding: 0;
+}
+
+.popover-notifications ul.host-notifications {
+    list-style: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+    .popover-notifications ul.host-notifications > li {
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+    }
+
+        .popover-notifications ul.host-notifications > li:last-child {
+            border-bottom: none;
+        }
 .petRegister{
    color: black !important;
 }
