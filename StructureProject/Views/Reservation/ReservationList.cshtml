@@ -205,9 +205,15 @@ else
             });
 
 
-        var table = $("#reservationsbyme").DataTable();
-        var table = $("#reservations").DataTable();
+         $("#reservationsbyme").DataTable();
+             $("#reservations").DataTable();
+                   if ('@TempData["Reservation"]' == "Made") {
+             toastr.success('Reservation Made!!!!');
+             TempData.Remove("Reservation");
+        }
+
         });
+
 
 
 

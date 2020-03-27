@@ -191,7 +191,6 @@
                 document.getElementById('final').style.display = style;
                 var pet = document.getElementById("PetId");
                 var petkindid = pet.options[pet.selectedIndex].getAttribute("data-kind");
-                alert("petkindid " + petkindid)
 
                 $.ajax({
                     type: "GET",
@@ -300,7 +299,6 @@
                             document.getElementById('final').style.display = style;
                             var pet = document.getElementById("PetId");
                             var petkindid = pet.options[pet.selectedIndex].getAttribute("data-kind");
-                            alert("petkindid " + petkindid)
 
                             $.ajax({
                                 type: "GET",

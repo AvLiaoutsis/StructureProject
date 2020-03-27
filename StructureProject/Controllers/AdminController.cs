@@ -45,6 +45,8 @@ namespace StructureProject.Controllers
             var contact = context.ContactInfos.Single(s => s.Person.Id == person.Id);
             var pets = context.Pets.Where(s => s.Owner.Id == person.Id);
             var hostinfo = context.HostInfos.Single(s => s.Person.Id == person.Id);
+            var hostNotifications = context.HostNotifications.Where(s => s.Host.Id == id);
+            var userNotifications = context.UserNotifications.Where(s => s.Host.Id == id || s.UserId == id);
 
 
             context.Persons.Remove(person);
@@ -52,6 +54,9 @@ namespace StructureProject.Controllers
             context.ContactInfos.Remove(contact);
             context.Pets.RemoveRange(pets);
             context.HostInfos.Remove(hostinfo);
+            context.HostNotifications.RemoveRange(hostNotifications);
+            context.UserNotifications.RemoveRange(userNotifications);
+            
 
 
             context.SaveChanges();
