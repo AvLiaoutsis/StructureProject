@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -19,6 +20,8 @@ namespace StructureProject.Models
         public Person Host { get;private set; }
         public Person Customer { get; set; }
         public Pet Pet { get; private set; }
+
+        [DisplayFormat(DataFormatString = "{0:n} €")]
         public Decimal Price { get; set; }
         public DateTime Date { get; private set; }
         public Acceptance Accept { get; private set; }
