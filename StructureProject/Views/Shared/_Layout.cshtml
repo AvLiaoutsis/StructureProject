@@ -3,9 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>PetAir</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="icon" href="@Url.Content("~/Content/Images/Images/puppy.png")" />
     @*@Styles.Render("~/Content/registerCSS")*@
 
 
@@ -28,10 +29,10 @@
                     {
 
                         <li>@Html.ActionLink("My Profile", "MyProfile", "Person")</li>
-                        <li>@Html.ActionLink("Show My Reservations", "Show", "Reservation")</li>
+                        <li>@Html.ActionLink("My Reservations", "Show", "Reservation")</li>
 
-                        <li>@Html.ActionLink("Show My Pets", "ShowPets", "Pet")</li>
-                        <li>@Html.ActionLink("Show Other Users", "OtherUsers", "Person")</li>
+                        <li>@Html.ActionLink("My Pets", "ShowPets", "Pet")</li>
+                        <li>@Html.ActionLink("Other Users", "OtherUsers", "Person")</li>
                         <li>@Html.ActionLink("Search By Location", "Search", "Person")</li>
 
                     }

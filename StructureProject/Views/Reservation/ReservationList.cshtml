@@ -146,7 +146,7 @@ else
                         @if (reservation.Accept == 0)
                         {
                             <button id="Btn-Accept-@reservation.Id" data-host-id="@reservation.Host.Id" data-pet-id="@reservation.Pet.Id" data-customer-id="@reservation.Customer.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-accept">Accept</button>
-                            <button id="Btn-Reject-@reservation.Id" data-host-id="@reservation.Host.Id" data-pet-id="@reservation.Pet.Id" data-customer-id="@reservation.Customer.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-reject">Reject</button>
+                            <button id="Btn-Reject-@reservation.Id" data-host-id="@reservation.Host.Id" data-pet-id="@reservation.Pet.Id" data-customer-id="@reservation.Customer.Id" data-reservation-id="@reservation.Id" class="btn btn-default btn-sm js-toggle-reject">Decline</button>
                         }
                         else
                         {
@@ -194,7 +194,7 @@ else
                         button
                             .removeClass("btn-default")
                             .addClass("btn-info")
-                            .text("Rejected")
+                            .text("Declined")
                             .prop('disabled', true);
                         document.getElementById("Btn-Accept-" + button.attr("data-reservation-id")).remove();
 
