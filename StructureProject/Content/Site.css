@@ -179,4 +179,9 @@ textarea {
     margin-left: -15px;
 }
 
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    color: #ffffff;
+    background-color: #743c5a;
+}
+
 

@@ -39,18 +39,24 @@
         }
         else
         {
-            <ul class="nav navbar-nav navbar-right">
-                <li class="notifications">
-                    <a href="#">
-                        <i class="fas fa-dog"></i>
-                        <span class="badge js-notifications-count hide"></span>
-                    </a>
-                </li>
-                <li>
-                    @Html.ActionLink("Hello " + User.GetName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                </li>
-                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-            </ul>
+<ul class="nav navbar-nav navbar-right">
+    <li class="notifications">
+        <a href="#">
+            <i class="fas fa-dog"></i>
+            <span class="badge js-notifications-count hide"></span>
+        </a>
+    </li>
+    <li class="host-notifications">
+        <a href="#">
+            <i class="fas fa-cat"></i>
+            <span class="badge js-host-notifications-count hide"></span>
+        </a>
+    </li>
+    <li>
+        @Html.ActionLink("Hello " + User.GetName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+    </li>
+    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+</ul>
         }
 
     }

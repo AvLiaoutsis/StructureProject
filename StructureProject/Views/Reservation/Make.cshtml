@@ -197,7 +197,7 @@
                     type: "GET",
                     url: "/api/pricekinds?kindId=" + petkindid + "&personId=" + personid,
                     success: function (data) {
-                        if (data.price == 0 || data.price == null) {
+                        if (!data[0]) {
 
                             $("#Price").html("N/A Price. Please Contact With Me");
 
@@ -307,7 +307,7 @@
                                 url: "/api/pricekinds?kindId=" + petkindid + "&personId=" + personid,
                                 success: function (data) {
 
-                                    if (!data.price) {
+                                    if (!data[0]) {
 
                                         $("#Price").attr("value", "N/A Price. Please Contact With Me");
 
