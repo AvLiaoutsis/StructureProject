@@ -1,5 +1,6 @@
 ﻿body {
     background-image: url("/Content/Images/Images/group-of-dogs-at-dog-park.jpg");
+    background-size: cover;
 }
 
 .hrindex {

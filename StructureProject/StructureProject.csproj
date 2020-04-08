@@ -405,6 +405,7 @@
     <Content Include="Content\brands.css" />
     <Content Include="Content\brands.min.css" />
     <Content Include="Content\Custom\IndexCSS.css" />
+    <Content Include="Content\Custom\login.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
@@ -815,6 +816,7 @@
     <Content Include="Scripts\Register\additional-methods.min.js" />
     <Content Include="Scripts\Register\jquery.steps.min.js" />
     <Content Include="Scripts\Register\jquery.validate.min.js" />
+    <Content Include="Scripts\Register\login.js" />
     <Content Include="Scripts\Register\register.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
@@ -889,6 +891,7 @@
     <Content Include="webfonts\fa-brands-400.eot" />
     <Content Include="Views\Person\PriceForm.cshtml" />
     <Content Include="Scripts\underscore.min.map" />
+    <Content Include="Views\Account\LoginOriginal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

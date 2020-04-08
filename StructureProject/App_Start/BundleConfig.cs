@@ -21,6 +21,8 @@ namespace StructureProject
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
+            bundles.Add(new ScriptBundle("~/bundles/login").Include(
+            "~/Scripts/Register/login.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/registerjs").Include(
             "~/Scripts/Register/additional-methods.min.js",
@@ -56,6 +58,8 @@ namespace StructureProject
             bundles.Add(new StyleBundle("~/Content/Custom/IndexCSS").Include(
               "~/Content/Custom/indexCSS.css"));
 
+            bundles.Add(new StyleBundle("~/Content/Custom/login").Include(
+             "~/Content/Custom/login.css"));
             bundles.Add(new StyleBundle("~/Content/registerCSS").Include(
                     "~/Content/Register/material-design-iconic-font.min.css",
                     "~/Content/Register/registerStyle.css"));

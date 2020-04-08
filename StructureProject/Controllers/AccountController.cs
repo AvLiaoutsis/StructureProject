@@ -154,7 +154,7 @@ namespace StructureProject.Controllers
         public ActionResult RegisterNewView()
         {
             var viewmodel = new RegisterViewModel();
-            return View(viewmodel);
+            return View("Login",viewmodel);
         }
         // GET: /Account/RegisterAdmin
 
@@ -162,7 +162,7 @@ namespace StructureProject.Controllers
         public ActionResult RegisterAdmin()
         {
             var viewmodel = new RegisterViewModel();
-            return View(viewmodel);
+            return View("Login",viewmodel);
         }
 
         //
@@ -228,7 +228,7 @@ namespace StructureProject.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View("Login",model);
         }
 
         //
